@@ -59,8 +59,11 @@
 Zoomを用いて行います. (ただし当日来れなかった人のために資料と動画を配布する予定.)
 
 - 第2回 (2022/04/21). 行列の定義
-[第1回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/1_第一回授業黒板.pdf) [第1回資料](https://github.com/masataka123/2021_summer/blob/master/material/1_実数の定義と性質.pdf) [第1回追加資料](https://github.com/masataka123/2021_summer/blob/master/material/1_追加資料_極限.pdf)
 
+製作中です. しばらくお待ちください.
+<!-- 
+[第1回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/1_第一回授業黒板.pdf) [第1回資料](https://github.com/masataka123/2021_summer/blob/master/material/1_実数の定義と性質.pdf) [第1回追加資料](https://github.com/masataka123/2021_summer/blob/master/material/1_追加資料_極限.pdf)
+-->
 - 第3回 (2022/04/28). 行列の演算
 
 - 第4回 (2022/05/12). 連立一次方程式 1 -基本変形-
@@ -75,13 +78,14 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 
 Zoomを用いて行います.
 
+<!-- 
 [第1回から第6回授業の動画](https://www.youtube.com/playlist?list=PLZDOK-K3OuvC0torHeC_jqZCwp1q1T0Qg)
 [第1回から第6回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の授業黒板.pdf)
 [第1回から第6回授業資料](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の資料.pdf)
+-->
 
 
 - 第9回 (2022/06/16). 行列式 1 -置換-
- [第9回授業動画](https://www.youtube.com/watch?v=8PZ9Fdob2HE) [第9回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/9_第九回授業黒板.pdf) [第9回資料](https://github.com/masataka123/2021_summer/blob/master/material/9_積分の性質.pdf) 
 
 - 第10回 (2022/06/23). 行列式 2 -行列式の計算方法-
 
@@ -99,15 +103,17 @@ Zoomを用いて行います.
 
 - 第16回 (2022/08/04). 期末試験(予定)
 
+<!-- 
 [第8回から第12回授業の動画](https://www.youtube.com/playlist?list=PLZDOK-K3OuvDpXKHjdAxJUy5ts6HPCeoB)
 [第8回から第12回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/0_第八回から第十二回の授業黒板.pdf)
 [第8回から第12回授業の資料](https://github.com/masataka123/2021_summer/blob/master/material/0_第八回から第十二回の資料.pdf)
+-->
 
 
 # 資料に関して
 
 - 授業資料・授業黒板の画像ともにダウンロードした方が良いかと思います.
-- もし資料を一括してダウンロードしたい場合は[こちらのページ](https://github.com/masataka123/2021_summer/tree/master/material)をご覧ください.
+- もし資料を一括してダウンロードしたい場合は[こちらのページ]()をご覧ください.
 - 資料の著作権は岩井雅崇にあります. 
 - 授業資料等に関して何か問題があった場合(例: 何らかの問題でダウンロードできない, 文字化けしている), メールにて私にご連絡していただければ幸いです.
 
