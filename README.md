@@ -60,10 +60,10 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 
 - 第2回 (2022/04/21). 行列の定義
 
-製作中です. しばらくお待ちください.
-<!-- 
-[第1回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/1_第一回授業黒板.pdf) [第1回資料](https://github.com/masataka123/2021_summer/blob/master/material/1_実数の定義と性質.pdf) [第1回追加資料](https://github.com/masataka123/2021_summer/blob/master/material/1_追加資料_極限.pdf)
--->
+[第2回資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/2_行列の定義.pdf) 
+[第2回授業動画](https://www.youtube.com/watch?v=IN3xShOdnjE&list=PLZDOK-K3OuvCo2DXf2KPA1jjjADsdTXQA&index=1&t=1526s)
+[第2回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/2_第2回授業黒板.pdf) 
+
 - 第3回 (2022/04/28). 行列の演算
 
 - 第4回 (2022/05/12). 連立一次方程式 1 -基本変形-
@@ -78,14 +78,16 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 
 Zoomを用いて行います.
 
-<!-- 
+
 [第1回から第6回授業の動画](https://www.youtube.com/playlist?list=PLZDOK-K3OuvC0torHeC_jqZCwp1q1T0Qg)
 [第1回から第6回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の授業黒板.pdf)
 [第1回から第6回授業資料](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の資料.pdf)
--->
+
 
 
 - 第9回 (2022/06/16). 行列式 1 -置換-
+
+製作中です. しばらくお待ちください.
 
 - 第10回 (2022/06/23). 行列式 2 -行列式の計算方法-
 
