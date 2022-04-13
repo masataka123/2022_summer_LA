@@ -85,7 +85,7 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 
 - 第6回 (2022/05/26). 連立一次方程式 3 -一般的な解法-
 
-[第6回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/6_連立一次方程式13.pdf), 
+[第6回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/6_連立一次方程式3.pdf), 
 [第6回授業動画](https://www.youtube.com/watch?v=bOOQA85lL_Q), 
 [第6回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/6_第6回授業黒板.pdf) 
 
