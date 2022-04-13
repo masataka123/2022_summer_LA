@@ -66,24 +66,41 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 
 - 第3回 (2022/04/28). 行列の演算
 
+[第3回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/3_行列の演算.pdf), 
+[第3回授業動画](https://www.youtube.com/watch?v=v4y-_Uq2JKw), 
+[第3回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/3_第3回授業黒板.pdf) 
+
 - 第4回 (2022/05/12). 連立一次方程式 1 -基本変形-
+
+[第4回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/4_連立一次方程式1.pdf), 
+[第4回授業動画](https://www.youtube.com/watch?v=8Tq6P-gmIcc), 
+[第4回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/4_第4回授業黒板.pdf) 
 
 - 第5回 (2022/05/19). 連立一次方程式 2 -行列の簡約化-
 
+[第5回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/5_連立一次方程式2.pdf), 
+[第5回授業動画](https://www.youtube.com/watch?v=y_0_R7vi03I), 
+[第5回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/5_第5回授業黒板.pdf) 
+
 - 第6回 (2022/05/26). 連立一次方程式 3 -一般的な解法-
 
+[第6回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/6_連立一次方程式13.pdf), 
+[第6回授業動画](https://www.youtube.com/watch?v=bOOQA85lL_Q), 
+[第6回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/6_第6回授業黒板.pdf) 
+
 - 第7回 (2022/06/02). 正則行列
+
+[第7回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/7_正則行列.pdf), 
+[第7回授業動画](https://www.youtube.com/watch?v=9Yb-XiyqiLU), 
+[第7回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/7_第7回授業黒板.pdf) 
 
 - 第8回 (2022/06/09). まとめと復習・質疑応答(中間レポートの質問も含む) 
 
 Zoomを用いて行います.
 
-<!--
-[第1回から第6回授業の動画](https://www.youtube.com/playlist?list=PLZDOK-K3OuvC0torHeC_jqZCwp1q1T0Qg)
-[第1回から第6回授業黒板](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の授業黒板.pdf)
-[第1回から第6回授業資料](https://github.com/masataka123/2021_summer/blob/master/material/0_第一回から第六回の資料.pdf)
--->
-
+[第2回から第7回の授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_線形代数資料_前半.pdf), 
+[第2回から第7回の授業動画リスト](https://youtube.com/playlist?list=PLZDOK-K3OuvCo2DXf2KPA1jjjADsdTXQA), 
+[第2回から第7回の授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_授業前半黒板.pdf) 
 
 - 第9回 (2022/06/16). 行列式 1 -置換-
 
