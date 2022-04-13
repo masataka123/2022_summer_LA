@@ -61,7 +61,7 @@ Zoomを用いて行います. (ただし当日来れなかった人のために�
 - 第2回 (2022/04/21). 行列の定義
 
 [第2回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/2_行列の定義.pdf), 
-[第2回授業動画](https://www.youtube.com/watch?v=IN3xShOdnjE&list=PLZDOK-K3OuvCo2DXf2KPA1jjjADsdTXQA&index=1&t=1526s), 
+[第2回授業動画](https://www.youtube.com/watch?v=IN3xShOdnjE), 
 [第2回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/2_第2回授業黒板.pdf) 
 
 - 第3回 (2022/04/28). 行列の演算
