@@ -59,7 +59,6 @@
 - 第1回 (2022/04/14). ガイダンス
 
 Zoomを用いて行いました. <!--(ただし当日来れなかった人のために資料と動画を配布する予定.)-->
-
 [第1回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/1_ガイダンス_アップロード.pdf), 
 [第1回授業動画](https://www.youtube.com/watch?v=i_AWOV-YTqw)
 
