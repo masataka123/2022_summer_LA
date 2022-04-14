@@ -1,0 +1,345 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第6回. 連立1次方程式3-一般的な解法- (三宅先生の本, 2.3の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/05/26
+\end{flushright}
+
+\section{簡約化を用いた連立1次方程式の解法}
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+連立1次方程式$A\bm{x} =\bm{b}$が解を持つ
+$\Leftrightarrow$ ${\rm rank}([A:\bm{b}]) = {\rm rank}(A)$.
+  \end{thm}
+ \end{tcolorbox}
+%連立1次方程式$A\bm{x} =\bm{b}$を解くためには, 拡大係数行列$[A:\bm{b}]$を簡約化してあげれば良い(この解き方を掃き出し法・ガウスの消去法とも言います). 
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+連立1次方程式$A\bm{x} =\bm{b}$の解きかた(掃き出し法・ガウスの消去法).
+ \begin{enumerate}
+ \item[手順1.] 連立方程式$A\bm{x} =\bm{b}$から拡大係数行列$[A:\bm{b}]$を作る.
+ \item[手順2.] 拡大係数行列$[A:\bm{b}]$を(行)基本変形で簡約化する.
+ \item[手順3.] その簡約化された行列のデータから連立方程式を書き下し, 一般解を求める.
+ \end{enumerate}
+ \end{tcolorbox}
+ 
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+x_1&+&4x_2& = &4\\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 連立方程式の拡大係数行列は
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 2& 4& 4  \\
+ \end{pmatrix}
+ $
+ である. これを簡約化すると
+ $
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 0& 0& 0  \\
+ \end{pmatrix} 
+ $
+ となる. よってこれより
+ $
+  \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+0x_1&+&0x_2& = &0\\
+\end{matrix}
+\right.
+$
+である. 
+
+以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=& 2 -2c_2\\
+x_2 &=& c_2\\
+\end{matrix}
+\text{\,\, ($c_2$は任意定数)}
+\right.
+$
+となる. 
+
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+0 \\
+\end{pmatrix}
++t 
+\begin{pmatrix}
+-2\\
+1 \\
+\end{pmatrix}
+(t \in \R)
+$
+と書くこともある.
+\end{exa}
+
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+x_1&+&4x_2& = &5\\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 連立方程式の拡大係数行列は
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 2& 4& 5  \\
+ \end{pmatrix}
+ $
+ である. 
+ これを簡約化すると
+ $
+  \begin{pmatrix}
+ 1& 2& 0  \\
+ 0& 0& 1 \\
+ \end{pmatrix} 
+ $
+ となる. よってこれより
+ $
+  \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &0 \\
+0x_1&+&0x_2& = &1\\
+\end{matrix}
+\right.
+$
+である. 以上より解は存在しない.
+\end{exa}
+
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+x_1&-&2x_2& + &x_3&+&2x_4&+&x_5&= 2 \\
+2x_1&-&4x_2& + &x_3&+&5x_4&+&2x_5&= 5 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 拡大係数行列は 
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+  1& -2& 1& 2& 1& 2   \\
+ 2& -4& 1 & 5& 2& 5   \\
+ \end{pmatrix}
+ $
+ である. これを基本変形で簡約化すると
+ $
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+ 0& 0& 1& -1& 0& 1   \\
+ 0& 0& 0 & 0& 1& 1   \\
+ \end{pmatrix}
+ $
+ となる.
+ これをもう一回式に書き下すと
+ $$
+\left \{
+ \begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+      & &		&   &x_3       &- & x_4& &       &= -1 \\
+      & & &   &    & &		& & x_5&= 1 \\
+\end{matrix}
+\right.
+\text{である.}
+ $$
+ 
+以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=& 2 +2c_2 -3c_4\\
+x_2&=&c_2 \\
+x_3&=& -1 + c_4\\
+x_4&=&c_4 \\
+x_5&=& 1\\
+\end{matrix}
+\text{\,\, ($c_2, c_4$は任意定数)}
+\right.
+$
+となる. 
+ 
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+0 \\
+-1 \\
+0\\
+1 \\
+\end{pmatrix}
++ s
+\begin{pmatrix}
+2\\
+1\\
+0\\
+0\\
+0 \\
+\end{pmatrix}
++ t
+\begin{pmatrix}
+-3\\
+0\\
+1\\
+1\\
+0 \\
+\end{pmatrix}
+(s, t \in \R)
+$
+と書くこともある.
+
+ \end{exa}
+
+\begin{rema}
+実際に連立1次方程式をプログラミングで解くときも, 掃き出し法・ガウスの消去法によって解きます. 実際にc++で書いたソースコードを以下のホームページで見ることができます.\footnote{第7回授業で簡約化の証明をする際にもこのホームページを参考にさせていただきました.}
+\begin{itemize}
+\item Gauss-Jordan の掃き出し法と、連立一次方程式の解き方 \\
+ \texttt{https://drken1215.hatenablog.com/entry/2019/03/20/202800}
+\end{itemize}
+\end{rema}
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1& &         &  +& 2x_3&- &x_4&+ & 2x_5&= 3 \\
+2x_1&+&x_2& + &3x_3&-&x_4&-&x_5&= -1 \\
+-x_1&+&3x_2& - &5x_3&+&4x_4&+&x_5&= -6 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+
+ 
+
+\end{document}

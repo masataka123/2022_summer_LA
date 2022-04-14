@@ -1,0 +1,571 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第3回. 行列の演算 (三宅先生の本, 1.2と1.3の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/04/28
+\end{flushright}
+
+
+
+\section{行列の和と差}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の和と差]
+    \text{}
+ 
+$m \times n$行列
+$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$, 
+$
+B=\begin{pmatrix}
+b_{11}& b_{12} & \cdots &b_{1n} \\
+b_{21}& b_{22} & \cdots &b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+b_{m1}& b_{m2} & \cdots &b_{mn} \\
+\end{pmatrix}
+$
+とする.
+
+このとき行列の和$A+B$と差$A-B$を次で定める.
+$$
+A+B=
+\begin{pmatrix}
+a_{11}+b_{11}& a_{12}+b_{12}& \cdots &a_{1n} +b_{1n}\\
+a_{21}+b_{21}& a_{22}+b_{22}& \cdots &a_{2n}+b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}+b_{m1}& a_{m2} +b_{m2}& \cdots &a_{mn} +b_{mn}\\
+\end{pmatrix}.
+$$
+$$
+A-B=
+\begin{pmatrix}
+a_{11}-b_{11}& a_{12}-b_{12}& \cdots &a_{1n} -b_{1n}\\
+a_{21}-b_{21}& a_{22}-b_{22}& \cdots &a_{2n}-b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}-b_{m1}& a_{m2}-b_{m2}& \cdots &a_{mn}-b_{mn}\\
+\end{pmatrix}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ -2&5&1 \\
+ 3&-1&2
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ -1 &3&9 \\
+ 5&4&1
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 3 &-7&7 \\
+ -1&6&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 3&1 \\
+ 1&4
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ 2&7\\
+ 5&8
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ 5&8 \\
+6&12
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 1&-6 \\
+ -4&-4
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 2&1 \\
+ 1&5
+ \end{pmatrix}
+ $,
+$ 
+ B = 
+ \begin{pmatrix}
+ 1&1 &3 \\
+ 4&6 & 7
+ \end{pmatrix}
+ $
+ とする．このとき$A+B$は型が違うため定義されない. 
+ \end{exa}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の和と差の性質]
+$A, B$を行列とする.
+ \begin{itemize}
+ \item $A\pm B =B\pm A$.
+  \item $A\pm O =A$ (ただし$O$は零行列).
+  \item $(A+B)+C =A + (B+C)$.
+  \item ${}^{t}(A+B) = {}^{t}A+ {}^{t}B$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{行列のスカラー倍}
+ 
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列のスカラー倍]
+    \text{}
+    
+ $m \times n$行列
+ $
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}$
+とし, $c$を数とする($c$をスカラーとも呼ぶ).
+
+$A$の$c$倍$cA$を次で定める.
+$$
+cA=
+\begin{pmatrix}
+ca_{11}&c a_{12} & \cdots &ca_{1n} \\
+ca_{21}& ca_{22} & \cdots &ca_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+ca_{m1}& ca_{m2} & \cdots &ca_{mn} \\
+\end{pmatrix}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $,
+ $
+ c =3
+ $
+ とする．
+ このとき$
+ cA =
+ \begin{pmatrix}
+ 3 &-6&24 \\
+ 6&15&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 2&1 \\
+ 4&3
+ \end{pmatrix}
+ $, 
+ $
+ c =-1
+ $
+ とする．
+ このとき$
+ cA =
+ \begin{pmatrix}
+ -2 &-1 \\
+-4&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列のスカラー倍の性質]
+$A$を行列, $a,b$を数とする.
+ \begin{itemize}
+ \item $0A =O$ (ただし$O$は零行列).
+  \item $1A=A$. 
+  \item $(-1)A$を$-A$と書くことにすると, $A + (-A) =O$.　
+  \item $(ab) A = a(bA)$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{行列の積}
+ 
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の積]
+    
+ $m \times n$行列$A = [a_{ij}]_{m \times n}$と$n \times l$行列$B= [b_{jk}]_{n \times l}$とする．
+このとき$A$と$B$の積$AB$は$m \times l$行列で, 次の式で定義される.
+
+$$
+AB = [c_{ik}]_{m \times l}\text{としたとき, }
+c_{ik} = a_{i1}b_{1k} + a_{i2}b_{2k} + \cdots + a_{in}b_{nk} = \sum_{j=1}^{n} a_{ij}b_{jk}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $ A=\begin{pmatrix} 1 &2 &3 \end{pmatrix}$, 
+ $ 
+ B = 
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$1\times 3$行列で$B$は$3 \times 1$行列なので, 行列の積$AB$が$1 \times 1$行列として定義でき, 
+ $$
+ AB = \begin{pmatrix}1 &2&3  \end{pmatrix}
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ = \begin{pmatrix}1\times 5 + 2 \times 7 + 3 \times 2  \end{pmatrix}= 
+  \begin{pmatrix}5+14+6 \end{pmatrix}= \begin{pmatrix}25 \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+ 
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 1$行列なので, 行列の積$AB$が$2 \times 1$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2\times 5 + 2\times 1 \\
+4 \times 5 + 3 \times 1
+ \end{pmatrix}
+ = 
+  \begin{pmatrix}
+12 \\
+23
+ \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+ 
+ \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 2$行列なので, 行列の積$AB$が$2 \times 2$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2 \times 5 + 3 \times 2& 2 \times 2 + 3 \times 3\\
+1 \times 5 + 4 \times 2 & 1\times 2 + 4 \times 3
+ \end{pmatrix}
+ = 
+ \begin{pmatrix}
+16 & 13\\
+13 & 14
+ \end{pmatrix}.
+ $$
+ 
+また$B$は$2\times 2$行列で$A$は$2 \times 2$行列なので, 行列の積$BA$が$2 \times 2$行列として定義でき, 
+ $$
+ BA = 
+  \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+12 & 23\\
+7 & 18
+ \end{pmatrix}.
+ $$
+
+よって\underline{行列の積に関して$AB=BA$とは限らない($AB \neq BA$となることがある).}
+ \end{exa}
+ 
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 1&-3\\
+1 & -5 & 2
+ \end{pmatrix}
+ $, $
+ B = 
+  \begin{pmatrix}
+8 & 7&5 & 2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2 \times 3$行列で$B$は$1 \times 4$行列であるので, 行列の積$AB$は定義されない.
+ \end{exa}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の積の性質]
+$A,B,C$を行列とする.
+ \begin{itemize}
+ \item $AO =O = OA$ (ただし$O$は零行列).
+  \item $AE_{n}=E_{n}A =A$ (ただし$E_n$は単位行列). 
+  \item $(AB)C = A(BC)$.　
+  \item ${}^{t}(AB) = {}^{t}B {}^{t}A$
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+\begin{itemize}
+\item $A$を$n$次正方行列とするとき$A^{m} = \underbrace{A \cdots A}_{m \text{ 個}}$とする
+\item $A^{m}=O$となる行列を\underline{\ruby{冪}{べき}\ruby{零}{ぜろ}行列}という.
+\end{itemize}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の演算の性質]
+$A,B,C$を行列とし, $a,b$を数とする.
+ \begin{itemize}
+ \item $a(AB)=(aA)B$. 
+  \item $a(A+B)=aA + aB$. 
+  \item $(a+b)A = aA + bA$.　
+  \item $A(B+C) = AB + AC$.
+  \item $(A+B)C = AC + BC$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+\section{三宅先生の本1.3の内容に関して}
+この授業では三宅先生の本1.3の内容「行列の分割」についての説明は割愛する(重要度が低いと思われるため).
+ただし証明等で行列の分割の記法を用いるため, 各自で三宅先生の本1.3の内容を読むことをお勧めする.
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.  次の行列の計算を行え.
+ $$
+ \begin{pmatrix}
+ 2 &3&-1 \\
+ 0&5&4\\
+ -1&0&-2
+ \end{pmatrix}
+ \left\{
+ \begin{pmatrix}
+ 0 &5&9 \\
+ 3&-2&8\\
+ -1&8&1
+ \end{pmatrix}
+ - 2
+  \begin{pmatrix}
+ -1 &0&1 \\
+ 3&2&3\\
+ -4&2&-1
+ \end{pmatrix}
+\right\}
+ $$
+  
+ 2. 次の行列$A,B,C,D$のうち, 積が定義される全ての組み合わせを求め, その積を計算せよ.
+ $$
+  A=\begin{pmatrix}
+ 2 \\ 1\\-1
+ \end{pmatrix} 
+B= \begin{pmatrix}
+ 3 &2\\
+ 4&1\\
+ 0&1
+ \end{pmatrix} 
+ C=
+  \begin{pmatrix}
+ 2 &0&1 
+ \end{pmatrix}
+ D= \begin{pmatrix}
+ 2&3\\
+ -1&4
+ \end{pmatrix}
+ $$
+
+
+ 
+
+\end{document}

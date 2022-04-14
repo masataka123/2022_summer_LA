@@ -1,0 +1,328 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第2回. 行列の定義 (三宅先生の本, 1.1の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/04/21
+\end{flushright}
+
+
+
+\section{行列の定義}
+
+\begin{itemize}
+\item $m \times n$個の数(実数または複素数) $a_{ij}$ ($i = 1, \ldots, m$, $j = 1, \ldots, n$)を
+$$
+\begin{bmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots\\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{bmatrix}
+\textit{\,\,\ または\,\,\,}
+\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$$
+のように並べたものを \underline{$m$行$n$列の行列}という.
+\underline{ $m \times n$行列}, \underline{ $m \times n$型の行列}, \underline{ $(m, n)$行列}ということもある. 
+\item 上の行列を$A$としたとき, $a_{ij}$を行列$A$の$(i,j)$成分という. 行列$A$を\underline{$[a_{ij}]_{m\times n}$や$(a_{ij})$}と略記することもある.
+\item $\begin{pmatrix} a_{i1} & \cdots & a_{in}\end{pmatrix}$を\underline{$A$の行}といい, 上から第1行, 第2行, $\cdots$, 第$m$行という.
+\item $\begin{pmatrix}a_{1j} \\ \vdots  \\ a_{mj}\end{pmatrix}$を\underline{$A$の列}といい, 上から第1列, 第2列, $\cdots$, 第$n$列という.
+\item $1 \times n$行列$(a_{11} \cdots a_{1n})$を\underline{行ベクトル}と呼び, $m \times 1$行列$\begin{pmatrix}a_{11} \\ \vdots  \\ a_{m1}\end{pmatrix}$を\underline{列ベクトル}と呼ぶ(この授業や教科書での用語).
+\end{itemize}
+
+ \begin{exa}
+ 行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 1 &2&5 \\
+ 3&10&4
+ \end{pmatrix}
+ $$
+ \begin{itemize}
+ \item $A$は2行3列の行列($2 \times 3$行列).
+ \item (1,2)成分は2, (2,1)成分は3, (2,3)成分は4である.
+ \item 第2行は$\begin{pmatrix}3 & 10 & 4\end{pmatrix}$. 第3列は$\begin{pmatrix}5 \\ 4\end{pmatrix}$である.
+ \end{itemize}
+ \end{exa}
+  \begin{exa}
+ 行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 13 &2&5&3 \\
+ 1 &4&2&5 \\
+  7&8&6&1 
+ \end{pmatrix}
+ $$
+ \begin{itemize}
+ \item $A$は3行4列の行列($3 \times 4$行列).
+ \item (1,1)成分は13, (2,4)成分は5, (3,2)成分は8である.
+ \item 第2行は$\begin{pmatrix}1&4&2&5\end{pmatrix}$. 第3列は$\begin{pmatrix}5 \\2\\ 6\end{pmatrix}$である.
+ \end{itemize}
+ \end{exa}
+ 
+ \begin{exa}行列$A = (2)$とすると, $A$は1行1列の行列($1 \times 1$行列)である.\end{exa}
+  
+%\begin{exa}行列$A$を次で定める.$$A = (3,5,2)$$$A$は1行3列の行列($1 \times 3$行列)である.\end{exa}
+
+\section{特別な行列}
+\begin{itemize}
+\item  $
+ \begin{pmatrix}
+0 &0&0\\
+0 &0&0
+ \end{pmatrix}, 
+  \begin{pmatrix}
+0 &0\\
+0 &0
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 &0\\
+0 &0 \\
+0&0
+ \end{pmatrix}
+ $
+ のように全ての成分が0の行列を\underline{\ruby{零}{ぜろ}行列}という.
+ \item $n \times n$行列のことを\underline{$n$次正方行列}という.
+ \item $n$次正方行列
+ $$
+ A =
+ \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{n1}& a_{n2} & \cdots &a_{nn} \\
+\end{pmatrix}
+ $$
+ について, $a_{11}, a_{22}, \ldots, a_{nn}$を\underline{$A$の対角成分}という．
+ \item 対角成分以外0の行列を\underline{対角行列}という. 例えば以下の行列は対角行列である:
+  $$
+ \begin{pmatrix}
+5&0\\
+0 &1
+ \end{pmatrix}, 
+  \begin{pmatrix}
+3
+ \end{pmatrix}, 
+   \begin{pmatrix}
+2&0 &0\\
+0 &1 &0\\
+0&0&5
+ \end{pmatrix}
+ $$
+ \item 対角成分が全て1な$n$次対角行列を\underline{単位行列}と言い, $E_n$とかく. 例えば以下の行列は単位行列である:
+   $$
+   E_2 =
+ \begin{pmatrix}
+1&0\\
+0 &1
+ \end{pmatrix}, 
+ E_1=
+  \begin{pmatrix}
+1
+ \end{pmatrix}, 
+ E_3=
+   \begin{pmatrix}
+1&0 &0\\
+0 &1 &0\\
+0&0&1
+ \end{pmatrix}
+ $$
+ \item 行列$A$の行と列を入れ替えた行列を\underline{転置行列}と言い${}^{t}A$とかく.
+\end{itemize}
+\begin{exa}
+ $
+ A = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 2 &3 \\
+ 5&2\\
+ 8&1
+ \end{pmatrix}
+  \text{であり, }
+ $
+ $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ =A
+ $
+ である.
+ 
+  $
+ A = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 3 &2 \\
+ 1&4\\
+ \end{pmatrix}
+  \text{であり, }
+ $
+  $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ =A
+ $
+ である.
+\end{exa}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[転置行列の性質]
+    \text{}
+\begin{itemize}
+\item $A$が$m\times n$行列なら${}^{t}A $は$n\times m$行列.
+\item $A=[a_{ij}]_{m \times n}$とし, ${}^{t}A=[b_{ij}]_{n \times m}$とするとき, $b_{ij} =a_{ji}$.
+\item ${}^{t}({}^{t}A) =A$.
+\end{itemize}
+
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{クロネッカーのデルタ}
+ $$
+ \delta_{ij} = 
+ \begin{cases}
+1 & \text{$i=j$のとき}\\
+0 & \text{$i \neq j$のとき}
+\end{cases}
+  $$
+ \text{を\underline{クロネッカーのデルタ}という.}
+ \begin{exa}
+ $\delta_{11}=\delta_{22}=1, \delta_{12}=\delta_{21}=0$である. $n$次正方行列$E_n$は$E_n = [\delta_{ij}]_{n\times n}$と略記できる.
+ \end{exa}
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.  行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 2 &4&-3&8 \\
+ 3&-1&2&-5 \\
+  18&0&2&12
+ \end{pmatrix}
+ $$
+ 次の問いに答えよ.
+ \begin{itemize}
+ \item $A$の型をいえ.
+ \item $A$の$(3,2)$成分をいえ.
+  \item $A$の第2行をいえ.
+ \item $A$の第3列をいえ.
+ \item $A$の転置行列${}^{t}A$を求めよ.
+ \end{itemize}
+ 
+ 2. ${}^{t}A =-A$となる$n$次正方行列を交代行列という. 交代行列の対角成分は0であることを示せ.
+
+
+
+ 
+
+\end{document}

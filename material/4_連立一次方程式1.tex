@@ -1,0 +1,538 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第4回. 連立1次方程式1-基本変形- (三宅先生の本, 1.4, 2.1の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/05/12
+\end{flushright}
+
+\section{連立1次方程式}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[係数行列, 拡大係数行列]
+$m$個の式からなる$n$変数連立1次方程式
+\begin{equation*}
+%\label{equation}
+\left\{ 
+\begin{matrix}
+a_{11}x_1&+& a_{12} x_2& +&\cdots &+&a_{1n}x_n &= &b_1 \\
+a_{21}x_1&+& a_{22} x_2& +&\cdots &+&a_{2n}x_n &= &b_2 \\
+\vdots		&& 	\vdots				 && 		& &\vdots&&\vdots	\\
+a_{m1}x_1&+& a_{m2} x_2& +&\cdots &+&a_{mn}x_n &= &b_m \\
+\end{matrix}
+\right.
+\text{に対して}
+\end{equation*}
+$$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+\bm{x} =\begin{pmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{pmatrix}
+\bm{b} =\begin{pmatrix}
+b_1\\b_2\\\vdots\\b_m
+\end{pmatrix}
+\text{とおく.}
+$$
+行列$A$を連立1次方程式の\underline{係数行列}といい, 
+$$
+[A : \bm{b}] = \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} & b_1\\
+a_{21}& a_{22} & \cdots &a_{2n} &b_2\\
+\vdots& \vdots	&	\ddots   &	\vdots&\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn}&b_m \\
+\end{pmatrix}
+\text{を連立1次方程式の\underline{拡大係数行列}という.}
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ これにより上の連立1次方程式は$A\bm{x}=\bm{b}$とかける.
+
+ \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& = &7 \\
+x&-&4y& = &9 \\
+\end{matrix}
+\right.
+ $
+ について, 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 2 & 3 \\
+ 1 & -4
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+  \begin{pmatrix}
+ 2 & 3  &7\\
+ 1 & -4 &9
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+ 
+  \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+3x_1&-&2x_2& +& x_3 &+& 4x_4 &=& 7 \\
+x_1 &  & 	   & -& 3x_3 &+& x_4 &=& 5 \\
+2x_1&-& x_2& +& 9x_3 & & 	 &=& 0 \\
+\end{matrix}
+\right.
+ $
+ について, \\
+ 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4\\
+ 1 & 0   & -3&1\\
+2 & -1  & 9&0\\
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4 & 7\\
+ 1 & 0   & -3&1 &5\\
+2 & -1  & 9&0 & 0\\
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+ 
+ \section{行列の基本変形}
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の基本変形]
+ 行列の次の3つの変形を(行)基本変形という.
+ \begin{enumerate}
+ \item 1つの行を何倍か($\neq 0$倍)する.
+ \item 2つの行を入れ替える.
+ \item1つの行に他の行の何倍かを加える.
+ \end{enumerate}
+  \end{dfn}
+  
+ \end{tcolorbox} 
+
+拡大係数行列の(行)基本変形を行うことで連立1次方程式が解ける(連立方程式の解き方に関しては, 第6回資料を見てください).
+
+\begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ $
+ を考える. 
+ これを拡大係数行列の基本変形と式変形で解いてみて, その対応を表すと下の通りとなる.\footnote{途中で現れる「$\maru{1}+\maru{3}\times(-2)$」は「行列の1行目に3行目の$(-2)$倍を加える」あるいは「1行目の式に3行目の式の$(-2)$倍を加える」を意味している(一応教科書に従った記法である).}
+
+  %まずこれを式変形で解くと次のとおりである.\footnote{途中で現れる「$\maru{1}+\maru{3}\times(-2)$」は「1行目の式に3行目の式の(-2)倍を加える」を意味している(一応教科書に従った記法である).}
+%これに対する拡大係数行列の基本変形は以下の通りである. \footnote{途中で現れる「$\maru{1} + \maru{3}\times(-2)$」は「行列の1行目に3行目の(-2)倍を加える」を意味している.}
+ 
+  \begin{align*}
+ & &\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ & \overset{\text{対応}}{\longleftrightarrow}& &\left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+ &\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ & \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+ & & y& + &z &= &1 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+  &\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ &\begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+ & & y& + &z &= &1\\
+ & &3y& +& z &= &-1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+   &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+ &\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+x&+&y& -&z &= &-2 \\
+ & &3y& +& z &= &-1 \\
+ & & y& + &z &= &1\\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+ &\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+x&+&y& -&z &= &-2 \\
+ & & y& + &z &= &1\\
+  & &3y& +& z &= &-1 \\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}
+ &\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}
+ & \left\{ 
+\begin{matrix}
+x& & & -&2z &= &-3 \\
+ & & y& + &z &= &1\\
+  & & & -& 2z &= &-4 \\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+ &\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+ & \left\{ 
+\begin{matrix}
+x& & & -&2z &= &-3 \\
+ & & y& + &z &= &1\\
+  & & &  & z &= &2 \\
+\end{matrix}
+\right.
+ \\ %%
+&\overset{\maru{1} + \maru{3}\times 2}{\underset{\maru{2} + \maru{3}\times(-1) }{\longrightarrow}}
+ &\begin{pmatrix}
+1& 0  & 0&1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\maru{1} + \maru{3}\times 2}{\underset{\maru{2} + \maru{3}\times(-1) }{\longrightarrow}}
+ & \left\{ 
+\begin{matrix}
+x& & &  &  &= &1 \\
+ & & y&   & &= &-1\\
+  & & &  & z &= &2 \\
+\end{matrix}
+\right.
+ \\ %%
+ \end{align*}
+ 以上より解は$x=1, y=-1, z=2$である.
+\end{exa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \begin{comment}
+ ボツネタ
+ 
+  
+ %\overset{\text{$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $}}{\longrightarrow} 
+ $\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}$
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+ &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+  \overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+ \\
+ &  \overset{\text{
+$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $
+ }}{\longrightarrow} 
+ \begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+   \overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+ \\
+ &\overset{\text{
+$\maru{1} + \maru{3}\times 2 $ と $\maru{2} + \maru{3}\times(-1) $
+  }}{\longrightarrow} 
+  \begin{pmatrix}
+1& 0  & 0&-1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+\end{align*}
+ 
+ 
+ 
+ 
+ \begin{align*}
+&\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ &\text{対応}&
+  \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\
+&\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+&\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+ &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+  \overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+ \\
+ &  \overset{\text{
+$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $
+ }}{\longrightarrow} 
+ \begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+   \overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+ \\
+ &\overset{\text{
+$\maru{1} + \maru{3}\times 2 $ と $\maru{2} + \maru{3}\times(-1) $
+  }}{\longrightarrow} 
+  \begin{pmatrix}
+1& 0  & 0&-1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+\end{align*}
+
+\begin{align*}
+ \begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\leftrightarrow} 
+ \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+\\
+\end{align*}
+
+
+  \end{comment}
+
+ 
+ 
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1. 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&x_2& -&x_3 &= & 1\\
+2x_1&+&x_2& +&3x_3&= &4 \\
+-x_1&+&2x_2& -&4x_3 &= &-2 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+
+
+ 
+
+\end{document}

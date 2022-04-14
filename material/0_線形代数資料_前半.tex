@@ -1,0 +1,1979 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+%\newcommand{\rank}{{\rm rank}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+
+
+\begin{center}
+{\Large 第2回. 行列の定義 (三宅先生の本, 1.1の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/04/21
+\end{flushright}
+
+
+
+\section{行列の定義}
+
+\begin{itemize}
+\item $m \times n$個の数(実数または複素数) $a_{ij}$ ($i = 1, \ldots, m$, $j = 1, \ldots, n$)を
+$$
+\begin{bmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots\\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{bmatrix}
+\textit{\,\,\ または\,\,\,}
+\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$$
+のように並べたものを \underline{$m$行$n$列の行列}という.
+\underline{ $m \times n$行列}, \underline{ $m \times n$型の行列}, \underline{ $(m, n)$行列}ということもある. 
+\item 上の行列を$A$としたとき, $a_{ij}$を行列$A$の$(i,j)$成分という. 行列$A$を\underline{$[a_{ij}]_{m\times n}$や$(a_{ij})$}と略記することもある.
+\item $\begin{pmatrix} a_{i1} & \cdots & a_{in}\end{pmatrix}$を\underline{$A$の行}といい, 上から第1行, 第2行, $\cdots$, 第$m$行という.
+\item $\begin{pmatrix}a_{1j} \\ \vdots  \\ a_{mj}\end{pmatrix}$を\underline{$A$の列}といい, 上から第1列, 第2列, $\cdots$, 第$n$列という.
+\item $1 \times n$行列$(a_{11} \cdots a_{1n})$を\underline{行ベクトル}と呼び, $m \times 1$行列$\begin{pmatrix}a_{11} \\ \vdots  \\ a_{m1}\end{pmatrix}$を\underline{列ベクトル}と呼ぶ(この授業や教科書での用語).
+\end{itemize}
+
+ \begin{exa}
+ 行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 1 &2&5 \\
+ 3&10&4
+ \end{pmatrix}
+ $$
+ \begin{itemize}
+ \item $A$は2行3列の行列($2 \times 3$行列).
+ \item (1,2)成分は2, (2,1)成分は3, (2,3)成分は4である.
+ \item 第2行は$\begin{pmatrix}3 & 10 & 4\end{pmatrix}$. 第3列は$\begin{pmatrix}5 \\ 4\end{pmatrix}$である.
+ \end{itemize}
+ \end{exa}
+  \begin{exa}
+ 行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 13 &2&5&3 \\
+ 1 &4&2&5 \\
+  7&8&6&1 
+ \end{pmatrix}
+ $$
+ \begin{itemize}
+ \item $A$は3行4列の行列($3 \times 4$行列).
+ \item (1,1)成分は13, (2,4)成分は5, (3,2)成分は8である.
+ \item 第2行は$\begin{pmatrix}1&4&2&5\end{pmatrix}$. 第3列は$\begin{pmatrix}5 \\2\\ 6\end{pmatrix}$である.
+ \end{itemize}
+ \end{exa}
+ 
+ \begin{exa}行列$A = (2)$とすると, $A$は1行1列の行列($1 \times 1$行列)である.\end{exa}
+  
+%\begin{exa}行列$A$を次で定める.$$A = (3,5,2)$$$A$は1行3列の行列($1 \times 3$行列)である.\end{exa}
+
+\section{特別な行列}
+\begin{itemize}
+\item  $
+ \begin{pmatrix}
+0 &0&0\\
+0 &0&0
+ \end{pmatrix}, 
+  \begin{pmatrix}
+0 &0\\
+0 &0
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 
+ \end{pmatrix}, 
+   \begin{pmatrix}
+0 &0\\
+0 &0 \\
+0&0
+ \end{pmatrix}
+ $
+ のように全ての成分が0の行列を\underline{\ruby{零}{ぜろ}行列}という.
+ \item $n \times n$行列のことを\underline{$n$次正方行列}という.
+ \item $n$次正方行列
+ $$
+ A =
+ \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{n1}& a_{n2} & \cdots &a_{nn} \\
+\end{pmatrix}
+ $$
+ について, $a_{11}, a_{22}, \ldots, a_{nn}$を\underline{$A$の対角成分}という．
+ \item 対角成分以外0の行列を\underline{対角行列}という. 例えば以下の行列は対角行列である:
+  $$
+ \begin{pmatrix}
+5&0\\
+0 &1
+ \end{pmatrix}, 
+  \begin{pmatrix}
+3
+ \end{pmatrix}, 
+   \begin{pmatrix}
+2&0 &0\\
+0 &1 &0\\
+0&0&5
+ \end{pmatrix}
+ $$
+ \item 対角成分が全て1な$n$次対角行列を\underline{単位行列}と言い, $E_n$とかく. 例えば以下の行列は単位行列である:
+   $$
+   E_2 =
+ \begin{pmatrix}
+1&0\\
+0 &1
+ \end{pmatrix}, 
+ E_1=
+  \begin{pmatrix}
+1
+ \end{pmatrix}, 
+ E_3=
+   \begin{pmatrix}
+1&0 &0\\
+0 &1 &0\\
+0&0&1
+ \end{pmatrix}
+ $$
+ \item 行列$A$の行と列を入れ替えた行列を\underline{転置行列}と言い${}^{t}A$とかく.
+\end{itemize}
+\begin{exa}
+ $
+ A = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 2 &3 \\
+ 5&2\\
+ 8&1
+ \end{pmatrix}
+  \text{であり, }
+ $
+ $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 2 &5&8 \\
+ 3&2&1
+ \end{pmatrix}
+ =A
+ $
+ である.
+ 
+  $
+ A = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ \text{ についてその転置行列は}
+{}^{t}A = 
+ \begin{pmatrix}
+ 3 &2 \\
+ 1&4\\
+ \end{pmatrix}
+  \text{であり, }
+ $
+  $
+{}^{t}({}^{t}A) = 
+ \begin{pmatrix}
+ 3 &1 \\
+ 2&4
+ \end{pmatrix}
+ =A
+ $
+ である.
+\end{exa}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[転置行列の性質]
+    \text{}
+\begin{itemize}
+\item $A$が$m\times n$行列なら${}^{t}A $は$n\times m$行列.
+\item $A=[a_{ij}]_{m \times n}$とし, ${}^{t}A=[b_{ij}]_{n \times m}$とするとき, $b_{ij} =a_{ji}$.
+\item ${}^{t}({}^{t}A) =A$.
+\end{itemize}
+
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{クロネッカーのデルタ}
+ $$
+ \delta_{ij} = 
+ \begin{cases}
+1 & \text{$i=j$のとき}\\
+0 & \text{$i \neq j$のとき}
+\end{cases}
+  $$
+ \text{を\underline{クロネッカーのデルタ}という.}
+ \begin{exa}
+ $\delta_{11}=\delta_{22}=1, \delta_{12}=\delta_{21}=0$である. $n$次正方行列$E_n$は$E_n = [\delta_{ij}]_{n\times n}$と略記できる.
+ \end{exa}
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.  行列$A$を次で定める.
+ $$
+ A = 
+ \begin{pmatrix}
+ 2 &4&-3&8 \\
+ 3&-1&2&-5 \\
+  18&0&2&12
+ \end{pmatrix}
+ $$
+ 次の問いに答えよ.
+ \begin{itemize}
+ \item $A$の型をいえ.
+ \item $A$の$(3,2)$成分をいえ.
+  \item $A$の第2行をいえ.
+ \item $A$の第3列をいえ.
+ \item $A$の転置行列${}^{t}A$を求めよ.
+ \end{itemize}
+ 
+ 2. ${}^{t}A =-A$となる$n$次正方行列を交代行列という. 交代行列の対角成分は0であることを示せ.
+
+
+\newpage
+
+\begin{center}
+{\Large 第3回. 行列の演算 (三宅先生の本, 1.2と1.3の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/04/28
+\end{flushright}
+
+
+
+\section{行列の和と差}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の和と差]
+    \text{}
+ 
+$m \times n$行列
+$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+$, 
+$
+B=\begin{pmatrix}
+b_{11}& b_{12} & \cdots &b_{1n} \\
+b_{21}& b_{22} & \cdots &b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+b_{m1}& b_{m2} & \cdots &b_{mn} \\
+\end{pmatrix}
+$
+とする.
+
+このとき行列の和$A+B$と差$A-B$を次で定める.
+$$
+A+B=
+\begin{pmatrix}
+a_{11}+b_{11}& a_{12}+b_{12}& \cdots &a_{1n} +b_{1n}\\
+a_{21}+b_{21}& a_{22}+b_{22}& \cdots &a_{2n}+b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}+b_{m1}& a_{m2} +b_{m2}& \cdots &a_{mn} +b_{mn}\\
+\end{pmatrix}.
+$$
+$$
+A-B=
+\begin{pmatrix}
+a_{11}-b_{11}& a_{12}-b_{12}& \cdots &a_{1n} -b_{1n}\\
+a_{21}-b_{21}& a_{22}-b_{22}& \cdots &a_{2n}-b_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}-b_{m1}& a_{m2}-b_{m2}& \cdots &a_{mn}-b_{mn}\\
+\end{pmatrix}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ -2&5&1 \\
+ 3&-1&2
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ -1 &3&9 \\
+ 5&4&1
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 3 &-7&7 \\
+ -1&6&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 3&1 \\
+ 1&4
+ \end{pmatrix}
+ $, 
+ $
+ B = 
+ \begin{pmatrix}
+ 2&7\\
+ 5&8
+ \end{pmatrix}
+ $
+ とする．
+ 
+ このとき$
+ A+B =
+ \begin{pmatrix}
+ 5&8 \\
+6&12
+ \end{pmatrix}
+ $, 
+ $
+  A-B =
+ \begin{pmatrix}
+ 1&-6 \\
+ -4&-4
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 2&1 \\
+ 1&5
+ \end{pmatrix}
+ $,
+$ 
+ B = 
+ \begin{pmatrix}
+ 1&1 &3 \\
+ 4&6 & 7
+ \end{pmatrix}
+ $
+ とする．このとき$A+B$は型が違うため定義されない. 
+ \end{exa}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の和と差の性質]
+$A, B$を行列とする.
+ \begin{itemize}
+ \item $A\pm B =B\pm A$.
+  \item $A\pm O =A$ (ただし$O$は零行列).
+  \item $(A+B)+C =A + (B+C)$.
+  \item ${}^{t}(A+B) = {}^{t}A+ {}^{t}B$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{行列のスカラー倍}
+ 
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列のスカラー倍]
+    \text{}
+    
+ $m \times n$行列
+ $
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}$
+とし, $c$を数とする($c$をスカラーとも呼ぶ).
+
+$A$の$c$倍$cA$を次で定める.
+$$
+cA=
+\begin{pmatrix}
+ca_{11}&c a_{12} & \cdots &ca_{1n} \\
+ca_{21}& ca_{22} & \cdots &ca_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+ca_{m1}& ca_{m2} & \cdots &ca_{mn} \\
+\end{pmatrix}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+
+\begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 1 &-2&8 \\
+ 2&5&-1
+ \end{pmatrix}
+ $,
+ $
+ c =3
+ $
+ とする．
+ このとき$
+ cA =
+ \begin{pmatrix}
+ 3 &-6&24 \\
+ 6&15&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ \begin{exa}
+ $A = 
+ \begin{pmatrix}
+ 2&1 \\
+ 4&3
+ \end{pmatrix}
+ $, 
+ $
+ c =-1
+ $
+ とする．
+ このとき$
+ cA =
+ \begin{pmatrix}
+ -2 &-1 \\
+-4&-3
+ \end{pmatrix}
+ $である.
+ \end{exa}
+ 
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列のスカラー倍の性質]
+$A$を行列, $a,b$を数とする.
+ \begin{itemize}
+ \item $0A =O$ (ただし$O$は零行列).
+  \item $1A=A$. 
+  \item $(-1)A$を$-A$と書くことにすると, $A + (-A) =O$.　
+  \item $(ab) A = a(bA)$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+ \section{行列の積}
+ 
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の積]
+    
+ $m \times n$行列$A = [a_{ij}]_{m \times n}$と$n \times l$行列$B= [b_{jk}]_{n \times l}$とする．
+このとき$A$と$B$の積$AB$は$m \times l$行列で, 次の式で定義される.
+
+$$
+AB = [c_{ik}]_{m \times l}\text{としたとき, }
+c_{ik} = a_{i1}b_{1k} + a_{i2}b_{2k} + \cdots + a_{in}b_{nk} = \sum_{j=1}^{n} a_{ij}b_{jk}.
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $ A=\begin{pmatrix} 1 &2 &3 \end{pmatrix}$, 
+ $ 
+ B = 
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$1\times 3$行列で$B$は$3 \times 1$行列なので, 行列の積$AB$が$1 \times 1$行列として定義でき, 
+ $$
+ AB = \begin{pmatrix}1 &2&3  \end{pmatrix}
+ \begin{pmatrix}
+5 \\7\\2
+ \end{pmatrix}
+ = \begin{pmatrix}1\times 5 + 2 \times 7 + 3 \times 2  \end{pmatrix}= 
+  \begin{pmatrix}5+14+6 \end{pmatrix}= \begin{pmatrix}25 \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+ 
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 1$行列なので, 行列の積$AB$が$2 \times 1$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 2\\
+4 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+5 \\1
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2\times 5 + 2\times 1 \\
+4 \times 5 + 3 \times 1
+ \end{pmatrix}
+ = 
+  \begin{pmatrix}
+12 \\
+23
+ \end{pmatrix}.
+ $$
+ 
+ \end{exa}
+ 
+ \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ $, $
+ B = 
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2\times 2$行列で$B$は$2 \times 2$行列なので, 行列の積$AB$が$2 \times 2$行列として定義でき, 
+ $$
+ AB = 
+ \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+ =  
+ \begin{pmatrix}
+2 \times 5 + 3 \times 2& 2 \times 2 + 3 \times 3\\
+1 \times 5 + 4 \times 2 & 1\times 2 + 4 \times 3
+ \end{pmatrix}
+ = 
+ \begin{pmatrix}
+16 & 13\\
+13 & 14
+ \end{pmatrix}.
+ $$
+ 
+また$B$は$2\times 2$行列で$A$は$2 \times 2$行列なので, 行列の積$BA$が$2 \times 2$行列として定義でき, 
+ $$
+ BA = 
+  \begin{pmatrix}
+5 & 2\\
+2 & 3
+ \end{pmatrix}
+  \begin{pmatrix}
+2 & 3\\
+1 & 4
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+12 & 23\\
+7 & 18
+ \end{pmatrix}.
+ $$
+
+よって\underline{行列の積に関して$AB=BA$とは限らない($AB \neq BA$となることがある).}
+ \end{exa}
+ 
+  \begin{exa}
+ $ A= 
+ \begin{pmatrix}
+2 & 1&-3\\
+1 & -5 & 2
+ \end{pmatrix}
+ $, $
+ B = 
+  \begin{pmatrix}
+8 & 7&5 & 2
+ \end{pmatrix}
+ $
+ とする. 
+ 
+ $A$は$2 \times 3$行列で$B$は$1 \times 4$行列であるので, 行列の積$AB$は定義されない.
+ \end{exa}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の積の性質]
+$A,B,C$を行列とする.
+ \begin{itemize}
+ \item $AO =O = OA$ (ただし$O$は零行列).
+  \item $AE_{n}=E_{n}A =A$ (ただし$E_n$は単位行列). 
+  \item $(AB)C = A(BC)$.　
+  \item ${}^{t}(AB) = {}^{t}B {}^{t}A$
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+\begin{itemize}
+\item $A$を$n$次正方行列とするとき$A^{m} = \underbrace{A \cdots A}_{m \text{ 個}}$とする
+\item $A^{m}=O$となる行列を\underline{\ruby{冪}{べき}\ruby{零}{ぜろ}行列}という.
+\end{itemize}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}[行列の演算の性質]
+$A,B,C$を行列とし, $a,b$を数とする.
+ \begin{itemize}
+ \item $a(AB)=(aA)B$. 
+  \item $a(A+B)=aA + aB$. 
+  \item $(a+b)A = aA + bA$.　
+  \item $A(B+C) = AB + AC$.
+  \item $(A+B)C = AC + BC$.
+ \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+ 
+\section{三宅先生の本1.3の内容に関して}
+この授業では三宅先生の本1.3の内容「行列の分割」についての説明は割愛する(重要度が低いと思われるため).
+ただし証明等で行列の分割の記法を用いるため, 各自で三宅先生の本1.3の内容を読むことをお勧めする.
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.  次の行列の計算を行え.
+ $$
+ \begin{pmatrix}
+ 2 &3&-1 \\
+ 0&5&4\\
+ -1&0&-2
+ \end{pmatrix}
+ \left\{
+ \begin{pmatrix}
+ 0 &5&9 \\
+ 3&-2&8\\
+ -1&8&1
+ \end{pmatrix}
+ - 2
+  \begin{pmatrix}
+ -1 &0&1 \\
+ 3&2&3\\
+ -4&2&-1
+ \end{pmatrix}
+\right\}
+ $$
+  
+ 2. 次の行列$A,B,C,D$のうち, 積が定義される全ての組み合わせを求め, その積を計算せよ.
+ $$
+  A=\begin{pmatrix}
+ 2 \\ 1\\-1
+ \end{pmatrix} 
+B= \begin{pmatrix}
+ 3 &2\\
+ 4&1\\
+ 0&1
+ \end{pmatrix} 
+ C=
+  \begin{pmatrix}
+ 2 &0&1 
+ \end{pmatrix}
+ D= \begin{pmatrix}
+ 2&3\\
+ -1&4
+ \end{pmatrix}
+ $$
+
+\newpage
+
+\begin{center}
+{\Large 第4回. 連立1次方程式1-基本変形- (三宅先生の本, 1.4, 2.1の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/05/12
+\end{flushright}
+
+\section{連立1次方程式}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[係数行列, 拡大係数行列]
+$m$個の式からなる$n$変数連立1次方程式
+\begin{equation*}
+%\label{equation}
+\left\{ 
+\begin{matrix}
+a_{11}x_1&+& a_{12} x_2& +&\cdots &+&a_{1n}x_n &= &b_1 \\
+a_{21}x_1&+& a_{22} x_2& +&\cdots &+&a_{2n}x_n &= &b_2 \\
+\vdots		&& 	\vdots				 && 		& &\vdots&&\vdots	\\
+a_{m1}x_1&+& a_{m2} x_2& +&\cdots &+&a_{mn}x_n &= &b_m \\
+\end{matrix}
+\right.
+\text{に対して}
+\end{equation*}
+$$
+A=\begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} \\
+a_{21}& a_{22} & \cdots &a_{2n} \\
+\vdots& \vdots	&	\ddots   &	\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn} \\
+\end{pmatrix}
+\bm{x} =\begin{pmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{pmatrix}
+\bm{b} =\begin{pmatrix}
+b_1\\b_2\\\vdots\\b_m
+\end{pmatrix}
+\text{とおく.}
+$$
+行列$A$を連立1次方程式の\underline{係数行列}といい, 
+$$
+[A : \bm{b}] = \begin{pmatrix}
+a_{11}& a_{12} & \cdots &a_{1n} & b_1\\
+a_{21}& a_{22} & \cdots &a_{2n} &b_2\\
+\vdots& \vdots	&	\ddots   &	\vdots&\vdots \\
+a_{m1}& a_{m2} & \cdots &a_{mn}&b_m \\
+\end{pmatrix}
+\text{を連立1次方程式の\underline{拡大係数行列}という.}
+$$
+  \end{dfn}
+ \end{tcolorbox}
+ これにより上の連立1次方程式は$A\bm{x}=\bm{b}$とかける.
+
+ \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& = &7 \\
+x&-&4y& = &9 \\
+\end{matrix}
+\right.
+ $
+ について, 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 2 & 3 \\
+ 1 & -4
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+  \begin{pmatrix}
+ 2 & 3  &7\\
+ 1 & -4 &9
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+ 
+  \begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+3x_1&-&2x_2& +& x_3 &+& 4x_4 &=& 7 \\
+x_1 &  & 	   & -& 3x_3 &+& x_4 &=& 5 \\
+2x_1&-& x_2& +& 9x_3 & & 	 &=& 0 \\
+\end{matrix}
+\right.
+ $
+ について, \\
+ 係数行列は
+ $A = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4\\
+ 1 & 0   & -3&1\\
+2 & -1  & 9&0\\
+ \end{pmatrix}
+ $
+ で, 拡大係数行列は
+ $[A : \bm{b}] = 
+ \begin{pmatrix}
+ 3 & -2  & 1&4 & 7\\
+ 1 & 0   & -3&1 &5\\
+2 & -1  & 9&0 & 0\\
+ \end{pmatrix}
+ $
+ である.
+ \end{exa}
+ 
+ \section{行列の基本変形}
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[行列の基本変形]
+ 行列の次の3つの変形を(行)基本変形という.
+ \begin{enumerate}
+ \item 1つの行を何倍か($\neq 0$倍)する.
+ \item 2つの行を入れ替える.
+ \item1つの行に他の行の何倍かを加える.
+ \end{enumerate}
+  \end{dfn}
+  
+ \end{tcolorbox} 
+
+拡大係数行列の(行)基本変形を行うことで連立1次方程式が解ける(連立方程式の解き方に関しては, 第6回資料を見てください).
+
+\begin{exa}
+ 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ $
+ を考える. 
+ これを拡大係数行列の基本変形と式変形で解いてみて, その対応を表すと下の通りとなる.\footnote{途中で現れる「$\maru{1}+\maru{3}\times(-2)$」は「行列の1行目に3行目の$(-2)$倍を加える」あるいは「1行目の式に3行目の式の$(-2)$倍を加える」を意味している(一応教科書に従った記法である).}
+
+  %まずこれを式変形で解くと次のとおりである.\footnote{途中で現れる「$\maru{1}+\maru{3}\times(-2)$」は「1行目の式に3行目の式の(-2)倍を加える」を意味している(一応教科書に従った記法である).}
+%これに対する拡大係数行列の基本変形は以下の通りである. \footnote{途中で現れる「$\maru{1} + \maru{3}\times(-2)$」は「行列の1行目に3行目の(-2)倍を加える」を意味している.}
+ 
+  \begin{align*}
+ & &\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ & \overset{\text{対応}}{\longleftrightarrow}& &\left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+ &\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ & \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+ & & y& + &z &= &1 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+  &\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ &\begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+ & & y& + &z &= &1\\
+ & &3y& +& z &= &-1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\ %%
+   &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+ &\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+x&+&y& -&z &= &-2 \\
+ & &3y& +& z &= &-1 \\
+ & & y& + &z &= &1\\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+ &\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+ & \left\{ 
+\begin{matrix}
+x&+&y& -&z &= &-2 \\
+ & & y& + &z &= &1\\
+  & &3y& +& z &= &-1 \\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}
+ &\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}
+ & \left\{ 
+\begin{matrix}
+x& & & -&2z &= &-3 \\
+ & & y& + &z &= &1\\
+  & & & -& 2z &= &-4 \\
+\end{matrix}
+\right.
+ \\ %%
+    &\overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+ &\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+ & \left\{ 
+\begin{matrix}
+x& & & -&2z &= &-3 \\
+ & & y& + &z &= &1\\
+  & & &  & z &= &2 \\
+\end{matrix}
+\right.
+ \\ %%
+&\overset{\maru{1} + \maru{3}\times 2}{\underset{\maru{2} + \maru{3}\times(-1) }{\longrightarrow}}
+ &\begin{pmatrix}
+1& 0  & 0&1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\longleftrightarrow} 
+&\overset{\maru{1} + \maru{3}\times 2}{\underset{\maru{2} + \maru{3}\times(-1) }{\longrightarrow}}
+ & \left\{ 
+\begin{matrix}
+x& & &  &  &= &1 \\
+ & & y&   & &= &-1\\
+  & & &  & z &= &2 \\
+\end{matrix}
+\right.
+ \\ %%
+ \end{align*}
+ 以上より解は$x=1, y=-1, z=2$である.
+\end{exa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \begin{comment}
+ ボツネタ
+ 
+  
+ %\overset{\text{$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $}}{\longrightarrow} 
+ $\overset{\maru{1}  + \maru{2}\times(-1)}{\underset{\maru{3} +  \maru{2}\times(-3)}{\longrightarrow}}$
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+ &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+  \overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+ \\
+ &  \overset{\text{
+$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $
+ }}{\longrightarrow} 
+ \begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+   \overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+ \\
+ &\overset{\text{
+$\maru{1} + \maru{3}\times 2 $ と $\maru{2} + \maru{3}\times(-1) $
+  }}{\longrightarrow} 
+  \begin{pmatrix}
+1& 0  & 0&-1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+\end{align*}
+ 
+ 
+ 
+ 
+ \begin{align*}
+&\begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ &\text{対応}&
+  \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+ \\
+&\overset{\text{$\maru{1} + \maru{3}\times(-2)$}}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+&\overset{\text{$\maru{2}+\maru{3}\times 1$ }}{\longrightarrow} 
+ \begin{pmatrix}
+ 0& 1  & 1&1\\
+0 & 3& 1&-1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+ \\
+ &\overset{\text{\maru{3}と\maru{1}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+0 & 3& 1&-1\\
+ 0& 1  & 1&1\\
+ \end{pmatrix}
+  \overset{\text{\maru{2}と\maru{3}を入れ替え}}{\longrightarrow} 
+\begin{pmatrix}
+1& 1  & -1&-2\\
+ 0& 1  & 1&1\\
+ 0 & 3& 1&-1\\
+ \end{pmatrix}
+ \\
+ &  \overset{\text{
+$ \maru{1}  + \maru{2}\times(-1)$ と$\maru{3} +  \maru{2}\times(-3) $
+ }}{\longrightarrow} 
+ \begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& -2&-4\\
+ \end{pmatrix}
+   \overset{\text{\maru{3}$\times (-\frac{1}{2})$}}{\longrightarrow}
+\begin{pmatrix}
+1& 0  & -2&-3\\
+ 0& 1  & 1&1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+ \\
+ &\overset{\text{
+$\maru{1} + \maru{3}\times 2 $ と $\maru{2} + \maru{3}\times(-1) $
+  }}{\longrightarrow} 
+  \begin{pmatrix}
+1& 0  & 0&-1\\
+ 0& 1  & 0&-1\\
+ 0 & 0& 1&2\\
+ \end{pmatrix} 
+\end{align*}
+
+\begin{align*}
+ \begin{pmatrix}
+ 2& 3  & -1&-3\\
+-1 & 2 & 2&1\\
+1& 1  & -1&-2\\
+ \end{pmatrix}
+&\overset{\text{対応}}{\leftrightarrow} 
+ \left\{ 
+\begin{matrix}
+2x&+&3y& -&z &= &-3 \\
+-x&+&2y& +&2z &= &1 \\
+x&+&y& -&z &= &-2 \\
+\end{matrix}
+\right.
+\\
+\end{align*}
+
+
+  \end{comment}
+
+ 
+ 
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1. 連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&x_2& -&x_3 &= & 1\\
+2x_1&+&x_2& +&3x_3&= &4 \\
+-x_1&+&2x_2& -&4x_3 &= &-2 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+
+
+\newpage
+
+%\maketitle
+\begin{center}
+{\Large 第5回. 連立1次方程式2-行列の簡約化- (三宅先生の本, 2.2の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/05/19
+\end{flushright}
+
+\section{簡約な行列}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[簡約な行列]
+  行列$A$が次の4つの条件を満たすとき, $A$を\underline{簡約な行列}という.
+  \begin{enumerate}
+\item 行ベクトルのうちに零ベクトル(全ての成分が0である行)があれば, それは零ベクトルでないものよりも下にある.
+\item 零ベクトルでない行ベクトルの主成分は1である.
+\item 第$i$行の主成分を$a_{ij_{i}}$とすると, $j_1<j_2<j_3<\cdots$となる. すなわち各行の主成分は下の行ほど右にある.
+\item 各行の主成分を含む列の他の成分は全て0である. すなわち第$i$行の主成分が$a_{ij_{i}}$であるならば, 第$j_i$列の$a_{ij_{i}}$以外の成分は全て0である.
+  \end{enumerate}
+  \end{dfn}
+ \end{tcolorbox}
+ \begin{exa}
+以下の行列は全て簡約な行列である.
+$$
+ \begin{pmatrix}
+ 0& 1& 3  & 0&2\\
+ 0& 0& 0  & 1&1\\
+ 0& 0& 0 & 0&0\\
+ \end{pmatrix}
+  \begin{pmatrix}
+ 1& 0& 1  & 4&0&-1\\
+ 0& 1& 7 & -4&0&1\\
+ 0& 0& 0 & 0&1&3\\
+ \end{pmatrix}
+   \begin{pmatrix}
+ 0& 0& 0  & 1&6&0&3&0\\
+ 0& 0& 0 & 0&0&1&2&0\\
+ 0& 0& 0 & 0&0&0&0&0 \\
+ \end{pmatrix}
+$$
+\end{exa}
+ \begin{exa}
+ 次に簡約ではない行列の例を理由とともに挙げる.
+ \begin{itemize}
+\item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 0& 0& 0  & 0&0\\
+ 0& 0& 0 & 0&1\\
+ \end{pmatrix} 
+ $
+ は1番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 0& 0& 0  & 0&3\\
+ \end{pmatrix} 
+ $
+ は2番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 0& 0& 1  & 0&0\\
+ 1& 0& 0  & 0&0\\
+ \end{pmatrix} 
+ $
+ は3番目の条件が満たされていないので簡約ではない.
+ \item 
+$ 
+\begin{pmatrix}
+ 1& 0& 1  & 1&0\\
+ 1& 0& 0  & 0&1\\
+ \end{pmatrix} 
+ $
+ は4番目の条件が満たされていないので簡約ではない.
+ \end{itemize}
+\end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[簡約化]
+  行列$A$に(行)基本変形
+ \begin{enumerate}
+ \item 1つの行を何倍か($\neq 0$倍)する.
+ \item 2つの行を入れ替える.
+ \item1つの行に他の行の何倍かを加える.
+ \end{enumerate}
+ を繰り返して簡約な行列$B$を得ることを\underline{$A$を簡約化する}といい, \underline{$B$を$A$の簡約化}という.
+   \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    任意の行列は基本変形を繰り返すことによって簡約化することができ, その簡約化は一意に定まる.
+   \end{thm}
+ \end{tcolorbox}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}[階数(ランク)]
+$A$を行列とし, $B$を$A$の簡約化とする.
+${\rm rank}(A)$を$B$の零ベクトルでない行の個数とし\underline{$A$の階数(ランク)}と呼ぶ.
+   \end{dfn}
+ \end{tcolorbox}
+${\rm rank}(A)$は簡約化の仕方によらずに定まる数である.
+また$A$を$m\times n$行列とすると${\rm rank}(A) \le \min(m,n)$である.
+\begin{exa}
+$A=
+ \begin{pmatrix}
+ 0& 1& 3  & 0&2\\
+ 0& 0& 0  & 1&1\\
+ 0& 0& 0 & 0&0\\
+ \end{pmatrix}
+ $
+ とすると, これは簡約な行列であり零ベクトルでない行の個数は2個である. よって${\rm rank}(A)=2$.
+ 
+ $B= \begin{pmatrix}
+ 1& 0& 1  & 4&0&-1\\
+ 0& 1& 7 & -4&0&1\\
+ 0& 0& 0 & 0&1&3\\
+ \end{pmatrix}
+ $ とすると, これは簡約な行列であり零ベクトルでない行の個数は3個である. よって${\rm rank}(B)=3$.
+\end{exa}
+
+\begin{exa}
+$
+ \begin{pmatrix}
+ 1& 2& -3  \\
+ 1& 1& 1  \\
+ \end{pmatrix}
+ $
+ を基本変形で簡約化すると次のとおりである.\footnote{第4回授業資料と同じで「$\maru{2} + \maru{1}\times(-1)$」は「行列の2行目に1行目の(-1)倍を加える」を意味している.}
+ \begin{align*}
+  \begin{pmatrix}
+ 1& 2& -3  \\
+ 1& 1& 1  \\
+ \end{pmatrix}
+ \overset{\text{$\maru{2} + \maru{1}\times(-1)$}}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 2& -3  \\
+ 0& -1& 4  \\
+ \end{pmatrix}
+ \overset{\text{$\maru{2} \times(-1)$}}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 2& -3  \\
+ 0& 1& -4  \\
+ \end{pmatrix}
+  \overset{\maru{1} + \maru{2}\times(-1)}{\longrightarrow} 
+   \begin{pmatrix}
+ 1& 0& 5  \\
+ 0& 1& -4  \\
+ \end{pmatrix}.
+  \end{align*}
+  よってこの行列の階数(ランク)は2である.
+\end{exa}
+
+\begin{exa}
+$
+ \begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+ $
+ を基本変形で簡約化すると次のとおりである.
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 2& 1& 1  &0\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+ \overset{\maru{2} + \maru{1}\times(-2)}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 1& 1  &0\\
+ \end{pmatrix}
+\overset{\maru{3} + \maru{2}\times(-1)}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 4  &2\\
+ \end{pmatrix}
+ \\ %%
+ & \overset{\maru{3}\times \frac{1}{2}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& 2  &1\\
+ 0& 1& -3 &-2\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+ \overset{\maru{1} + \maru{3}\times (-1)}{\underset{\maru{2} + \maru{3}\times \frac{3}{2}}{\longrightarrow}}
+ \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 2  &1\\
+ \end{pmatrix} 
+ \overset{\maru{3}\times \frac{1}{2}}{\longrightarrow} 
+  \begin{pmatrix}
+ 1& 0& 0  &0\\
+ 0& 1& 0 &-\frac{1}{2}\\
+ 0& 0& 1 &\frac{1}{2}\\
+ \end{pmatrix}.
+ \end{align*}
+   よってこの行列の階数(ランク)は3である.
+ \end{exa}
+ 
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.
+$
+ \begin{pmatrix}
+ 1& 0& -1  & 0&-2\\
+ 0& 1& 1  & 0&1\\
+ -1& 0& 1 & 1&1\\
+ 2& 1& -1 & 0&3\\
+ \end{pmatrix}
+ $
+ を簡約化し, その階数を求めよ.
+
+2.
+$
+ \begin{pmatrix}
+ 1& 0& -1  & 0&-2\\
+ 0& 1& 1  & 0&1\\
+  -1& 0& 1 & 1&1\\
+ 2& 1& -1 & 0&-3\\
+ \end{pmatrix}
+ $
+ を簡約化し, その階数を求めよ.
+
+\newpage
+
+\begin{center}
+{\Large 第6回. 連立1次方程式3-一般的な解法- (三宅先生の本, 2.3の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/05/26
+\end{flushright}
+
+\section{簡約化を用いた連立1次方程式の解法}
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+連立1次方程式$A\bm{x} =\bm{b}$が解を持つ
+$\Leftrightarrow$ ${\rm rank}([A:\bm{b}]) = {\rm rank}(A)$.
+  \end{thm}
+ \end{tcolorbox}
+%連立1次方程式$A\bm{x} =\bm{b}$を解くためには, 拡大係数行列$[A:\bm{b}]$を簡約化してあげれば良い(この解き方を掃き出し法・ガウスの消去法とも言います). 
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+連立1次方程式$A\bm{x} =\bm{b}$の解きかた(掃き出し法・ガウスの消去法).
+ \begin{enumerate}
+ \item[手順1.] 連立方程式$A\bm{x} =\bm{b}$から拡大係数行列$[A:\bm{b}]$を作る.
+ \item[手順2.] 拡大係数行列$[A:\bm{b}]$を(行)基本変形で簡約化する.
+ \item[手順3.] その簡約化された行列のデータから連立方程式を書き下し, 一般解を求める.
+ \end{enumerate}
+ \end{tcolorbox}
+ 
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+x_1&+&4x_2& = &4\\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 連立方程式の拡大係数行列は
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 2& 4& 4  \\
+ \end{pmatrix}
+ $
+ である. これを簡約化すると
+ $
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 0& 0& 0  \\
+ \end{pmatrix} 
+ $
+ となる. よってこれより
+ $
+  \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+0x_1&+&0x_2& = &0\\
+\end{matrix}
+\right.
+$
+である. 
+
+以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=& 2 -2c_2\\
+x_2 &=& c_2\\
+\end{matrix}
+\text{\,\, ($c_2$は任意定数)}
+\right.
+$
+となる. 
+
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+0 \\
+\end{pmatrix}
++t 
+\begin{pmatrix}
+-2\\
+1 \\
+\end{pmatrix}
+(t \in \R)
+$
+と書くこともある.
+\end{exa}
+
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &2 \\
+x_1&+&4x_2& = &5\\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 連立方程式の拡大係数行列は
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& 2& 2  \\
+ 2& 4& 5  \\
+ \end{pmatrix}
+ $
+ である. 
+ これを簡約化すると
+ $
+  \begin{pmatrix}
+ 1& 2& 0  \\
+ 0& 0& 1 \\
+ \end{pmatrix} 
+ $
+ となる. よってこれより
+ $
+  \left\{ 
+\begin{matrix}
+x_1&+&2x_2& = &0 \\
+0x_1&+&0x_2& = &1\\
+\end{matrix}
+\right.
+$
+である. 以上より解は存在しない.
+\end{exa}
+
+\begin{exa}
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+x_1&-&2x_2& + &x_3&+&2x_4&+&x_5&= 2 \\
+2x_1&-&4x_2& + &x_3&+&5x_4&+&2x_5&= 5 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+ 
+ (解). 拡大係数行列は 
+ $[A:\bm{b}]=
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+  1& -2& 1& 2& 1& 2   \\
+ 2& -4& 1 & 5& 2& 5   \\
+ \end{pmatrix}
+ $
+ である. これを基本変形で簡約化すると
+ $
+  \begin{pmatrix}
+ 1& -2& 0 & 3& 0& 2   \\
+ 0& 0& 1& -1& 0& 1   \\
+ 0& 0& 0 & 0& 1& 1   \\
+ \end{pmatrix}
+ $
+ となる.
+ これをもう一回式に書き下すと
+ $$
+\left \{
+ \begin{matrix}
+x_1&-&2x_2&   &		&+&3x_4& &	&= 2 \\
+      & &		&   &x_3       &- & x_4& &       &= -1 \\
+      & & &   &    & &		& & x_5&= 1 \\
+\end{matrix}
+\right.
+\text{である.}
+ $$
+ 
+以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=& 2 +2c_2 -3c_4\\
+x_2&=&c_2 \\
+x_3&=& -1 + c_4\\
+x_4&=&c_4 \\
+x_5&=& 1\\
+\end{matrix}
+\text{\,\, ($c_2, c_4$は任意定数)}
+\right.
+$
+となる. 
+ 
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+0 \\
+-1 \\
+0\\
+1 \\
+\end{pmatrix}
++ s
+\begin{pmatrix}
+2\\
+1\\
+0\\
+0\\
+0 \\
+\end{pmatrix}
++ t
+\begin{pmatrix}
+-3\\
+0\\
+1\\
+1\\
+0 \\
+\end{pmatrix}
+(s, t \in \R)
+$
+と書くこともある.
+
+ \end{exa}
+
+\begin{rema}
+実際に連立1次方程式をプログラミングで解くときも, 掃き出し法・ガウスの消去法によって解きます. 実際にc++で書いたソースコードを以下のホームページで見ることができます.\footnote{第7回授業で簡約化の証明をする際にもこのホームページを参考にさせていただきました.}
+\begin{itemize}
+\item Gauss-Jordan の掃き出し法と、連立一次方程式の解き方 \\
+ \texttt{https://drken1215.hatenablog.com/entry/2019/03/20/202800}
+\end{itemize}
+\end{rema}
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.
+連立1次方程式
+ $
+ \left\{ 
+\begin{matrix}
+x_1& &         &  +& 2x_3&- &x_4&+ & 2x_5&= 3 \\
+2x_1&+&x_2& + &3x_3&-&x_4&-&x_5&= -1 \\
+-x_1&+&3x_2& - &5x_3&+&4x_4&+&x_5&= -6 \\
+\end{matrix}
+\right.
+ $
+ を解け.
+
+\newpage
+
+\begin{center}
+{\Large 第7回. 正則行列 (三宅先生の本, 2.4の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/06/02
+\end{flushright}
+\section{正則行列}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+$A$を$n$次正方行列とする.
+ ある行列$B$があって
+ $$
+ AB =BA =E_{n} %\text{(\,\,\,ただし$E_n$は単位行列)}
+ $$
+ となるとき\underline{$B$を$A$の逆行列}といい$B=A^{-1}$とかく.
+ 
+ 行列$A$が逆行列$A^{-1}$を持つとき, $A$は\underline{正則行列}という(\underline{$A$は正則である}ともいう).
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $A=
+  \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ の逆行列は
+  $A^{-1}=
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ である. \\ 
+ 実際
+  $
+  \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+=
+  \begin{pmatrix}
+ 1& 5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+   \begin{pmatrix}
+ 1& -5  \\
+ 0& 1  \\
+ \end{pmatrix} 
+ =
+   \begin{pmatrix}
+ 1& 0 \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ である.
+ 特に$A$は正則行列である. 
+ \end{exa}
+
+ \begin{exa}
+2次正方行列
+ $A=
+  \begin{pmatrix}
+ a& b  \\
+ c& d  \\
+ \end{pmatrix} 
+ $
+ について
+  $ad-bc \neq 0$ならば, $A$は逆行列を持ち
+ $$
+ A^{-1} =   
+ \frac{1}{ad-bc}
+ \begin{pmatrix}
+ d& -b  \\
+ -c& a  \\
+ \end{pmatrix} 
+ \text{\,\,\,である.}
+ $$
+  特に$A$は正則行列である. 
+ \end{exa}
+ 
+  \begin{exa}
+  $
+   A=\begin{pmatrix}
+ 0& 1 \\
+ 0& 1  \\
+ \end{pmatrix} 
+ $
+ は逆行列を持たない. 特に$A$は正則行列ではない.
+  \end{exa}
+  
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    $A$を$n$次正方行列とするとき, 以下は同値.
+\begin{enumerate}
+\item $\rank (A) =n$
+\item $A$の簡約化は$E_n$である.
+\item 任意の$n$次列ベクトル$\bm{b}$について, $A \bm{x}=\bm{b}$はただ一つの解をもつ.
+\item $A \bm{x}=0$の解は$\bm{x}=0$に限る.
+\item $A$は正則行列.
+\item $A$の行列式$\det(A)$は0ではない(行列式に関しては第9, 10, 11回の講義でやります).
+\end{enumerate}
+  \end{thm}
+ \end{tcolorbox}
+ 
+ \section{掃き出し法を使った逆行列の求め方}
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    $A$を$n$次正方行列とし, $n \times 2n$行列$[A : E_n]$の簡約化が$[E_n : B]$となるとする.
+    このとき$A$は正則行列で, $B$は$A$の逆行列である.
+  \end{thm}
+ \end{tcolorbox}
+ この定理により掃き出し法を用いて逆行列を得ることができる.
+ 
+ \begin{exa}
+ $
+  A=\begin{pmatrix}
+ 1& 2&1 \\
+ 2& 3 & 1 \\
+ 1& 2 &  2 \\
+ \end{pmatrix} 
+ $
+ の逆行列を求めよ.
+ 
+ (解).
+ $[A:E_3] = 
+ \begin{pmatrix}
+ 1& 2&1  &1& 0&0 \\
+ 2& 3 & 1 &0& 1&0 \\
+ 1& 2 &  2 &0& 0&1 \\
+ \end{pmatrix} 
+ $
+ を(行)基本変形を用いて簡約化すると, \\
+ $
+ \begin{pmatrix}
+ 1& 0&0  &-4& 2&1 \\
+ 0& 1 & 0 &3& -1&-1 \\
+ 0& 0&  1 &-1& 0&1 \\
+ \end{pmatrix} 
+ $
+ となる. よって$A$の逆行列は
+ $
+ \begin{pmatrix}
+-4& 2&1 \\
+3& -1&-1\\
+1& 0&1 \\
+ \end{pmatrix} 
+ $
+ である.
+ \end{exa}
+
+\section{演習問題}
+演習問題の解答は授業動画にあります.
+
+1.
+$
+\begin{pmatrix}
+ 2& -1& 0\\
+ 2& -1 & -1 \\
+ 1& 0 &  -1 \\
+ \end{pmatrix} 
+ $
+ の逆行列を求めよ.
+
+ 
+
+\end{document}
