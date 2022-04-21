@@ -1,0 +1,321 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+%\newcommand{\rank}{{\rm rank}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第13回. クラメルの公式と特殊な行列式 (三宅先生の本, 3.4, 3.5の内容)} 
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/07/14
+\end{flushright}
+
+この授業で行う内容は理解しなくても構いません(結構マニアックな話題を扱います). 
+また覚える必要もございません. 
+\section{クラメルの公式}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+$A$を正則な$n$次正方行列とし, 列ベクトル$a_1, \ldots, a_{n}$を用いて
+$
+A = 
+\begin{pmatrix}
+a_1 & \cdots & a_{n}
+\end{pmatrix}
+$
+と表されているとする.
+このとき連立1次方程式$A \bm{x} =\bm{b}$の解は次のようになる.
+$$
+\bm{x}= \begin{pmatrix}
+x_1 \\ \vdots \\ x_{n}
+\end{pmatrix}, 
+x_i = \frac{\det
+\begin{pmatrix}
+a_1 & \cdots& \bm{b}&\cdots & a_{n}
+\end{pmatrix}
+}{\det A}.
+$$
+    \end{thm}
+ \end{tcolorbox}
+\begin{exa}
+$
+A = 
+\begin{pmatrix}
+5 &1\\
+3&2 \\ 
+\end{pmatrix}
+$, $
+\bm{b} = 
+\begin{pmatrix}
+3\\
+2 \\ 
+\end{pmatrix}
+$
+とする. 
+連立1次方程式$A \bm{x} =\bm{b}$の解を
+$
+\bm{x}= \begin{pmatrix}
+x_1 \\x_2
+\end{pmatrix} 
+$
+とすると,
+$$
+x_1 = \frac{\det
+\begin{pmatrix}
+ \bm{b}& a_{2}
+\end{pmatrix}
+}{\det A}
+= 
+\frac{ 
+\begin{vmatrix}
+3&1\\
+2&2 \\
+\end{vmatrix}
+}
+{
+\begin{vmatrix}
+5&1\\
+3&2 \\
+\end{vmatrix}
+}
+=\frac{4}{7} 
+\text{, }
+x_2 = \frac{\det
+\begin{pmatrix}
+a_{1}& \bm{b}
+\end{pmatrix}
+}{\det A}
+= 
+\frac{ 
+\begin{vmatrix}
+5&3\\
+3&2 \\
+\end{vmatrix}
+}
+{
+\begin{vmatrix}
+5&1\\
+3&2 \\
+\end{vmatrix}
+}
+=\frac{1}{7}
+\text{となる.}
+$$
+\end{exa}
+
+\section{特殊な行列式}
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+  \begin{enumerate}
+\item (ヴァンデルモンドの行列式)
+\begin{align*}
+ &
+ \begin{vmatrix}
+1   &   1     & \cdots &  1  \\
+x_1& x_2 & \cdots &x_n \\
+{x_1}^{2}& {x_2}^{2} & \cdots &{x_n}^{2} \\
+\vdots & \vdots    &  &\vdots \\
+{x_1}^{n-1}& {x_2}^{n-1} & \cdots &{x_n}^{n-1} \\
+\end{vmatrix}
+= \prod_{1 \leqq i < j \leqq n} (x_j - x_i).
+\\%%
+%&=(x_2 - x_1)  (x_3 - x_1)  \cdots  (x_n - x_1)  (x_3- x_2)    \cdots  (x_n - x_2)  (x_4 - x_3)\cdots (x_n - x_{n-1})
+%\begin{matrix}=(x_2 - x_1)  (x_3 - x_1)  \cdots  (x_n - x_1) \\\times (x_3- x_2)  (x_4 - x_2)  \cdots  (x_n - x_2) \\\times \cdots \\\times (x_n - x_{n-1}) \\ \end{matrix}
+%\begin{matrix}(x_2 - x_1) & \times&  (x_3 - x_1) & \times&  \cdots &\times & (x_n - x_1) \\\end{matrix}
+\end{align*}
+\item (ヴァンデルモンドの行列式の応用) $b_1, \ldots, b_n, c_1, \ldots, c_n$を実数とし, $b_1, \ldots, b_n$は相異なると仮定する.
+ このとき実数係数の$n$次式$f(x) = x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}$があって, 任意の$i = 1, \ldots, n$について$f(b_i) =c_i $となる.
+
+  \end{enumerate}
+    \end{thm}
+ \end{tcolorbox}
+$\prod_{1 \leqq i < j \leqq n}$は積の記号で, $\prod_{1 \leqq i < j \leqq n} (x_j - x_i)$は「$1 \leqq i < j \leqq n$を満たす$(i,j)$について$ (x_j - x_i)$を全てかけた数」を表している.
+
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+$$
+ \begin{vmatrix}
+a_0   &   -1   &0 &0 & \cdots &  0 \\
+a_1   &   x    &-1  &0 & \cdots &  0 \\
+a_2   &   0    & x   &-1 & \cdots &  0 \\
+\vdots  &    \vdots   &   &\ddots & \ddots &  0 \\
+a_{n-1}&   0    & 0   &                  & x&  -1\\
+a_n   &   0   & 0   &0 & \cdots &  x\\
+\end{vmatrix}
+=a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}.
+$$
+    \end{thm}
+ \end{tcolorbox}
+ 
+\section{終結式と判別式}
+以下の内容は「永田雅宜著 理系のための線型代数の基礎 (紀伊國屋書店)」の第3章に基づく.
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+$a_0, a_1, \ldots, a_n$を複素数とし, $f(x) = a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}$とする(ただし$a_0 \neq 0$とする). $f(x)=0$の解を$\alpha_{1}, \ldots, \alpha_{n}$とするとき, 
+$$
+D = a_{0}^{2n -2} \prod_{1 \leqq i < j \leqq n} (\alpha_j - \alpha_i)^2
+\text{ を\underline{$f(x)$の判別式}という.}
+$$
+    \end{dfn}
+ \end{tcolorbox}
+ 簡単にわかることとして, 「$D \neq 0$ $\Leftrightarrow$ $f(x)=0$の解が相異なる」である.
+\begin{exa}
+$f(x) = a_0 x^2 + a_1 x + a_2$の判別式$D$を求める(ただし$a_0 \neq 0$とする). 
+$\alpha_1, \alpha_2$を$f(x)=0$の解とすると, 解と係数の関係から
+$$
+a_0 x^2 + a_1 x + a_2 = a_0 (x - \alpha_1) (x- \alpha_2)
+$$
+であるので, $-a_ 1 = a_0 (\alpha_1 + \alpha_2), a_2 = a_0\alpha_1 \alpha_2$となる. よって
+$$
+D = a_{0}^{2} (\alpha_2 - \alpha_1)^2 = a_{0}^{2}\{ (\alpha_1 + \alpha_2)^2 - 4 \alpha_1 \alpha_2 \} = a_{1}^{2} - 4 a_0 a_{2}.
+ $$
+\end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+複素係数多項式$f(x) = a_0 x^{n} +  a_1 x^{n-1} +  \cdots +  a_{n-1} x + a_{n}$, 
+$g(x) = b_0 x^{m} +  b_1 x^{m-1} +  \cdots +  b_{m-1} x + b_{m}$
+(ただし$a_0 \neq 0, b_0 \neq 0$)について, $m+n$次正方行列を次で定める.
+$$
+ \begin{pmatrix}
+ a_0 	& a_1& \cdots &a_n 	&0		&0 	     & \cdots&0 \\
+0   		& a_0 & a_1		& \cdots &a_n 	&0 	      & \cdots&0 \\
+ 0 		& 0      & a_0 		&    a_1	& \cdots &a_n  & \cdots&0 \\
+\vdots  & \vdots  &      \ddots 	&     \ddots &  \ddots     &   & \ddots&\vdots \\
+   0		 & 0         &	 \cdots	&    0	& a_0 &a_1 & \cdots &a_n \\
+ b_0 	& b_1& b_2 &  \cdots  	& \cdots		&b_m	     & \cdots&0 \\
+%0		& b_0 	& b_1& b_2 &  \cdots  	&b_m 	    &      &0 \\
+\vdots 	&    \ddots 	&   \ddots    &   \ddots     & 		&   	    & \ddots&\vdots \\
+0		&     \cdots 	&      b_0 & b_1 &  b_2  	&  \cdots& \cdots&b_m \\
+ \end{pmatrix}
+$$
+この行列の行列式を\underline{$f,g$の終結式と言い, $R(f,g)$と表す.}
+    \end{dfn}
+ \end{tcolorbox}
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    \begin{enumerate}
+\item $f(x) =0$の解を$\alpha_1, \ldots, \alpha_n$とし, $g(x) =0$の解を$\beta_1, \ldots, \beta_m$とすると
+$$
+R(f,g) = a_{0}^{m}b_{0}^{n} \prod_{1 \leqq i \leqq n, 1\leqq j \leqq m} (\alpha_i - \beta_j)
+=a_{0}^{m} \prod_{1 \leqq i \leqq n} g(\alpha_{i})\text{である.}
+$$
+特に$R(f,g)=0$は$f(x)=g(x)=0$が共通解を持つことと同値である.
+\item $f'$を$f$の微分とすると, 
+$$
+R(f, f') = (-1)^{\frac{n(n-1)}{2}} a_0 D.
+$$
+特に$f(x)$の判別式$D$は$a_0, \ldots, a_n$の式でかける. また$R(f,f')=0$は$f(x)=0$が重根を持つことと同値である.
+    \end{enumerate}
+
+    \end{thm}
+ \end{tcolorbox}
+ 
+ 
+ \end{document}

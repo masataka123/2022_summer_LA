@@ -108,21 +108,47 @@ Zoomを用いて行います.
 
 - 第9回 (2022/06/16). 行列式 1 -置換-
 
-製作中です. しばらくお待ちください.
+[第9回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/9_行列式1.pdf), 
+[第9回授業動画](https://www.youtube.com/watch?v=fFk01jAERag), 
+[第9回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/9_第9回授業黒板.pdf) 
 
 - 第10回 (2022/06/23). 行列式 2 -行列式の計算方法-
 
+[第10回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/10_行列式2.pdf), 
+[第10回授業動画](https://www.youtube.com/watch?v=8dY367vY1pk), 
+[第10回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/10_第10回授業黒板.pdf) 
+
 - 第11回 (2022/06/30). 行列式 3 -行列式の基本性質-
+
+[第11回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/11_行列式3.pdf), 
+[第11回授業動画](https://www.youtube.com/watch?v=ubEQpb_vtKM), 
+[第11回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/11_第11回授業黒板.pdf) 
 
 - 第12回 (2022/07/07). 余因子行列と余因子展開
 
+[第12回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/12_余因子行列と余因子展開.pdf), 
+[第12回授業動画](https://www.youtube.com/watch?v=su6F7LcWiOk), 
+[第12回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/12_第12回授業黒板.pdf) 
+
 - 第13回 (2022/07/14). クラメルの公式と特殊な行列式
 
+[第13回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/13_クラメルの公式と特殊な行列式.pdf), 
+[第13回授業動画](https://www.youtube.com/watch?v=KW_1TEgG8n4), 
+[第13回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/13_第13回授業黒板.pdf) 
+
 - 第14回 (2022/07/21). 内積と外積
+
+[第14回授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/14_内積と外積.pdf), 
+[第14回授業動画](https://www.youtube.com/watch?v=pm19pywMM3g), 
+[第14回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/14_第14回授業黒板.pdf) 
 
 - 第15回 (2022/07/28). まとめと復習・質疑応答(期末試験の質問も含む)
 
 Zoomを用いて行います.
+
+[第9回から第14回の授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_線形代数資料_後半.pdf), 
+[第9回から第14回の授業動画リスト](https://www.youtube.com/playlist?list=PLZDOK-K3OuvCZz9GHbKNL4zLqAWWeLE3R), 
+[第9回から第14回の授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_授業後半黒板.pdf) 
 
 - 第16回 (2022/08/04). 期末試験(予定)
 

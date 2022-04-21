@@ -1,0 +1,298 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+%\newcommand{\rank}{{\rm rank}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第14回. 内積と外積} 
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/07/21
+\end{flushright}
+
+以下の内容は「基礎数学研究会 新版基礎線形代数 (東海大学出版会)」の第8章を参考にした. 
+これも覚える必要はない(\underline{ただしベクトル解析などで役に立つ内容である}).
+
+\section{内積}
+
+$\R$を実数の集合とし, $n \geqq1$なる自然数について
+$$
+\R^n  = \{ (x_1, \ldots, x_n) | x_1, \ldots, x_n \in \R\} \text{とする.}
+$$
+\begin{exa}
+$\R^2$は平面をあらわし, $\R^3$は空間を表す.
+\end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+$\bm{a}=(a_1, \ldots, a_n), \bm{b}=(b_1, \ldots, b_n)\in \R^n$, $\alpha \in \R$について和, 差, スカラー倍, 内積, 長さ(ノルム)を次で定める.
+\begin{itemize}
+\item 和 $\bm{a} + \bm{b} = (a_1 + b_1, \ldots, a_n + b_n)$.
+\item 差 $\bm{a} - \bm{b} = (a_1 - b_1, \ldots, a_n - b_n)$.
+\item スカラー倍 $\alpha \bm{a} = (\alpha a_1, \ldots, \alpha a_n)$.
+\item 内積 $\bm{a} \cdot\bm{b} = a_1 b_1 + \cdots + a_n b_n $.
+\item 長さ(ノルム) $||\bm{a}||= \sqrt{\bm{a} \cdot\bm{a}} = \sqrt{a_{1}^{2}+ \cdots + a_{n}^{2}}$.
+\end{itemize}
+    \end{dfn}
+ \end{tcolorbox}
+
+\begin{exa}
+$\bm{a}=(3,5), \bm{b} = (6,1), \alpha=2$とすると
+$\bm{a} + \bm{b} =(9,6)$, $\bm{a} - \bm{b} =(-3,4)$, $\alpha \bm{a}= (6,10)$, 
+$\bm{a} \cdot\bm{b} = 3 \times 6 + 5 \times 1 =23$, $||\bm{a}||=\sqrt{3^2 + 5^2}= \sqrt{34}$となる.
+\end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}
+$\bm{a}, \bm{b} \in \R^n$とする.
+\begin{enumerate}
+\item (中線定理) $||\bm{a} + \bm{b}||^2 + ||\bm{a} - \bm{b}||^2 = 2(||\bm{a}||^2 + ||\bm{b}||^2)$.
+\item $\bm{a} \cdot\bm{b} = \frac{1}{4}(||\bm{a} + \bm{b}||^2 - ||\bm{a} - \bm{b}||^2)
+= \frac{1}{2}(||\bm{a} + \bm{b}||^2 - ||\bm{a} ||^2- || \bm{b}||^2)
+= \frac{1}{2}(||\bm{a} ||^2 + || \bm{b}||^2 - ||\bm{a} - \bm{b}||^2)$.
+\item (Cauchy-Schwarzの不等式) $(\bm{a} \cdot\bm{b})^2 \leqq ||\bm{a} ||^2 ||\bm{b} ||^2 $.
+\item (三角不等式) $ ||\bm{a} + \bm{b} ||   \leqq ||\bm{a} || +  ||\bm{b} ||  $.
+\item $n=3$とし$\bm{a} =(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3)$とする.
+$\R^3$上の点Pを$(a_1, a_2, a_3)$, $\R^3$上の点Qを$(b_1, b_2, b_3)$, $\R^3$上の原点を点Oとする.
+このとき線分OPとOQがなす角を$\theta$とすると
+$$
+\bm{a} \cdot\bm{b} = ||\bm{a} || || \bm{b}|| \cos \theta \text{となる.}
+$$
+特に$||\bm{a} ||  \neq 0$かつ$|| \bm{b}|| \neq0$のとき, $\bm{a} \cdot\bm{b} =0$は直線OPとOQが直交していることと同値である.
+\end{enumerate}
+    \end{prop}
+ \end{tcolorbox}
+\begin{exa}
+$\bm{a} = (a_1, a_2, a_3)$に直交し点$\bm{c} = (c_1, c_2, c_3)$を通る平面$S$を求めよ.
+
+(解). $\bm{x}=(x_1, x_2, x_3)$が平面$S$の点であるとき, $\bm{x} - \bm{c}$と$\bm{a}$は直交する.
+よって
+$(\bm{x} - \bm{c}) \cdot \bm{a} =0$である.
+$$
+(\bm{x} - \bm{c}) \cdot \bm{a} = 
+a_1(x_1 - c_1) +a_2(x_2 - c_2) +a_3(x_3 - c_3)
+$$
+であるので, $S = \{ (x_1, x_2, x_3) \in \R^3 | a_1(x_1 - c_1) +a_2(x_2 - c_2) +a_3(x_3 - c_3)=0\} $となる.
+\end{exa}
+
+\section{外積}
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+$\bm{a}=(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3)\in \R^3$について, 外積$\bm{a} \times \bm{b}$を次で定める. 
+\begin{align*}
+\bm{a} \times \bm{b} 
+&=\left(\begin{vmatrix}
+a_2&a_3\\
+b_2&b_3 \\
+\end{vmatrix},
+\begin{vmatrix}
+a_3&a_1\\
+b_3&b_1 \\
+\end{vmatrix},
+\begin{vmatrix}
+a_1&a_2\\
+b_1&b_2 \\
+\end{vmatrix}
+\right)
+\\
+&=
+( a_2b_3 - a_3b_2, a_3b_1-a_1b_3, a_1b_2-a_2b_1)  
+\end{align*}
+\end{dfn}
+ \end{tcolorbox}
+ \begin{exa}
+ $\bm{a}=(3, 5, 0), \bm{b}=(6, 1, 0)$とすると
+ $$
+ \bm{a} \times \bm{b}
+ =\left(\begin{vmatrix}
+5&0\\
+1&0 \\
+\end{vmatrix},
+\begin{vmatrix}
+0&3\\
+0&6 \\
+\end{vmatrix},
+\begin{vmatrix}
+3&5\\
+6&1 \\
+\end{vmatrix}
+\right)
+= (0,0,-27)
+\text{, } 
+\bm{b} \times  \bm{a} 
+ =\left(\begin{vmatrix}
+1&0 \\
+5&0\\
+\end{vmatrix},
+\begin{vmatrix}
+0&6 \\
+0&3\\
+\end{vmatrix},
+\begin{vmatrix}
+6&1 \\
+3&5\\
+\end{vmatrix}
+\right)
+= (0,0,27).
+ $$
+ \end{exa}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}
+$\bm{a}, \bm{b} \in \R^3$とする.
+\begin{enumerate}
+\item $\bm{b} \times  \bm{a}  = - \bm{a} \times  \bm{b}$. 特に$\bm{a} \times  \bm{a} =0$.
+\item $\bm{a} \times  \bm{b}$は$\bm{a} $や$\bm{b}$に直交する.
+\item $\bm{a} \times  \bm{b} =0$であることは$\bm{a} $と$\bm{b}$が平行であることと同値.
+\item $|| \bm{a} \times  \bm{b}||$は$\bm{a} $と$\bm{b}$を2辺とする平行四辺形の面積に等しい.
+\end{enumerate}
+    \end{prop}
+ \end{tcolorbox}
+ 
+ 
+\begin{exa}
+$a_1, a_2, b_1,b_2$を実数とする. 
+このとき$\begin{vmatrix}
+a_1&a_2 \\
+b_1&b_2\\
+\end{vmatrix}$
+の行列式の絶対値$|a_1b_2 - a_2b_1|$は$(a_1, a_2)$と$(b_1, b_2)$を2辺とする平行四辺形の面積に等しい.
+
+\end{exa}
+\section{3次の行列式と内積外積}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+$\bm{a}=(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3), \bm{c}=(c_1, c_2, c_3)\in \R^3$について, 
+$$
+\det
+\begin{pmatrix}
+a_1& a_2 & a_3\\
+b_1& b_2 & b_3\\
+c_1& c_2 & c_3\\
+\end{pmatrix}
+=\bm{a} \cdot (\bm{b} \times \bm{c}).
+$$
+特に
+$\bm{a} \cdot (\bm{b} \times \bm{c}) = \bm{b} \cdot (\bm{c} \times \bm{a})=\bm{c} \cdot (\bm{a} \times \bm{b})$である(スカラー3重積とも呼ばれる).
+\end{thm}
+ \end{tcolorbox}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+$\bm{a}=(a_1, a_2, a_3), \bm{b}=(b_1, b_2, b_3), \bm{c}=(c_1, c_2, c_3)\in \R^3$とすると次の値は等しい．
+\begin{itemize}
+\item $\det
+\begin{pmatrix}
+a_1& a_2 & a_3\\
+b_1& b_2 & b_3\\
+c_1& c_2 & c_3\\
+\end{pmatrix}$の絶対値.
+\item $\bm{a} \cdot (\bm{b} \times \bm{c})$の絶対値.
+\item $\bm{a}, \bm{b}, \bm{c}$によって生成される平行6面体の体積.
+\end{itemize}
+\end{thm}
+ \end{tcolorbox}
+ 
+ \end{document}

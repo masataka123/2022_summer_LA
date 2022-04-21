@@ -1,0 +1,180 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+%\newcommand{\rank}{{\rm rank}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第11回. 行列式3 -行列式の基本性質- (三宅先生の本, 3.2, 3.3の内容)} 
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/06/30
+\end{flushright}
+
+一部の内容について, 齋藤正彦著 線型代数学 (東京図書)の第3章を参考にした.
+
+%\section{行列式の基本性質}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}
+$a_1, \ldots, a_{n}$を行ベクトルとし, $n$次正方行列
+$A = 
+\begin{pmatrix}
+a_1 \\ \vdots \\ a_{n}
+\end{pmatrix}
+$とする.
+\begin{enumerate}
+\item $\tau$を$n$次の置換とすると
+$$
+\det \begin{pmatrix}
+a_{\tau(1)} \\ \vdots \\ a_{\tau(n)} 
+\end{pmatrix}
+= 
+\sgn(\tau) \det \begin{pmatrix}
+a_1 \\ \vdots \\ a_{n}
+\end{pmatrix}
+= \sgn(\tau) \det(A).
+\text{\,\,\,(交代性)}
+$$
+\item $b_i, c_i$を行ベクトルとし, $\alpha, \beta$を数とすると,
+$$
+\det \begin{pmatrix}
+a_1 \\ \vdots \\ \alpha b_i + \beta c_i \\ \vdots  \\ a_{n}
+\end{pmatrix}
+= 
+\alpha\det \begin{pmatrix}
+a_1 \\ \vdots \\  b_i \\ \vdots  \\ a_{n}
+\end{pmatrix}
++
+\beta
+\det \begin{pmatrix}
+a_1 \\ \vdots \\ c_i \\ \vdots  \\ a_{n}
+\end{pmatrix}
+\text{\,\,\,(多重線型性)}
+$$
+\end{enumerate}
+
+  \end{prop}
+ \end{tcolorbox}
+ 
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+行ベクトル$x_1, \ldots, x_n$について, 数
+$F\begin{pmatrix}
+x_1 \\ \vdots \\ x_{n}
+\end{pmatrix}$
+を対応させる関数$F$を考える.
+この$F$が交代性と多重線型性を満たすとき, 
+$$
+F\begin{pmatrix}
+x_1 \\ \vdots \\ x_{n}
+\end{pmatrix}
+=
+F\begin{pmatrix}
+f_1 \\ \vdots \\ f_{n}
+\end{pmatrix}
+\det
+\begin{pmatrix}
+x_1 \\ \vdots \\ x_{n}
+\end{pmatrix}
+\text{となる.}
+$$
+ここで$f_i =
+\begin{pmatrix}
+0 & \cdots&\overset{i}{\hat{1}}&\cdots &0
+\end{pmatrix}
+$
+という行ベクトルとする.
+
+特に行列$A$に対して数$F(A)$を対応させる関数が, 行に関して交代性と多重線型性を満たすとき
+$F(A) =F(E_n) \det(A)$となる.
+  \end{thm}
+ \end{tcolorbox}
+ 
+
+\end{document}

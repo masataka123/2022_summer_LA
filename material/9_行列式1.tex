@@ -1,0 +1,422 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} %宗教上の理由でmin10が嫌いなので
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+%\newcommand{\rank}{{\rm rank}}
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large 第9回. 行列式1 -置換- (三宅先生の本, 3.1の内容)}
+\end{center}
+
+\begin{flushright}
+ 岩井雅崇 2022/06/16
+\end{flushright}
+
+\section{置換}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+    \text{}
+    \begin{itemize}
+\item $\{ 1, \ldots, n\}$から$\{ 1, \ldots, n\}$への1対1写像を\underline{置換}と言い$\sigma$で表す．
+つまり置換$\sigma$とは$k_1, \ldots, k_n$を1から$n$の並び替えとして, 
+1を$k_1$に, 2を$k_2$に, $\cdots$, $n$を$k_n$にと変化させる規則のことである.
+\item 上の置換$\sigma$を
+$$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ k_1& k_2  &\cdots &k_n\\
+ \end{pmatrix} 
+$$
+とかき, $\sigma(1) =k_1, \sigma(2) =k_2, \ldots, \sigma(n) =k_n$とする.
+    \end{itemize}
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ 置換$\sigma$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 &4\\
+ 3& 1  &4 &2\\
+ \end{pmatrix} 
+$
+とする. 
+これは「1を$3$に, 2を$1$に, 3を4に, 4を$2$にと変化させる規則」である.
+ $\sigma(1) =3, \sigma(2) =1, \sigma(3) =4,  \sigma(4) =2$である.
+ \end{exa}
+ 
+ \begin{exa}
+ 置換$\sigma$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 \\
+ 2& 1  &3 \\
+ \end{pmatrix} 
+$
+とする. 
+これは「1を$2$に, 2を$1$に, 3を3にと変化させる規則」である.
+ $\sigma(1) =2, \sigma(2) =1, \sigma(3) =3$である.
+ 
+ この置換は3に関しては何も変化させていないので
+ $
+\sigma =
+  \begin{pmatrix}
+ 1& 2   \\
+ 2& 1   \\
+ \end{pmatrix} 
+$
+ともかく.
+ \end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+置換$\sigma, \tau$について, その積$\sigma \tau$を
+$\sigma(\tau(i))$で定める.
+  \end{dfn}
+ \end{tcolorbox}
+ 
+\begin{exa}
+ 置換$\sigma, \tau$を
+$
+\sigma =
+  \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 4& 3  &1  &2 \\
+ \end{pmatrix} 
+\tau=
+  \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 2& 3  &4  &1 \\
+ \end{pmatrix} 
+ $
+とすると, 
+$$
+  \begin{matrix}
+ \sigma (\tau (1)) &= &  \sigma (2)  & = & 3  \\
+ \sigma (\tau (2)) &= &  \sigma (3)  & = & 1 \\
+ \sigma (\tau (3)) &= &  \sigma (4)  & = & 2  \\
+ \sigma (\tau (4)) &= &  \sigma (1)  & = & 4  \\
+ \end{matrix} 
+ \text{\,\,\,であるので, }
+ \sigma \tau
+= 
+ \begin{pmatrix}
+ 1& 2  &3 & 4 \\
+ 3& 1  &2  &4 \\
+ \end{pmatrix} 
+ \text{である.}
+$$
+
+\end{exa}
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+\text{}
+\begin{itemize}
+\item $
+\epsilon =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ 1& 2  &\cdots &n\\
+ \end{pmatrix} $を\underline{単位置換}という.
+ \item  
+ $ \sigma =
+  \begin{pmatrix}
+ 1& 2  &\cdots &n\\
+ k_1& k_2  &\cdots &k_n\\
+ \end{pmatrix} 
+$について, 
+$
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_n\\
+ 1& 2  &\cdots &n\\
+ \end{pmatrix} 
+$を\underline{$\sigma$の逆置換}と言い$\sigma^{-1}$で表す.
+\end{itemize}
+  \end{dfn}
+ \end{tcolorbox}
+
+\begin{exa} 
+$\sigma = 
+\begin{pmatrix}
+ 1& 2  &3 & 4 & 5\\
+ 4& 5  &1  &3 &2\\
+ \end{pmatrix} 
+$
+とするとき
+$
+\sigma^{-1}
+=
+\begin{pmatrix}
+ 4& 5  &1  &3 &2\\
+ 1& 2  &3 & 4 & 5\\
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+ 1& 2  &3 & 4 & 5\\
+ 3& 5  &4  &1 &2\\
+ \end{pmatrix} 
+ \text{である.}
+$
+\end{exa}
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+ $ \sigma =
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_l\\
+ k_2& k_3  &\cdots &k_1\\
+ \end{pmatrix} 
+$となる置換$\sigma$を\underline{巡回置換}と言い
+$\sigma =
+  \begin{pmatrix}
+ k_1& k_2  &\cdots &k_l\\
+ \end{pmatrix} 
+$と表す.
+
+特に $ \sigma =
+  \begin{pmatrix}
+ k_1& k_2  \\
+ k_2& k_1 \\
+ \end{pmatrix} 
+$となる巡回置換を\underline{互換}と言い$\sigma =
+  \begin{pmatrix}
+ k_1& k_2 \\
+ \end{pmatrix} 
+$と表す.
+  \end{dfn}
+ \end{tcolorbox}
+
+
+\begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+任意の置換$\sigma$は互換の積$\tau_1 \cdots \tau_{l}$で表わすことができ, $l$の偶奇は$\sigma$によってのみ定まる.
+  \end{thm}
+ \end{tcolorbox}
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+置換$\sigma$が互換の積$\tau_1 \cdots \tau_{l}$で表せられているとする.
+\begin{itemize}
+\item $\sgn (\sigma) = (-1)^{l}$とし, これを\underline{$\sigma$の符号}と呼ぶ.
+\item $\sgn (\sigma) = 1$なる置換$\sigma$を\underline{偶置換}といい, $\sgn (\sigma) = -1$なる置換$\sigma$を\underline{奇置換}という.
+\end{itemize}
+  \end{dfn}
+ \end{tcolorbox}
+ 
+ \begin{exa}
+ $
+ \sigma 
+  =
+ \begin{pmatrix}
+ 1& 2  &3 & 4 & 5 & 6 & 7\\
+ 4& 1  &6  &2 &7 & 5 & 3\\
+ \end{pmatrix} 
+ $を互換の積で表し, その符号を求めよ.
+ 
+ (解). 
+ $1 \overset{\sigma}{\rightarrow} 4 \overset{\sigma}{\rightarrow}2 \overset{\sigma}{\rightarrow}1 $と変化し,  
+  $3 \overset{\sigma}{\rightarrow} 6\overset{\sigma}{\rightarrow}5 \overset{\sigma}{\rightarrow}7 \overset{\sigma}{\rightarrow}3$と変化するので, 
+  $$
+  \sigma = 
+   \begin{pmatrix}
+ 1& 4 &2 
+ \end{pmatrix} 
+    \begin{pmatrix}
+ 3& 6 &5 &7
+ \end{pmatrix} 
+ \text{である.}
+  $$
+  さらに
+  $   \begin{pmatrix}
+ 1& 4 &2 
+ \end{pmatrix} 
+ = 
+ \begin{pmatrix}
+ 1& 4  
+ \end{pmatrix} 
+ \begin{pmatrix}
+ 4 &2 
+ \end{pmatrix},
+\begin{pmatrix}
+ 3& 6 &5 &7
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+ 3& 6  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 6& 5  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 5& 7  
+ \end{pmatrix} 
+ $
+ であるので, 
+ $$
+\sigma= 
+\begin{pmatrix}
+ 1& 4  
+ \end{pmatrix} 
+ \begin{pmatrix}
+ 4 &2 
+ \end{pmatrix}
+ \begin{pmatrix}
+ 3& 6  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 6& 5  
+ \end{pmatrix} 
+  \begin{pmatrix}
+ 5& 7  
+ \end{pmatrix} 
+ $$
+ となり, $\sgn(\sigma)= (-1)^{5}=-1$である.
+ 
+ \end{exa}
+
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}置換$\sigma, \tau$について, 
+    $\sgn(\epsilon) = 1$, $\sgn(\sigma^{-1}) = \sgn(\sigma)$, 
+$\sgn(\sigma \tau) = \sgn(\sigma) \sgn(\tau) $が成り立つ(ただし$\epsilon$は単位置換とする).
+  \end{prop}
+ \end{tcolorbox}
+ 
+ 
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{dfn}
+$S_n$を$n$文字置換の集合とし, $A_n$を$n$文字置換の集合とする.
+  \end{dfn}
+ \end{tcolorbox}
+ \footnote{専門用語で$S_n$は対称群と言い, $A_n$は交代群と言います. }
+
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{prop}\text{}
+    \begin{itemize}
+\item $S_n$の個数は$n!$個である.
+\item 偶置換と奇置換の個数は同じである.
+\item $A_n$の個数は$\frac{n!}{2}$個である.
+\item $\sigma, \tau \in A_n$ならば$\sigma \tau \in A_n$
+    \end{itemize}
+  \end{prop}
+ \end{tcolorbox}
+
+ 
+
+\end{document}
