@@ -110,7 +110,7 @@ Zoomを用いて行いました. <!--(ただし当日来れなかった人のた
 
 - 第8回 (2022/06/09). まとめと復習・質疑応答(中間レポートの質問も含む) 
 
-Zoomを用いて行います.
+Zoomを用いて行います.  CLEにZoomのリンクをお知らせいたしました.
 
 [第2回から第7回の授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_線形代数資料_前半.pdf), 
 [第2回から第7回の授業動画リスト](https://youtube.com/playlist?list=PLZDOK-K3OuvCo2DXf2KPA1jjjADsdTXQA), 
