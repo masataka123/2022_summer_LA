@@ -1,0 +1,1701 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} 
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{ \large 大阪大学 2022年度春夏学期 全学共通教育科目 \\ 木曜2限 線形代数学I (理(生物・生命(化・生)))} \\
+\vspace{5pt}
+
+{\LARGE 中間レポート解答例 } \\
+\vspace{5pt}
+
+%{ \Large 提出締め切り 2022年6月16日(木) 23時59分00秒 (日本標準時刻)}
+\end{center}
+
+\begin{flushright}
+ 担当教官: 岩井雅崇(いわいまさたか) 
+\end{flushright}
+
+ {\Large 第1問} (授業第2-3回の内容).
+ 
+ \vspace{11pt}
+次の行列の計算を行え.
+ 
+  \vspace{11pt}
+(1).
+$
+ \begin{pmatrix}
+ 1 &2 \\
+ -4&-1\\
+  5&-2\\
+ \end{pmatrix}
+ + 2
+ \begin{pmatrix}
+ 2 &-1 \\
+  0&4\\
+  -7&0\\
+ \end{pmatrix}
+ $
+(2).
+$
+3 \begin{pmatrix}
+ 2 &-1&4 \\
+ 0&3&-5\\
+ \end{pmatrix}
+ - 2
+ \left\{
+ \begin{pmatrix}
+ 0 &1&-2 \\
+ 7&-5&4\\
+ \end{pmatrix}
+ - 3
+  \begin{pmatrix}
+ 1 &-2&6 \\
+ 4&-1&5\\
+ \end{pmatrix}
+\right\}
+ $
+ 
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第1問解答例.}
+
+(1).
+$$
+ \begin{pmatrix}
+ 1 &2 \\
+ -4&-1\\
+  5&-2\\
+ \end{pmatrix}
+ + 2
+ \begin{pmatrix}
+ 2 &-1 \\
+  0&4\\
+  -7&0\\
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+ 1 &2 \\
+ -4&-1\\
+  5&-2\\
+ \end{pmatrix}
+ + 
+  \begin{pmatrix}
+ 4 &-2 \\
+0&8\\
+  -14&0\\
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+5 & 0 \\
+-4 & 7 \\
+-9 & -2 \\
+ \end{pmatrix}.
+$$
+
+(2).
+\begin{align*}
+\begin{split}
+& 3 \begin{pmatrix}
+ 2 &-1&4 \\
+ 0&3&-5\\
+ \end{pmatrix}
+ - 2
+ \left\{
+ \begin{pmatrix}
+ 0 &1&-2 \\
+ 7&-5&4\\
+ \end{pmatrix}
+ - 3
+  \begin{pmatrix}
+ 1 &-2&6 \\
+ 4&-1&5\\
+ \end{pmatrix}
+\right\} \\
+&=
+\begin{pmatrix}
+ 6 &-3&12 \\
+ 0&9&-15\\
+ \end{pmatrix}
+ - 2
+ \left\{
+ \begin{pmatrix}
+ 0 &1&-2 \\
+ 7&-5&4\\
+ \end{pmatrix}
+ +
+  \begin{pmatrix}
+ -3 &6&-18 \\
+ -12&3&-15\\
+ \end{pmatrix}
+\right\} \\
+&=
+\begin{pmatrix}
+ 6 &-3&12 \\
+ 0&9&-15\\
+ \end{pmatrix}
+-2
+ \begin{pmatrix}
+ -3&7&-20 \\
+ -5&-2&-11\\
+ \end{pmatrix}\\
+ & = 
+ \begin{pmatrix}
+ 6 &-3&12 \\
+ 0&9&-15\\
+ \end{pmatrix}
+ +
+ \begin{pmatrix}
+ 6&-14&40 \\
+ 10&4&-22\\
+ \end{pmatrix}
+ =
+  \begin{pmatrix}
+ 12&-17&52 \\
+ 10&13&7\\
+ \end{pmatrix} .
+\end{split}
+\end{align*}
+
+
+ \vspace{22pt}
+   
+{\Large 第2問} (授業第2-3回の内容).
+
+\vspace{11pt}
+次の行列$A,B,C,D$のうち, 積が定義される全ての組み合わせを求め, その積を計算せよ.
+ $$
+  A=\begin{pmatrix} %14
+ -1 & 2 &-5  \\
+ \end{pmatrix} 
+ \text{, \,\,} 
+B= \begin{pmatrix} %33
+ 1& 0 & 2\\
+ 0 & 3 & 0\\
+ 4 & 0 & 5 \\
+ \end{pmatrix} %%32
+ \text{, \,\,} 
+ C=
+  \begin{pmatrix}
+ -2 &5 & 3\\
+1 &-3&0  \\
+ \end{pmatrix}
+ \text{, \,\,} 
+ D= \begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ $$
+ 
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第2問解答例.}
+ 
+\begin{enumerate}
+\item $A$は$1 \times 3$行列$B$は$3 \times 3$行列より行列の積$AB$が定義できて$AB$は$1 \times 3$行列で
+$$
+AB 
+= 
+\begin{pmatrix} %14
+ -1 & 2 &-5  \\
+ \end{pmatrix} 
+  \begin{pmatrix} %33
+ 1& 0 & 2\\
+ 0 & 3 & 0\\
+ 4 & 0 & 5 \\
+ \end{pmatrix}
+ =
+ \begin{pmatrix} %14
+ -21& 6 &-27  \\
+ \end{pmatrix}.
+$$
+\item $A$は$1 \times 3$行列$C$は$2 \times 3$行列より行列の積$AC$は定義できない.
+\item $A$は$1 \times 3$行列$D$は$3 \times 1$行列より行列の積$AD$が定義できて$AD$は$1 \times 1$行列で
+$$
+AD
+= 
+\begin{pmatrix} %14
+ -1 & 2 &-5  \\
+ \end{pmatrix} 
+ \begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ =
+ \begin{pmatrix} %14
+5
+ \end{pmatrix}.
+$$
+\item $B$は$3 \times 3$行列$A$は$1 \times 3$行列より行列の積$BA$は定義できない.
+\item $B$は$3\times 3$行列$C$は$2 \times 3$行列より行列の積$BC$は定義できない.
+\item $B$は$3\times 3$行列$D$は$3\times 1$行列より行列の積$BD$が定義できて$BD$は$3 \times 1$行列で
+$$
+BD
+= 
+\begin{pmatrix} %33
+ 1& 0 & 2\\
+ 0 & 3 & 0\\
+ 4 & 0 & 5 \\
+ \end{pmatrix} 
+\begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ =
+ \begin{pmatrix} %14
+-2 \\
+9 \\
+-11
+ \end{pmatrix}.
+$$
+\item $C$は$2\times 3$行列$A$は$1 \times 3$行列より行列の積$CA$は定義できない.
+\item $C$は$2 \times 3$行列$B$は$3 \times 3$行列より行列の積$CB$が定義できて$CB$は$2\times 3$行列で
+$$
+CB
+= 
+  \begin{pmatrix}
+ -2 &5 & 3\\
+1 &-3&0  \\
+ \end{pmatrix}
+\begin{pmatrix} %33
+ 1& 0 & 2\\
+ 0 & 3 & 0\\
+ 4 & 0 & 5 \\
+ \end{pmatrix} 
+ =
+ \begin{pmatrix} %14
+10 & 15 & 11\\
+1 & -9 & 2\\
+ \end{pmatrix}.
+$$
+\item $C$は$2 \times 3$行列$D$は$3\times 1$行列より行列の積$CD$が定義できて$CD$は$2 \times 1$行列で
+$$
+CD
+= 
+  \begin{pmatrix}
+ -2 &5 & 3\\
+1 &-3&0  \\
+ \end{pmatrix}
+\begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ =
+ \begin{pmatrix} %14
+26 \\
+-13
+ \end{pmatrix}.
+$$
+\item $D$は$3\times 1$行列$A$は$1 \times 3$行列より行列の積$DA$が定義できて$DA$は$3 \times 3$行列で
+$$
+DA
+= 
+\begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ \begin{pmatrix} %14
+ -1 & 2 &-5  \\
+ \end{pmatrix} 
+ =
+ \begin{pmatrix} %14
+4 & -8 & 20 \\
+-3 & 6 & -15\\
+-1 & 2 & -5
+ \end{pmatrix}.
+$$
+\item $D$は$3\times 1$行列$B$は$3 \times 3$行列より行列の積$DB$は定義できない.
+\item $D$は$3\times 1$行列$C$は$2 \times 3$行列より行列の積$DC$は定義できない.
+\end{enumerate}
+
+以上より積が定義できる組み合わせは$AB, AD, BD, CB, CD, DA$であり, 各々その積は以下の通りとなる.
+
+$$AB = 
+ \begin{pmatrix} %14
+ -21& 6 &-27  \\
+ \end{pmatrix},
+ AD = \begin{pmatrix} %14
+5
+ \end{pmatrix}, 
+ BD =  \begin{pmatrix} %14
+-2 \\
+9 \\
+-11
+ \end{pmatrix},
+  $$
+ $$
+ CB =  \begin{pmatrix} %14
+10 & 15 & 11\\
+1 & -9 & 2\\
+ \end{pmatrix},
+ CD
+= 
+ \begin{pmatrix} %14
+26 \\
+-13
+ \end{pmatrix},
+ DA
+= 
+ \begin{pmatrix} %14
+4 & -8 & 20 \\
+-3 & 6 & -15\\
+-1 & 2 & -5
+ \end{pmatrix}.
+ $$
+
+ \vspace{22pt}
+ 
+   
+   {\Large 第3問} (授業第2-3回の内容).
+    \vspace{11pt}
+    
+    $
+A = \begin{pmatrix} %%41
+2 & 1\\
+1 & 2\\
+ \end{pmatrix}
+ $
+ $
+P =\frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}
+ $
+ とおく. 次の問いに答えよ.
+     \vspace{11pt}
+ 
+(1). $A^2$と$A^3$をそれぞれ求めよ.
+ 
+(2). $P{}^tP$と${}^t PP$をそれぞれ求めよ. %\footnote{$P{}^tP$とは$P$と${}^tP$($P$の転置行列)の積である.}
+
+(3). ${}^tP A P$を求めよ.
+
+(4). $n$を1以上の整数とする. $({}^tP A P)^n$を$n$を用いて表せ.
+
+(5). $n$を1以上の整数とする. $A^n$を$n$を用いて表せ.
+ 
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第3問解答例.}
+\begin{itemize}
+\item[(1).] 
+$A^2 = 
+\begin{pmatrix} %%41
+2 & 1\\
+1 & 2\\
+ \end{pmatrix}
+ \begin{pmatrix} %%41
+2 & 1\\
+1 & 2\\
+ \end{pmatrix}
+=
+\begin{pmatrix} %%41
+5 & 4\\
+4 & 5\\
+ \end{pmatrix}$.
+ $A^3 = 
+\begin{pmatrix} %%41
+5 & 4\\
+4 & 5\\
+ \end{pmatrix}
+ \begin{pmatrix} %%41
+2 & 1\\
+1 & 2\\
+ \end{pmatrix}
+=
+\begin{pmatrix} %%41
+14& 13\\
+13 & 14\\
+ \end{pmatrix}$.
+ 
+ \item[(2).] 
+ ${}^tP = \frac{1}{\sqrt{2}} 
+\begin{pmatrix}
+1& -1\\
+1 & 1\\
+ \end{pmatrix}$であるので, 
+ 
+ $P{}^tP = 
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix}
+1& -1\\
+1 & 1\\
+ \end{pmatrix}
+ =
+  \frac{1}{2} 
+  \begin{pmatrix}
+2& 0\\
+0& 2\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+1& 0\\
+0& 1\\
+ \end{pmatrix}
+ $ .
+ 
+ ${}^t PP = 
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix}
+1& -1\\
+1 & 1\\
+ \end{pmatrix}
+   \frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}
+ =
+  \frac{1}{2} 
+  \begin{pmatrix}
+2& 0\\
+0& 2\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+1& 0\\
+0& 1\\
+ \end{pmatrix}
+ $.
+ 
+(補足.) ${}^t P$は$P$の逆行列である.
+ 
+ \item[(3).]
+${}^tP A P
+=
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix}
+1& -1\\
+1 & 1\\
+ \end{pmatrix}
+ \begin{pmatrix} %%41
+2 & 1\\
+1 & 2\\
+ \end{pmatrix}
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}
+=
+\frac{1}{2}
+\begin{pmatrix}
+1& -1\\
+3& 3\\
+ \end{pmatrix}
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}
+ =
+\begin{pmatrix}
+1& 0\\
+0& 3\\
+ \end{pmatrix}.
+$
+\item[(4).]
+$({}^tP A P)^n 
+=
+\begin{pmatrix}
+1& 0\\
+0& 3^n\\
+ \end{pmatrix}
+$
+であることを数学的帰納法で示す.
+$n=1$の時は(3)より良い. $n-1$のとき等号が成立すると仮定すると, 
+$({}^tP A P)^n 
+=
+\begin{pmatrix}
+1& 0\\
+0& 3^{n-1}\\
+ \end{pmatrix}
+ \begin{pmatrix}
+1& 0\\
+0& 3\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+1& 0\\
+0& 3^{n}\\
+ \end{pmatrix}
+ $
+ となる. よって$({}^tP A P)^n 
+=
+\begin{pmatrix}
+1& 0\\
+0& 3^n\\
+ \end{pmatrix}
+$
+である.
+ \item[(5).]
+ (2)より$({}^tP A P)^n ={}^tP A^n P $となる(厳密に示すなら帰納法を使う). 
+この等式に対し左から$P$をかけ右から${}^tP$をかけると(2)から
+$$
+P \left( ({}^tP A P)^n \right) {}^tP = P ({}^tP A^n P ){}^tP
+= (P {}^tP)  A^n (P {}^tP) = A^n
+$$
+となる. 
+%$ A^n = P \left( ({}^tP A P)^n \right) {}^tP$ である.
+ 以上より(4)から
+ $$
+  A^n = P \left( ({}^tP A P)^n \right) {}^tP
+  =
+\frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& 1\\
+-1 & 1\\
+ \end{pmatrix}  
+\begin{pmatrix}
+1& 0\\
+0& 3^{n}\\
+ \end{pmatrix}  
+ \frac{1}{\sqrt{2}} 
+\begin{pmatrix} %%41
+1& -1\\
+1 & 1\\
+ \end{pmatrix}
+ =
+ \frac{1}{2} 
+ \begin{pmatrix}
+1 + 3^n& -1 + 3^n\\
+-1 + 3^n& 1 + 3^n\\
+ \end{pmatrix} .
+ $$
+ 
+\end{itemize}
+
+
+  \vspace{22pt} 
+ 
+ {\Large 第4問} (授業第4-6回の内容).
+ 
+    \vspace{11pt}
+ 次の行列を簡約化し, その階数を求めよ.
+ 
+ \vspace{11pt}
+(1).
+$
+ \begin{pmatrix}
+2&1&-1 \\
+1&1& 1 \\
+3&1&-3 \\
+ \end{pmatrix}
+ $
+(2).
+$
+ \begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+ 3& 1& 9  & 1&8\\
+ 2& 0& 4 & 1&5\\
+ 2& 1& 7 & 1&7\\
+ \end{pmatrix}
+ $
+ (3).
+ $
+ \begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{pmatrix}
+ $
+ 
+ \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第4問解答例.}
+
+以下この解答において$\longrightarrow$は行基本変形を表すものとする.
+
+(1).
+\begin{align*}
+ &\begin{pmatrix}
+ 2& 1& -1 \\
+ 1& 1& 1 \\
+ 3& 1& -3 \\
+ \end{pmatrix}
+ \overset{\text{1行目と2行目を入れ替え}}{\longrightarrow} 
+ \begin{pmatrix}
+  1& 1& 1 \\
+ 2& 1& -1 \\
+ 3& 1& -3 \\
+ \end{pmatrix}
+ \overset{\text{1行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+  1& 1& 1 \\
+ 0& -1& -3 \\
+ 0&-2& -6 \\
+ \end{pmatrix} \\
+ &   \overset{\text{2行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+  1& 0& -2 \\
+ 0& -1& -3 \\
+ 0&0& 0\\
+ \end{pmatrix}
+ \overset{\text{2行目$\times (-1)$}}{\longrightarrow} 
+ \begin{pmatrix}
+  1& 0& -2 \\
+ 0& 1& 3 \\
+ 0&0& 0\\
+ \end{pmatrix}.
+ \end{align*}
+階数は2である.
+
+(2).
+
+\begin{align*}
+ &\begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+ 3& 1& 9  & 1&8\\
+ 2& 0& 4 & 1&5\\
+ 2& 1& 7 & 1&7\\
+ \end{pmatrix}
+ \overset{\text{1行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+ 0& -2& -6 & 1&-1\\
+ 0& -2& -6 & 1&-1\\
+ 0& -1& -3 & 1&1\\
+ \end{pmatrix}
+ \overset{\text{2行目と4行目を入れ替え}}{\longrightarrow} 
+ \begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+  0& -1& -3 & 1&1\\
+ 0& -2& -6 & 1&-1\\
+ 0& -2& -6 & 1&-1\\
+ \end{pmatrix} \\
+& \overset{ \text{2行目 $\times (-1)$}}{\underset{\text{4行目に3行目を引く} }{\longrightarrow}}
+ \begin{pmatrix}
+ 1& 1& 5  & 0&3\\
+  0& 1& 3 & -1&-1\\
+ 0& -2& -6 & 1&-1\\
+  0&0&0&0& 0\\
+ \end{pmatrix}
+ \overset{\text{2行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+ 1& 0& 2  & 1&4\\
+  0& 1& 3 & -1&-1\\
+ 0& 0& 0 & -1&-3\\
+  0&0&0&0& 0\\
+ \end{pmatrix} \\
+& \overset{\text{3行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+ 1& 0& 2 & 0&1\\
+  0& 1& 3 & 0&2\\
+ 0& 0& 0 & 1&3\\
+  0&0&0&0& 0\\
+ \end{pmatrix}.
+ \end{align*}
+階数は3である.
+
+(3).
+\begin{align*}
+ &\begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{pmatrix}
+ \overset{\text{5行目に4行目を引く}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 1& 1& 1 & 1&1\\
+ \end{pmatrix}
+ \overset{\text{同様のことを2,3,4行目にする}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 1& 1& 1 & 1&1\\
+  1& 1& 1 & 1&1\\
+   1& 1& 1 & 1&1\\
+ 1& 1& 1 & 1&1\\
+ \end{pmatrix} \\
+ & \overset{\text{3,4,5行目に2行目を引く}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 1& 1& 1 & 1&1\\
+  0&0&0&0& 0\\
+    0&0&0&0& 0\\
+      0&0&0&0& 0\\
+ \end{pmatrix}
+\overset{\text{1行目で掃き出し}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 0& -1& -2 & -3&-4\\
+ 0&0&0&0& 0\\
+0&0&0&0& 0\\
+0&0&0&0& 0\\
+ \end{pmatrix} \\
+&\overset{\text{2行目で掃き出し}}{\longrightarrow} 
+\begin{pmatrix}
+ 1& 0& -1  & -2&-3\\
+ 0& 1& 2 & 3&4\\
+ 0&0&0&0& 0\\
+0&0&0&0& 0\\
+0&0&0&0& 0\\
+ \end{pmatrix}.
+ \end{align*}
+階数は2である.
+ 
+\vspace{22pt}
+
+ 
+   
+{\Large 第5問} (授業第4-6回の内容).
+    \vspace{11pt}
+
+次の連立1次方程式を解け. \\
+
+(1).
+ $
+ \left\{ 
+\begin{matrix}
+x_1& + &  2x_2&  +& x_3&  = & 0 \\
+2x_1& + & 3x_2&  +& x_3&  = & 0 \\
+ x_1& + & 2x_2&  +& 2x_3&  = & 0 \\
+\end{matrix}
+\right.
+ $
+
+(2).
+ $
+ \left\{ 
+\begin{matrix}
+x_1& + &  x_2&  +& 5x_3&  && = & 3 \\
+2x_1& + &  x_2&  +& 7x_3& + &x_4& = & 7 \\
+3x_1& + &  x_2&  +& 9x_3& + &x_4& = & 8 \\
+\end{matrix}
+\right.
+ $
+ 
+(3).
+ $
+ \left\{ 
+\begin{array}{ccccccccccc}
+x_1& +& x_2&  -&2x_3	&+&x_4& +&3x_5&=& 1\\
+2x_1&-&x_2& + &2x_3&+&2x_4&+&6x_5&= &2 \\
+3x_1&+&2x_2& - &4x_3& - &  3x_4  &-&9x_5&= &3\\
+\end{array}
+\right.
+ $
+ 
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第5問解答例.}
+
+以下この解答では簡約化の手順を省略して記入する.\footnote{大学院の試験等で行列を簡約化する場合, $\overset{\text{2行目で掃き出し}}{\longrightarrow} $のようにどのように掃き出しをしたかを答案で書く必要はあまりないと思います. ただ採点者も人間なので書いてくれた方が非常に助かります(もしかするとケアレスミスの減点を抑えることができるかもしれません).}
+
+(1).
+拡大係数行列は
+$
+\begin{pmatrix}
+1 & 2&1&0\\
+2 & 3&1&0\\
+1 & 2&2&0\\
+ \end{pmatrix}
+ $であるので, これを簡約化していく.
+ 
+ \begin{align*}
+ &\begin{pmatrix}
+1 & 2&1&0\\
+2 & 3&1&0\\
+1 & 2&2&0\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1 & 2&1&0\\
+0 & -1&-1&0\\
+0 & 0&1&0\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1 & 0&-1&0\\
+0 & 1&1&0\\
+0 & 0&1&0\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+  \begin{pmatrix}
+1 & 0&0&0\\
+0 & 1&0&0\\
+0 & 0&1&0\\
+ \end{pmatrix}.
+ \end{align*}
+ 
+よってこれより
+$
+ \left\{ 
+\begin{matrix}
+x_1& &  &  & &  = & 0 \\
+& & x_2&  & &  = & 0 \\
+& & &  & x_3&  = & 0 \\
+\end{matrix}
+\right.
+ $である.
+ つまり, $x_1=x_2=x_3=0$である.
+ 
+ (別解.) 
+ $A=
+ \begin{pmatrix}
+1 & 2&1\\
+2 & 3&1\\
+1 & 2&2\\
+ \end{pmatrix}
+ $
+ とおくと, 行列式$\det(A)\neq 0$であるので$A$は正則行列である.
+ よって$A \bm{x} = \bm{0}$の解は$\bm{x} = A^{-1}\bm{0} = \bm{0}$である.
+
+ 
+ (2).
+拡大係数行列は
+$
+\begin{pmatrix}
+1&1&5&0&3\\
+2&1&7&1&7\\
+3&1&9&1&8\\
+ \end{pmatrix}
+ $であるので, これを簡約化していく.
+ 
+  \begin{align*}
+ &\begin{pmatrix}
+1&1&5&0&3\\
+2&1&7&1&7\\
+3&1&9&1&8\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&1&5&0&3\\
+0&-1&-3&1&1\\
+0&-2&-6&1&-1\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&1&5&0&3\\
+0&1&3&-1&-1\\
+0&-2&-6&1&-1\\
+ \end{pmatrix} \\
+ &\overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&0&2&1&4\\
+0&1&3&-1&-1\\
+0&0&0&1&3\\
+ \end{pmatrix} 
+  \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&0&2&0&1\\
+0&1&3&0&2\\
+0&0&0&1&3\\
+ \end{pmatrix}. 
+ \end{align*}
+ よってこれより
+  $
+ \left\{ 
+\begin{matrix}
+x_1&  &  &  & 2x_3&  && = & 1 \\
+&  &  x_2&  +& 3x_3& && = & 2\\
+&  &  &  & & &x_4& = & 3 \\
+\end{matrix}
+\right.
+ $
+ である.
+ 
+  以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=&1-2c_3\\
+x_2&=&2-3c_3 \\
+x_3&=& c_3\\
+x_4&=&3\\
+\end{matrix}
+\text{\,\, ($c_3$は任意定数)}
+\right.
+$
+となる.
+
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+2\\
+0 \\
+3\\
+\end{pmatrix}
++ s
+\begin{pmatrix}
+-2\\
+-3\\
+1\\
+0 \\
+\end{pmatrix}
+(s \in \R)
+$
+と書くこともある.
+ 
+ 
+  (3).
+拡大係数行列は
+$
+\begin{pmatrix}
+1&1&-2&1&3&1\\
+2&-1&2&2&6&2\\
+3&2&-4&-3&-9&3\\
+ \end{pmatrix}
+ $であるので, これを簡約化していく.
+ 
+  \begin{align*}
+ &\begin{pmatrix}
+1&1&-2&1&3&1\\
+2&-1&2&2&6&2\\
+3&2&-4&-3&-9&3\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+\begin{pmatrix}
+1&1&-2&1&3&1\\
+0&-3&6&0&0&0\\
+0&-1&2&-6&-18&0\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&1&-2&1&3&1\\
+0&1&-2&0&0&0\\
+0&-1&2&-6&-18&0\\
+ \end{pmatrix}\\
+ &\overset{}{\longrightarrow} 
+  \begin{pmatrix}
+1&0&0&1&3&1\\
+0&1&-2&0&0&0\\
+0&0&0&-6&-18&0\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+  \begin{pmatrix}
+1&0&0&1&3&1\\
+0&1&-2&0&0&0\\
+0&0&0&1&3&0\\
+ \end{pmatrix}
+  \overset{}{\longrightarrow} 
+  \begin{pmatrix}
+1&0&0&0&0&1\\
+0&1&-2&0&0&0\\
+0&0&0&1&3&0\\
+ \end{pmatrix}.
+ \end{align*}
+ 
+ よってこれより
+  $
+ \left\{ 
+\begin{array}{ccccccccccc}
+x_1& & &  &	&&& &&=& 1\\
+&&x_2& - &2x_3&&&&&= &0 \\
+&&&  &&  &  x_4  &+&3x_5&= &0\\
+\end{array}
+\right.
+ $である.
+ 
+   以上より解は
+$
+ \left\{ 
+\begin{matrix}
+x_1&=&1\\
+x_2&=&2c_3 \\
+x_3&=& c_3\\
+x_4&=&-3c_5\\
+x_5&=&c_5\\
+\end{matrix}
+\text{\,\, ($c_3, c_5$は任意定数)}
+\right.
+$
+となる.
+
+解の書き方として
+$
+\begin{pmatrix}
+x_1\\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+0\\
+0 \\
+0\\
+0\\
+\end{pmatrix}
++ s
+\begin{pmatrix}
+0\\
+2\\
+1\\
+0 \\
+0\\
+\end{pmatrix}
++ t
+\begin{pmatrix}
+0\\
+0\\
+0\\
+-3 \\
+1\\
+\end{pmatrix}
+(s,t \in \R)
+$
+と書くこともある.
+
+\vspace{22pt}
+
+ 
+
+{\Large 第6問} (授業第4-6回の内容).
+    \vspace{11pt}
+
+連立1次方程式
+ $$
+ \left\{ 
+\begin{array}{ccccccccccc}
+x_1&-&2x_2&  -&x_3	&+&x_4& &	&=& 0\\
+-2x_1&+&5x_2& + &3x_3&-&2x_4&+&x_5&= &-1 \\
+x_1&+&x_2& + &2x_3& &    &-&x_5&= &1\\
+5x_1& & & + &5x_3& +&3x_4   &+&2x_5&= &a\\
+\end{array}
+\right.
+ $$
+の解が存在するような$a$の値を全て求めよ.
+ 
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第6問解答例.}
+拡大係数行列は
+$
+\begin{pmatrix}
+1&-2&-1&1&0&0\\
+-2&5&3&-2&1&-1\\
+1&1&2&0&-1&1\\
+5&0&5&3&2&a\\
+ \end{pmatrix}
+ $であるので, これを簡約化(の一歩手前まで)していく.
+ 
+  \begin{align*}
+ &\begin{pmatrix}
+1&-2&-1&1&0&0\\
+-2&5&3&-2&1&-1\\
+1&1&2&0&-1&1\\
+5&0&5&3&2&a\\
+ \end{pmatrix}
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&-2&-1&1&0&0\\
+0&1&1&0&1&-1\\
+0&3&3&-1&-1&1\\
+0&10&10&-2&2&a\\
+ \end{pmatrix}
+  \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&0&1&1&2&-2\\
+0&1&1&0&1&-1\\
+0&0&0&-1&-4&4\\
+0&0&0&-2&-8&a+10\\
+ \end{pmatrix}\\
+& \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&0&1&0&-2&2\\
+0&1&1&0&1&-1\\
+0&0&0&-1&-4&4\\
+0&0&0&0&0&a+2\\
+ \end{pmatrix} 
+ \overset{}{\longrightarrow} 
+ \begin{pmatrix}
+1&0&1&0&-2&2\\
+0&1&1&0&1&-1\\
+0&0&0&1&4&-4\\
+0&0&0&0&0&a+2\\
+ \end{pmatrix}.
+ \end{align*}
+
+よって問題の連立一次方程式は
+$
+ \left\{ 
+\begin{array}{ccccccccccc}
+x_1& &&  +&x_3& && -&2x_5	&=& 2\\
+&&x_2& + &x_3& & & +&x_5&= &-1 \\
+&&& && &  x_4&+&4x_5&= &-4\\
+& & & && &   &&0&= &a+2\\
+\end{array}
+\right.
+ $
+ と同じであるので, この連立一次方程式の解が存在するための必要十分条件は$a+2=0$となる.
+ 以上より解が存在するような$a$の値は$a=-2$である.
+\vspace{44pt} 
+
+   
+ \hspace{-11pt}{\LARGE 中間レポートについて.}
+
+第1問から第6問を通して, 正答率92\%でした. 問題6以外は基本的な問題で揃えたのでほぼ全員できていました. 行列は今までの高校数学と違い最初はとっつきにくいものなのでもっと酷い解答が出ると思ってたのですが, 意に反して非常に良くできていました. 素晴らしいと思います.
+
+各問題を通しての感想は以下のとおりです.
+\begin{itemize}
+\item [第1問.] 正答率89\%. 減点の主な理由は計算ミスです.
+\item [第2問.] 正答率93\%. 第3回演習問題と同じなのでほぼできていました.
+\item [第3問.] 正答率97\%. 対角化と呼ばれるものの一種です. 以外にも(5)を漸化式で解いている解答が多かったです. 解答例の方法だと漸化式を使わなくて良くなります(行列を考える利点とも言えます).
+\item [第4問.] 正答率95\%. 第4-6回演習問題と同じなのでほぼできていました.
+\item [第5問.] 正答率95\%. 「連立一次方程式を掃き出し法で解けるようになること」はこの授業で一番重要なことですので多めに出しました. よくできていました.
+\item [第6問.] 正答率80\%. こういう問題は大学院の入試でよく出てくるので出しました(第5問より第6問のように問題を出すことが多いと思います). もし3年後に大学院入試を受ける際にはこの資料を参考にしてください. また答案には拡大係数行列の掃き出しを終えた後に「なぜ$a=-2$でないといけないのか」という理由を書いておいたほうが無難だと思います.
+\end{itemize}
+
+今回のレポート問題はプログラミングや計算機で解答可能です(むしろこの授業や大学院試験を除いて手計算で行列の計算をすることはないかもしれません). 
+もしかしたらそちらの方が皆さんのためにもなるかもしれないので, プログラミングで解答した答案を授業ホームページに公開しておきます.
+
+\vspace{44pt} 
+
+{\Large 中間レポートおまけ問題} (授業第4-6回の内容).
+\vspace{11pt}
+
+全ての成分が0か1である$n$次正方行列について次の操作を考える.
+
+\vspace{5pt}
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = black,
+    fonttitle = \bfseries,
+    breakable = true]
+(操作): $(i,j)$成分を自由に一つ選び, $(i,j)$成分とその上下左右の全ての成分に対して, 0と1を入れ替える.
+ \end{tcolorbox}
+\vspace{5pt}
+
+例えば
+$
+A =
+ \begin{pmatrix}
+1 & 0 & 1\\
+1 & 1 & 1\\
+0 & 0 & 0 \\
+ \end{pmatrix}
+ $
+ の場合, $(2,2)$成分を選んで上の操作を行うと次のように変化する:
+ $$
+  \begin{pmatrix}
+1 & \colorbox[rgb]{0.8, 1.0, 0.8}{0} & 1\\
+\colorbox[rgb]{0.8, 1.0, 0.8}{1} & \colorbox[rgb]{0.8, 1.0, 0.8}{1} & \colorbox[rgb]{0.8, 1.0, 0.8}{1}\\
+0 & \colorbox[rgb]{0.8, 1.0, 0.8}{0} & 0 \\
+ \end{pmatrix}
+ \rightarrow 
+  \begin{pmatrix}
+1 & 1 & 1\\
+0 & 0 & 0\\
+0 & 1 & 0 \\
+ \end{pmatrix}
+ $$
+ 
+上の$A$に対し, $(1,2)$成分を選んで上の操作を行うと次のように変化する:\footnote{$(1,2)$成分に対して, その上の成分は存在しないため, この場合は(1,1), (1,2), (1,3), (2,2)の成分について0と1を入れ替えることになる.}
+ $$
+  \begin{pmatrix}
+\colorbox[rgb]{0.8, 1.0, 0.8}{1} & \colorbox[rgb]{0.8, 1.0, 0.8}{0} & \colorbox[rgb]{0.8, 1.0, 0.8}{1}\\
+1 & \colorbox[rgb]{0.8, 1.0, 0.8}{1} & 1\\
+0 & 0 & 0 \\
+ \end{pmatrix}
+ \rightarrow 
+  \begin{pmatrix}
+0 & 1 & 0\\
+1 & 0 & 1\\
+0 & 0 & 0 \\
+ \end{pmatrix}
+ $$
+
+上の$A$に対し, $(3,3)$成分を選んで上の操作を行うと次のように変化する:
+ $$
+  \begin{pmatrix}
+1 & 0 & 1\\
+1 & 1 & \colorbox[rgb]{0.8, 1.0, 0.8}{1}\\
+0 & \colorbox[rgb]{0.8, 1.0, 0.8}{0} & \colorbox[rgb]{0.8, 1.0, 0.8}{0} \\
+ \end{pmatrix}
+ \rightarrow 
+  \begin{pmatrix}
+1 & 0 & 1\\
+1 & 1 & 0\\
+0 & 1 & 1 \\
+ \end{pmatrix}
+ $$
+
+次の問いに答えよ.
+\vspace{11pt}
+
+(1). 
+$
+B = 
+  \begin{pmatrix}
+1 & 1 & 1 & 1\\
+1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 \\
+ \end{pmatrix}
+ $
+とする. $B$に上の操作を何回か行なって零行列にできることを示せ.
+
+(2). $B$に上の操作を何回か行なって零行列にするために必要な最小の操作回数を求めよ.
+
+(3). 与えられた$n$次正方行列$B$について, 上の操作を何回か行なって零行列にすることが可能か判定し, 可能ならば零行列にするために必要な最小の操作回数を求めるアルゴリズムを構築せよ.  \footnote{$n$は10程度を想定しています. $n=10$でも処理時間が2秒以内に収まるアルゴリズムを構築してください.}
+
+\begin{comment}
+
+\vspace{11pt}
+中間レポートおまけ問題を解答するに際し, 次の点に注意すること.
+\begin{enumerate}
+\item[注意1.]  この問題に限りプログラミングや計算機を用いて解答して良い. %\footnote{言い忘れましたが, 中間レポートの\underline{検算}をするためにプログラミングや計算機を用いることは許可しております. むしろ線形代数の理解を深めるためにもプログラミングを用いて検算を行った方が良いと思います. }
+\item[注意2.] (3)の解答については「第7回授業の簡約化ができることの証明」のように記述しても良いし, 実際にプログラミングをして提出しても良い. プログラミングを用いて提出した場合はボーナスとして得点を何点か加点する. 
+\item[注意3.]プログラミングを用いて提出する場合に際し, プログラミング言語に関しては自由だが, あまりにもマニアックな言語は控えてください.\footnote{Haskellは大丈夫です. 私はc, c++, Pythonぐらいなら読めます.} ただし処理時間があまりにも長い場合は不正解とする. 処理時間の目安は2秒程度とする. 
+\item[注意4.] この問題をプログラミングを用いて解答する場合に限り, その提出方法は皆さんにお任せいたします. 例えばgithub等にアップロードしてそのリンクをレポートに貼っても良いし, メールやCLEのダイレクトメッセージで, プログラムのソースファイルを直接私に送るなどでも良いです. プログラムのソースファイルを(スクリーンショット等で)画像にしてその画像をそのままレポートに貼っても良いです. \\
+%\item[注意4.]  \underline{この問題(中間レポートおまけ問題(3))に限り, 提出方法は皆さんにお任せいたします.} (ただしプログラミングを用いて提出する場合のみ). github等にアップロードしてそのリンクをレポートに貼っても良いし, プログラムのソースファイルを(スクリーンショット等で)画像にしてその画像をそのままレポートに貼っても良いです(メールやCLEのダイレクトメッセージで, プログラムのソースファイルを直接私に送るなどでも良いです). \\
+%目安として処理時間2秒程度とする.
+\end{enumerate}
+
+\end{comment}
+
+ \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 中間レポートおまけ問題解答例.}
+
+私自身が(何も考えずに)出したかった問題です. このようなゲームのような問題が実は線形代数や連立一次方程式と関連があるという点が面白いと思ったので今回のおまけ問題に出しました.  ただ作った私も全部解答するまで1,2日ぐらいかかりました. かなり難しい問題だと思います. おまけの問題ということで許してください.
+
+この問題や解答を作成するにあたり, 次の文献を参考しました.
+\begin{itemize}
+\item 安田健彦 著  ゲームで大学数学入門: スプラウトからオイラーゲッターまで
+\end{itemize}
+この本の4章「ライツアウト」を参考にいたしました.
+大変面白い本ですので皆様も一度読んでみることをお勧めいたします.
+
+(1) (2). 最小の操作回数は6で, その操作方法は次の4通りが考えられます.
+\begin{itemize}
+\item$(1,3) \rightarrow (2,1) \rightarrow (3,2) \rightarrow (3,3)\rightarrow (4,1)\rightarrow (4,4)$
+\item$(1,2) \rightarrow (1,4) \rightarrow (2,3) \rightarrow (3,1)\rightarrow (3,3)\rightarrow (4,4)$
+\item$(1,1) \rightarrow (2,3) \rightarrow (2,4) \rightarrow (3,2)\rightarrow (4,2)\rightarrow (4,4)$
+\item$(1,1) \rightarrow (1,4) \rightarrow (3,4) \rightarrow (4,1)\rightarrow (4,3)\rightarrow (4,4)$
+\end{itemize}
+また(3)でも触れますが, 順番はどのようにやっても構いません(つまり$(1,3) \rightarrow (2,1) $でも$(2,1) \rightarrow (1,3) $でも一緒です).
+
+これが最小の操作回数であることを言うには, おそらく全探索をするしか方法はないです(そのためにプログラミングや計算機の使用を許可しました).\footnote{この解答はあまり納得してないので全探索以外に論理的な解答があれば教えてほしいです.}
+さて計算量ですが, おおむね$2^{16} \times16 = 1048576 \fallingdotseq 10^{6}$ぐらいの計算をすればよく, 遅いと言われているPythonを使っても処理時間に1秒もかからないです.
+
+(3). 上と同じく全探索でやると, $n=10$程度なので, おおむね$2^{100} \times100\fallingdotseq 10^{32}$ぐらいの計算量がかかります.\footnote{スーパーコンピューター「富岳」でさえ1秒に40京($= 4 \times 10^{17}$)しか計算できません. よって「スーパーコンピューターを利用して(2)と同じく全探索する」という答えも間違いです.}
+ よって何かうまい方法を考えないといけません. 
+ 
+そこでとりあえず$2 \times 2$行列の場合を考えます.
+ %そして$(1,1)$成分に$\maru{1}$, $(1,2)$成分に$\maru{2}$, $(2,1)$成分に$\maru{3}$, $(2,2)$成分に$\maru{4}$を当てはめます.
+ %$$\begin{pmatrix}\maru{1} & \maru{2}  \\\maru{3}  & \maru{4} \\\end{pmatrix}$$
+また具体例として
+$B=\begin{pmatrix}
+0 & 1 \\
+0 & 1 \\
+ \end{pmatrix}$
+ を上の操作をして零行列にすることを考えます.
+ $(1,1)$成分に操作を行うと, 
+ $
+\begin{pmatrix}
+0 & 1 \\
+0 & 1 \\
+ \end{pmatrix}
+ \rightarrow 
+ \begin{pmatrix}
+1& 0 \\
+1 & 1 \\
+ \end{pmatrix}
+ $
+ と変化します.
+ これは「$B$の$(1,1)$成分と$(1,2)$成分と$(2,1)$成分に$+1$して, その2で割ったあまりを見る」ということと同じです.
+ 実際
+ $$
+ B +  
+ \begin{pmatrix}
+1& 1 \\
+1 & 0 \\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+1& 2 \\
+1 & 0 \\
+ \end{pmatrix}
+ \equiv
+  \begin{pmatrix}
+1& 0 \\
+1 & 0 \\
+ \end{pmatrix}
+ \text{\,\,\, (mod 2)}
+ $$
+ であることからもわかります.
+
+少々行列の形だと見づらいのでこれを列ベクトルの形で見てみます.
+つまり
+$
+ \bm{b} 
+ =
+  \begin{pmatrix}
+B_{11} \\
+B_{12} \\
+B_{21} \\
+B_{22} \\
+ \end{pmatrix} 
+ =
+   \begin{pmatrix}
+0 \\
+1\\
+0\\
+1\\
+ \end{pmatrix} 
+ $
+ とおくと, $(1,1)$成分に操作を行うことは, 「$\bm{b}$に
+ $
+ \begin{pmatrix}
+1 \\
+1\\
+1\\
+0\\
+ \end{pmatrix}
+ $を足してその2で割ったあまりを見る」ことと同じです. 実際
+ $$ \bm{b} 
+ +
+ \begin{pmatrix}
+1 \\
+1\\
+1\\
+0\\
+ \end{pmatrix} 
+ = 
+   \begin{pmatrix}
+B_{11} \\
+B_{12} \\
+B_{21} \\
+B_{22} \\
+ \end{pmatrix} 
+ + 
+  \begin{pmatrix}
+1 \\
+1\\
+1\\
+0\\
+ \end{pmatrix} 
+ =
+    \begin{pmatrix}
+0 \\
+1\\
+0\\
+1\\
+ \end{pmatrix} 
+ + 
+  \begin{pmatrix}
+1 \\
+1\\
+1\\
+0\\
+ \end{pmatrix} 
+ =
+   \begin{pmatrix}
+1 \\
+2\\
+1\\
+0\\
+ \end{pmatrix} 
+ \equiv
+  \begin{pmatrix}
+1 \\
+0\\
+1\\
+0\\
+ \end{pmatrix} 
+  \text{\,\,\, (mod 2)}
+ $$
+ となっていることからわかります.
+同様に次のことがわかります
+\begin{itemize}
+\item $(1,2)$成分に操作を行うことは, $\bm{b}$に
+ $
+ \begin{pmatrix}
+1 \\
+1\\
+0\\
+1\\
+ \end{pmatrix}
+ $を足してその2で割ったあまりを見る.
+ \item $(2,1)$成分に操作を行うことは, $\bm{b}$に
+ $
+ \begin{pmatrix}
+1 \\
+0\\
+1\\
+1\\
+ \end{pmatrix}
+ $を足してその2で割ったあまりを見る.
+ \item $(2,2)$成分に操作を行うことは, $\bm{b}$に
+ $
+ \begin{pmatrix}
+0 \\
+1\\
+1\\
+1\\
+ \end{pmatrix}
+ $を足してその2で割ったあまりを見る.
+ \end{itemize}
+ ということと同じです.
+ さて$x_1, x_2, x_3, x_4$を次のように定めます.
+ \begin{itemize}
+ \item $x_1$は$(1,1)$を操作した回数.
+ \item $x_2$は$(1,2)$を操作した回数.
+  \item $x_3$は$(2,1)$を操作した回数.
+  \item $x_4$は$(2,2)$を操作した回数.
+ \end{itemize}
+すると$\bm{b}$は上の操作によって
+$$
+\bm{b} + 
+x_1\begin{pmatrix}
+1 \\
+1\\
+1\\
+0\\
+ \end{pmatrix} 
+ +
+ x_2
+  \begin{pmatrix}
+1 \\
+1\\
+0\\
+1\\
+ \end{pmatrix}
+ + 
+ x_3
+  \begin{pmatrix}
+1 \\
+0\\
+1\\
+1\\
+ \end{pmatrix}
+ +
+ x_4
+ \begin{pmatrix}
+0 \\
+1\\
+1\\
+1\\
+ \end{pmatrix}
+ = 
+ \begin{pmatrix}
+B_{11} + x_1+x_2+x_3 \\
+B_{12} + x_1+x_2+x_4 \\
+B_{21} + x_1+x_3+x_4 \\
+B_{22} + x_2+x_3 + x_4\\
+ \end{pmatrix}
+$$
+に変化します. 最終的に零行列にしたいのですから, 
+$$
+ \begin{pmatrix}
+B_{11} + x_1+x_2+x_3 \\
+B_{12} + x_1+x_2+x_4 \\
+B_{21} + x_1+x_3+x_4 \\
+B_{22} + x_2+x_3 + x_4\\
+ \end{pmatrix}
+ \equiv
+\begin{pmatrix}
+0 \\
+0\\
+0\\
+0\\
+ \end{pmatrix} 
+   \text{\,\,\,(mod 2)}
+$$
+となるような$x_1, x_2, x_3, x_4$を探せば良いことになります.
+
+ここで任意の整数$c$について$2c \equiv 0 \text{\,\,\, (mod 2)}$なので, 最小の操作回数を求める限りにおいて$x_1, x_2, x_3, x_4$は0か1で良いことがわかります.
+また任意の整数$c$について$-c \equiv c \text{\,\,\,(mod 2)}$であるので
+\begin{equation}
+\label{matrixx}
+\begin{pmatrix}
+1&1&1&0\\
+1&1&0&1\\
+1&0&1&1\\
+0&1&1&1\\
+ \end{pmatrix}
+\begin{pmatrix}
+x_1\\
+x_2\\
+x_3 \\
+x_4\\
+ \end{pmatrix}
+=
+\begin{pmatrix}
+x_1+x_2+x_3 \\
+ x_1+x_2+x_4 \\
+x_1+x_3+x_4 \\
+ x_2+x_3 + x_4\\
+ \end{pmatrix}
+ \equiv
+\begin{pmatrix}
+B_{11} \\
+B_{12} \\
+B_{21} \\
+B_{22} \\
+ \end{pmatrix} 
+ =
+ \bm{b} \text{\,\,\, (mod 2)}
+\end{equation}
+となる$x_1, x_2, x_3, x_4$を探せば良いことになります.
+以上より$x_1, x_2, x_3, x_4$を求めるには, 連立方程式(\ref{matrixx})を解けば良いことになります.
+実際に
+$
+\bm{b} 
+ =
+   \begin{pmatrix}
+0 \\
+1\\
+0\\
+1\\
+ \end{pmatrix} 
+ $の場合
+$
+\begin{pmatrix}
+x_1\\
+x_2\\
+x_3 \\
+x_4\\
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+1 \\
+0\\
+1\\
+0\\
+ \end{pmatrix}  
+$
+ が連立方程式(\ref{matrixx})の解となります．
+ よってこの問題は線形代数の問題, とりわけ連立一次方程式の解答に帰着されます.
+
+
+以上の考察を$n$が一般の場合でも行えば良いことがわかります. 
+まとめると次のようになります.
+\begin{enumerate}
+\item 行列の左上の成分から$1, 2, \ldots, n^2$と番号を割り当てる. 以下, 番号$i$と1対1に対応する成分を$(a_i, b_i)$と呼ぶことにする.
+\item $A$を$n^2 \times n^2$行列とする. $A$の$(k,l)$成分を, 「$(a_k, b_k)$を操作したときに$(a_l,b_l)$は$+1$される場合$A_{kl}=1$」とし, 「他の場合は$A_{kl}=0$」とする.
+例えば$n=2$の場合
+$A=\begin{pmatrix}
+1&1&1&0\\
+1&1&0&1\\
+1&0&1&1\\
+0&1&1&1\\
+ \end{pmatrix}$となる.
+\item $\bm{b} = {}^t (B_{11}, B_{12}, \ldots, B_{1n}, B_{21}, \ldots, B_{nn})$という$n^2 \times 1$行列とおく. $\bm{x} = {}^t (x_1, x_2, \ldots, x_{n^2})$として, 
+\begin{equation}
+\label{rights}
+A\bm{x} \equiv \bm{b}  \text{\,\,\, (mod 2)}
+\end{equation}
+という連立一次方程式を考える.
+\item 式(\ref{rights})の解がなければ与えられた行列$B$をこの操作で零行列にできないことがわかる．もし解があれば, その解の中で$x_1 + \cdots + x_{n^2}$が最小になる値が最小の操作回数を与える.
+\end{enumerate}
+
+さてこのアルゴリズムの計算量をざっくりと計算すると
+\begin{itemize}
+\item 連立一次方程式(\ref{rights})を解くにあたり$O(n^6)$の計算量がかかる.
+\item $A$のランクを$r$とすると連立一次方程式(\ref{rights})の解は$2^{n^2 -r}$通りあるので, 最小の操作回数を計算するにあたりそれらを総当たりすることになり$O(2^{n^2-r})$の計算量がかかる.
+\end{itemize}
+そのため大体$O(\max(n^6, 2^{n^2-r}))$の計算量がかかります.\footnote{ここの計算量を$O(n^6)$にできないでしょうか...?}
+ $n^2-r$の値は実際に計算すると$n=10$程度であればかなり小さいので, この場合でも$n=10$程度ならばPythonでも高速に動きます. 実際にプログラミングしたのでその解答をホームページにアップロードしておきます.
+ 
+[補足] $n=4$の場合$r=12$であるので, $n=4$の場合は零行列にできない$4 \times 4$行列が存在します. 
+一方で$n=6$の場合は$r=36$なので, この場合はどのような行列を持ってきても零行列にすることができます (しかも最小回数を達成する操作方法のやり方は一通りに限ります).\footnote{何か法則性などはないでしょうか...?}
+
+
+\end{document}
