@@ -1,0 +1,395 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} 
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{ \large 大阪大学 2022年度春夏学期 全学共通教育科目 \\ 木曜2限 線形代数学I (理(生物・生命(化・生)))} \\
+\vspace{5pt}
+
+{\LARGE 期末レポート } \\
+\vspace{5pt}
+
+{ \Large 提出締め切り 2022年8月4日(木) 23時59分00秒 (日本標準時刻)}
+\end{center}
+
+\begin{flushright}
+ 担当教官: 岩井雅崇(いわいまさたか) 
+\end{flushright}
+
+{\Large $\bullet$ 注意事項}
+\begin{enumerate}
+\item 第1問から第4問まで解くこと. 
+\item おまけ問題は全員が解く必要はない(詳しくは3ページ目を参照せよ).
+\item 用語に関しては授業または教科書(三宅敏恒著 入門線形代数(培風館))に準じます.
+\item \underline{提出締め切りを遅れて提出した場合, 大幅に減点する可能性がある.}
+\item \underline{名前・学籍番号をきちんと書くこと.}
+\item \underline{解答に関して, 答えのみならず, 答えを導出する過程をきちんと記してください.} きちんと記していない場合は大幅に減点する場合がある.
+%ただし用語の定義の違いによるミスに関して, 大幅に減点することはない.
+\item 字は汚くても構いませんが, \underline{読める字で濃く書いてください.} あまりにも読めない場合は採点をしないかもしれません.%\footnote{私も字が汚い方ですので人のこと言えませんが...自論ですが, 字が汚いと自覚ある人は大きく書けば読みやすくなると思います.}
+\item 採点を効率的に行うため, \underline{順番通り解答するようお願いいたします.}
+\item 採点を効率的に行うため,  \underline{レポートはpdfファイル形式で提出し,} ファイル名を「det(学籍番号).pdf」とするようお願いいたします(detは行列式(determinant)の略です).
+例えば学籍番号が「04D99999」の場合はファイル名は「det04D99999.pdf」となります.
+\end{enumerate}
+
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = black,
+    fonttitle = \bfseries,
+    breakable = true]
+    レポート提出前のチェックリスト
+    \begin{itemize}
+    \item[] $\Box$ 締め切りを守っているか?
+    \item[] $\Box$ レポートに名前・学籍番号を書いたか?
+     \item[] $\Box$ 答えを導出する過程をきちんと記したか?
+     \item[] $\Box$ 計算ミスしていないか?
+    \item[] $\Box$ 他者が読める字で書いたか?
+    \item[] $\Box$ 順番通り解答したか?
+    \item[] $\Box$レポートはpdfファイル形式で提出したか?
+   \item[] $\Box$ ファイル名を「det(学籍番号).pdf」としたか?
+    \end{itemize}
+
+  \end{tcolorbox}
+  
+%2020年12月15日(火)の10時50分からオンラインによる質疑応答の場を設けます. (出席義務はありません, 来たい人だけ来てください. レポートに関する質問も可とします.) 質疑応答に関してはWebClassを参照してください.
+ 
+\newpage
+ \hspace{-11pt}
+{\Large  レポートの提出方法について }
+
+\begin{itemize}
+\setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+  \item \underline{原則的にCLEからの提出しか認めません.}
+レポートは余裕を持って提出してください.
+\item \underline{レポートはpdfファイルで提出してください.}
+またCLEからの提出の際, 提出ファイルを一つにまとめる必要があるとのことですので, 提出ファイルを一つにまとめてください.
+\item \underline{採点を効率的に行うため, ファイル名を「det(学籍番号).pdf」とするようお願いいたします.}
+(detは行列式(determinant)の略です).
+例えば学籍番号が「04D99999」の場合はファイル名は「det04D99999.pdf」となります.
+\end{itemize}
+
+ \hspace{-11pt}
+{\Large 提出用pdfファイルの作成の仕方について}
+\vspace{11pt}
+
+1つ目は「手書きレポートをpdfにする方法」があります.
+この方法は時間はあまりかかりませんが, お金がかかる可能性があります.
+手書きレポートをpdfにするには以下の方法があると思います.
+\begin{itemize}
+\setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item スキャナーを使うかコンビニに行ってスキャンする.
+\item スマートフォンやカメラで画像データにしてからpdfにする. 例えばMicrosoft Wordを使えば画像データをpdfにできます. また大阪大学の学生であればMicrosoft Wordを無料でインストールすることができます.
+%(見づらくなる可能性あり)
+\item その他いろいろ検索して独自の方法を行う.
+\end{itemize}
+
+2つ目は「TeXでレポートを作成する方法」があります.
+時間はかなりかかります. 見た目はかなり綺麗ですがあまりお勧めしません.
+\vspace{11pt}
+
+他にもいろいろと方法はあると思います. 最終的に私が読めるように書いたレポートであれば大丈夫です.
+%他者が読める字で書いてあれば問題ありません. (私が読めるようなレポートであれば大丈夫です.)
+
+\vspace{11pt}
+ \hspace{-11pt}
+{\Large CLEからの提出が不可能な場合}
+\vspace{11pt}
+
+提出の期限までに (CLEのシステムトラブル等の理由で)CLEからの提出が不可能な場合のみメール提出を受け付けます.
+その場合には以下の項目を厳守してください.
+\begin{itemize}
+\setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item 大学のメールアドレスを使って送信すること(なりすまし提出防止のため).
+\item 件名を「レポート提出」とすること
+\item 講義名, 学籍番号, 氏名 (フルネーム)を書くこと.
+\item レポートのファイルを添付すること.
+\item CLEでの提出ができなかった事情を説明すること. 提出理由が不十分である場合, 減点となる可能性があります.
+\end{itemize}
+
+メール提出の場合はmasataka[at]math.sci.osaka-u.ac.jpにメールするようお願いいたします.
+
+%正当な理由(WebClassのシステムトラブル等)ではない場合, メールでの提出は減点対象となるので注意すること.
+\newpage
+ \hspace{-11pt}
+{\Large  成績の付け方について }
+\vspace{11pt}
+
+中間レポートと期末レポートによって成績をつけます. 
+具体的には以下の通りになります.
+\vspace{11pt}
+
+ \hspace{-11pt}$\bullet$ {\large 中間レポートまたは期末レポートどちらか一方が未提出の場合.}
+ 
+問答無用でこの授業の単位は不可になります. なおこの期末レポートが掲示されている時点で中間レポートを出していない人は, 問答無用で不可です. 
+\vspace{11pt}
+
+ \hspace{-11pt}$\bullet$ {\large 中間レポートと期末レポートを両方出している場合.}
+ 
+ よほど成績が悪い場合を除いて単位は可以上が確定します.  よほど成績が悪い方に対し救済措置を行い, 別途メールでレポートの再提出などをさせる場合があります.
+ %\footnote{参考までに私は以前に2回ほど授業を担当したことがありますが, 中間と期末(+救済措置)全て提出した人を不可にしたことはないです. なのでそこは安心してレポートを提出してください.} 
+ \vspace{11pt}
+ 
+  \hspace{-11pt}$\bullet$ {\large 良い成績が欲しい場合.}
+  
+ 今回レポートで成績をつけるため, 成績に関してやや不公平が起こる可能性があります. なぜならレポートだとほとんどの人が正答できてしまうためです.
+ また平均点の調整等で全部の問題を解いていても, 全員の成績がよいために単位が良になる可能性があります. これは大阪大学の制度によるところが大きいです.
+ %\footnote{以前に2回ほど授業を担当した際はそのようなことはしなかったですが, こればかりは大阪大学の制度によるところが大きいです. }
+ 
+良い成績が欲しい場合は次のことに気をつけると良いと思います. 
+ \begin{itemize}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+ \item 第1問から第4問まで全て解く(第4問を難しくすることで成績に差が出るようにしました). 
+ \item 計算ミスをしていないかチェックする.
+ \item おまけ問題を解く(期末のおまけ問題はちょっと難易度を下げました).
+ \end{itemize}
+
+逆に単位を欲しいだけの人はそこまで頑張る必要はありません. とりあえず第1問から第3問までの計算問題は全て解いて, 第4問の証明問題は余力で解けば良いでしょう.  
+
+\newpage
+\begin{center}
+{\LARGE 期末レポート問題.} 
+\end{center}
+
+
+ {\Large 第1問} (授業第7, 9-12回の内容).
+ 
+ \vspace{11pt}
+以下の(1)-(4)の各行列は正則行列かどうか判定せよ. また正則行列ならばその逆行列も求めよ.
+ 
+  \vspace{11pt}
+ (1).
+ $
+ \begin{pmatrix}
+1& 2022 \\
+0& 1
+ \end{pmatrix}
+ $
+(2).
+$
+ \begin{pmatrix}
+1 &2&3 \\
+2 & 0 & 2\\
+3&2 &1
+ \end{pmatrix}
+ $
+(3).
+$
+ \begin{pmatrix}
+1 &2&1 \\
+2 & 1& 3\\
+1&5 &0
+ \end{pmatrix}
+ $
+ (4).
+ $
+ \begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{pmatrix}
+ $
+
+ \vspace{33pt}
+ 
+{\Large 第2問} (授業第7, 9-12回の内容).
+    \vspace{11pt}
+
+$x$を実数とし, $4 \times 4$行列$A$を次のように定める.
+ $$A=
+  \begin{pmatrix}
+1 &-1&1 &2\\
+0 & 1&-1 &-1\\
+2 &-1&x &3\\
+x &-2&2&4\\
+ \end{pmatrix}
+ $$
+行列$A$が逆行列を持たないような$x$の値を全て求めよ.
+\vspace{33pt} 
+
+   
+   {\Large 第3問} (授業全体の内容).
+    \vspace{11pt}
+  
+$y$を実数とし, $3 \times 3$行列$B$を次のように定める.
+ $$B=
+  \begin{pmatrix}
+1 &y&3 \\
+y & 3& 13\\
+3&6 &9
+ \end{pmatrix}
+ $$
+次の問いに答えよ.
+     \vspace{11pt}
+     
+  \begin{enumerate}
+\renewcommand{\labelenumi}{(\arabic{enumi}).}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item $B$の階数$\rank (B)$は2以上であることを示せ.
+ 
+%(2). $\rank (B)=2$となるための, $a$が満たすべき必要十分条件を求めよ.
+
+%\item $B$の行列式$\det (B)$を求めよ.\footnote{$a$と$b$の式として表してください.}
+
+\item $B$が正則行列になるための, $y$が満たすべき必要十分条件を求めよ.
+ \end{enumerate}
+ 
+     \vspace{33pt} 
+     
+  \begin{flushright}
+ {\LARGE 第4問に続く.}
+ \end{flushright}
+
+     
+ \newpage
+ 
+ {\Large 第4問}  (授業全体の内容).
+ \vspace{11pt}
+ 
+   以下の(1)-(8)の各主張について, 正しい場合には証明を与え, 誤っている場合には反例をあげよ.\footnote{反例とは「ある主張について, それが成立しない例」のことである. 例えば「任意の実数$x$について, $x \geqq 0$ならば, $x+1=2$である」という主張は誤りであり, その反例として$x=5$が挙げられる. なぜなら$x=5 \geqq0$ではあるが, $x+1 = 5 + 1 =6 \neq 2$であるためである. また$x=1$はこの主張の反例にはならない.}
+   ただし授業・教科書で証明を与えた定理に関しては自由に用いて良い. またこの問題において, $m,n$を正の整数, $E_m$を$m$次の単位行列, $O_{n,m}$を$n\times m$型の零行列とする.
+ \begin{enumerate}
+\renewcommand{\labelenumi}{(\arabic{enumi}).}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+ \item $m\times n$行列$A$と$n\times m$行列$B$について, $AB=E_m$ならば, $BA = E_n$である.
+ \item $n$次正方行列$A$と$n\times m$行列$B$について, $A$が正則行列かつ$AB=O_{n,m}$ならば, $B=O_{n,m}$である.
+  \item $n$次正方行列$A, B$について, $AB=O_{n,n}$ならば, $B=O_{n,n}$である.
+  \item $n$次正方行列$A, B$について, $AB=E_n$ならば, $AB=BA$である.
+   \item $n$次正方行列$A, B$について, $AB$が正則行列ならば, $A$も$B$も正則行列である.
+ %\item 「$n$次正方行列$A, B$について, $A$も$B$も正則行列であるならば, $AB$も正則行列である.」
+ \item $n$次正方行列$A, B, C$について, $\det(ABC) = \det(BAC)$である.
+ \item 全ての成分が整数である$n$次正則行列$A$について, $\det(A) =\pm1$ならば, 逆行列$A^{-1}$の全ての成分は整数である.
+ \item 全ての成分が整数である$n$次正則行列$A$について, 逆行列$A^{-1}$の全ての成分が整数であるならば, $\det(A) =\pm1$である.
+
+ \end{enumerate}
+
+\vspace{33pt} 
+  
+
+ % \begin{flushright}
+% {\LARGE 中間レポートおまけ問題に続く.}
+% \end{flushright}
+% \newpage
+ 
+{\Large 期末レポートおまけ問題}  (授業第14回の内容).
+\vspace{11pt}
+
+$m$を正の整数とし, $\bm{x} = (x_0, x_1, \ldots, x_m), \bm{y} = (y_0, y_1, \ldots, y_m)\in \R^{m+1}$について$q(\bm{x},\bm{y})$を次のように定める. 
+$$
+q(\bm{x},\bm{y}) = x_0 y_0 - (x_1y_1 + \cdots + x_m y_m) 
+$$
+次の問いに答えよ.
+\begin{enumerate}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item[$(1).$] $q(\bm{x} , \bm{x} )\geqq 0$ならば, $q(\bm{x} , \bm{x})q(\bm{y} , \bm{y}) \leqq q(\bm{x},\bm{y})^2$であることを示せ.
+\item[$(2).$] $q(\bm{x} ,\bm{x})>0$かつ$q(\bm{x},\bm{y})=q(\bm{y},\bm{y})=0$ならば, $\bm{y}=0$となることを示せ.
+\item[$(3).$] $q(\bm{x},\bm{x})=q(\bm{x},\bm{y})=q(\bm{y},\bm{y})=0$ならば, ある実数$\lambda, \mu$があって, $\lambda \bm{x} + \mu \bm{y}=0$とできることを示せ.
+\item[$(4).$] $\bm{x} \neq 0$かつ$q(\bm{x} ,\bm{y})=q(\bm{x},\bm{x})=0$ならば, $q(\bm{y} , \bm{y}) \leqq 0$であることを示せ.
+\end{enumerate}
+
+ \vspace{33pt} 
+ 
+ 
+ %{\Large 中間レポートおまけ問題 2}
+%\vspace{11pt}
+
+%52枚のトランプのカードをまとめて持ち, 2つの山に分けてそれぞれの山を1枚おきに交互に重ねるシャッフルするという操作を
+%52枚のトランプを正確に2等分し、2つの山のカードをそれぞれに分けてを完全に1枚ずつ噛み合わせる
+%52枚のトランプを正確に2等分の束に分け, その2等分したトランプの束それぞれを完全に1枚ずつ噛み合わせるシャッフルの方法を考える. このシャッフルを最低何回繰り返せばトランプのカードの配列が元に戻るかを答えよ. 
+ %\vspace{33pt} 
+ 
+ 
+     
+ \begin{flushright}
+ {\LARGE 以上.}
+ \end{flushright}
+
+
+
+ 
+
+\end{document}
