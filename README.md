@@ -170,9 +170,9 @@ Zoomを用いて行います.  CLEにZoomのリンクをお知らせいたしま
 [第14回授業動画](https://www.youtube.com/watch?v=pm19pywMM3g), 
 [第14回授業黒板](https://github.com/masataka123/2022_summer_LA/blob/main/material/14_第14回授業黒板.pdf) 
 
-- 第15回 (2022/07/28). まとめと復習・質疑応答(期末試験の質問も含む)
+- 第15回 (2022/07/28). まとめと復習・質疑応答(期末レポートの質問も含む)
 
-Zoomを用いて行います.
+Zoomを用いて行います. CLEにZoomのリンクをお知らせいたしました.
 
 [第9回から第14回の授業資料](https://github.com/masataka123/2022_summer_LA/blob/main/material/0_線形代数資料_後半.pdf), 
 [第9回から第14回の授業動画リスト](https://www.youtube.com/playlist?list=PLZDOK-K3OuvCZz9GHbKNL4zLqAWWeLE3R), 
