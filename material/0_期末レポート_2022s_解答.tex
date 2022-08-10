@@ -1,0 +1,1108 @@
+\documentclass[dvipdfmx,a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[dvipdfmx]{hyperref} %リンクを有効にする
+\usepackage{url} %同上
+\usepackage{amsmath,amssymb} %もちろん
+\usepackage{amsfonts,amsthm,mathtools} %もちろん
+\usepackage{braket,physics} %あると便利なやつ
+\usepackage{bm} %ラプラシアンで使った
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry} %余白設定
+\usepackage{latexsym} %ごくたまに必要になる
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf} 
+
+
+\usepackage[all]{xy}
+\usepackage{amsthm,amsmath,amssymb,comment}
+\usepackage{amsmath}    % \UTF{00E6}\UTF{0095}°\UTF{00E5}\UTF{00AD}\UTF{00A6}\UTF{00E7}\UTF{0094}¨
+\usepackage{amssymb}  
+\usepackage{color}
+\usepackage{amscd}
+\usepackage{amsthm}  
+\usepackage{wrapfig}
+\usepackage{comment}	
+\usepackage{graphicx}
+\usepackage{setspace}
+\setstretch{1.2}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{\text{Area}}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+
+
+
+
+   %当然のようにやる．
+\allowdisplaybreaks[4]
+   %もちろん．
+%\title{第1回. 多変数の連続写像 (岩井雅崇, 2020/10/06)}
+%\author{岩井雅崇}
+%\date{2020/10/06}
+%ここまで今回の記事関係ない
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+  \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+
+
+
+%ここから本文．
+\begin{document}
+%\maketitle
+\begin{center}
+{ \large 大阪大学 2022年度春夏学期 全学共通教育科目 \\ 木曜2限 線形代数学I (理(生物・生命(化・生)))} \\
+\vspace{5pt}
+
+{\LARGE 期末レポート解答例 } \\
+\vspace{5pt}
+
+%{ \Large 提出締め切り 2022年6月16日(木) 23時59分00秒 (日本標準時刻)}
+\end{center}
+
+\begin{flushright}
+ 担当教官: 岩井雅崇(いわいまさたか) 
+\end{flushright} 
+
+解答を始める前に, 基本的な事実を復習しておきます.
+ このレポートでは次の定理を何回も使うことになります．(第7回授業の内容です.)
+ 
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    \label{determinant}
+    $A$を$n$次正方行列とするとき, 以下は同値.
+\begin{enumerate}
+\item $\rank (A) =n$.
+%\item $A$の簡約化は$E_n$である.
+%\item 任意の$n$次列ベクトル$\bm{b}$について, $A \bm{x}=\bm{b}$はただ一つの解をもつ.
+%\item $A \bm{x}=0$の解は$\bm{x}=0$に限る.
+\item $A$は正則行列, つまり$A$は逆行列を持つ.
+\item $\det(A)\neq 0$.
+\end{enumerate}
+  \end{thm}
+ \end{tcolorbox}
+ 
+次の形に言い換えても良いと思います．
+  \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+    \begin{thm}
+    \label{determinant_2}
+    $A$を$n$次正方行列とするとき, 以下は同値.
+\begin{enumerate}
+\item $\rank (A) < n$.
+%\item $A$の簡約化は$E_n$である.
+%\item 任意の$n$次列ベクトル$\bm{b}$について, $A \bm{x}=\bm{b}$はただ一つの解をもつ.
+%\item $A \bm{x}=0$の解は$\bm{x}=0$に限る.
+\item $A$は逆行列を持たない.
+\item $\det(A)= 0$.
+\end{enumerate}
+  \end{thm}
+ \end{tcolorbox}
+以下この解答例で定理\ref{determinant}, 定理\ref{determinant_2}といえば上の定理を指すものとします.
+  \vspace{22pt}
+ 
+{\Large 第1問} (授業第7, 9-12回の内容).
+ 
+ \vspace{11pt}
+以下の(1)-(4)の各行列は正則行列かどうか判定せよ. また正則行列ならばその逆行列も求めよ.
+ 
+  \vspace{11pt}
+ (1).
+ $
+ \begin{pmatrix}
+1& 2022 \\
+0& 1
+ \end{pmatrix}
+ $
+(2).
+$
+ \begin{pmatrix}
+1 &2&3 \\
+2 & 0 & 2\\
+3&2 &1
+ \end{pmatrix}
+ $
+(3).
+$
+ \begin{pmatrix}
+1 &2&1 \\
+2 & 1& 3\\
+1&5 &0
+ \end{pmatrix}
+ $
+ (4).
+ $
+ \begin{pmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{pmatrix}
+ $
+
+ \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第1問解答例.}
+
+方針としては行列式を計算して定理\ref{determinant}と定理\ref{determinant_2}から正則行列かどうか判定し, 正則行列ならば逆行列を第7回授業の演習の通りに求めます. 
+
+ \vspace{11pt}
+ 
+(1). 
+ $
+ \begin{vmatrix}
+1& 2022 \\
+0& 1
+ \end{vmatrix}
+ =
+ 1 \times 1 - 2022 \times 0 
+ = 1 \neq 0
+ $
+ より行列式が0ではないので正則である.
+ 正則行列を求める方法は第7回授業の演習のように求める. 
+ $
+ \begin{pmatrix}
+1& 2022 &1 & 0 \\
+0& 1& 0& 1
+ \end{pmatrix}
+ $
+ を基本変形で簡約化すると
+ $$
+ \begin{pmatrix}
+1& 2022 &1 & 0 \\
+0& 1& 0& 1
+ \end{pmatrix}
+   \overset{\text{１行目で掃き出し}}{\longrightarrow} 
+  \begin{pmatrix}
+1& 0 &1 & -2022 \\
+0& 1& 0& 1
+ \end{pmatrix}
+ $$
+となるので, 逆行列は
+$ \begin{pmatrix}
+1& -2022 \\
+0& 1
+ \end{pmatrix}
+ $
+ である. 
+
+ [別解.] 第7回授業資料の例3で「
+2次正方行列
+ $A=
+  \begin{pmatrix}
+ a& b  \\
+ c& d  \\
+ \end{pmatrix} 
+ $
+ について
+  $ad-bc \neq 0$ならば, $A$は逆行列を持ち
+ $
+ A^{-1} =   
+ \frac{1}{ad-bc}
+ \begin{pmatrix}
+ d& -b  \\
+ -c& a  \\
+ \end{pmatrix} 
+ $
+ である.」ということを示しているので, その公式を用いても良い.
+ %2次の正方行列の逆行列は求めているのでその公式を用いても良い.
+ 
+
+(2). サラスの公式より
+
+\begin{align*}
+\begin{split}
+\begin{vmatrix}
+1 &2&3 \\
+2 & 0 & 2 \\
+3&2 &1 
+ \end{vmatrix}
+& =
+ 1 \times 0 \times 1 + 2 \times 2 \times 3 + 3 \times 2 \times 2 
+ - 1 \times 2 \times 2 - 2 \times 2 \times 1 - 3 \times 0 \times 3 \\
+ & = 12 + 12 - 4 -4 =16 \neq 0.
+\end{split}
+\end{align*}
+ のため行列式が0ではないので正則である. 
+ 
+ また
+ $
+  \begin{pmatrix}
+1 &2&3 &1 & 0 & 0\\
+2 & 0 & 2 &0 & 1 & 0\\
+3&2 &1 &0 & 0 & 1
+ \end{pmatrix}
+ $
+を簡約化すると次の通りになる.
+ 
+ \begin{align*}
+\begin{split}
+ & \begin{pmatrix}
+1 &2&3 &1 & 0 & 0\\
+2 & 0 & 2 &0 & 1 & 0\\
+3&2 &1 &0 & 0 & 1
+ \end{pmatrix}
+  \overset{\text{１行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &2&3 &1 & 0 & 0\\
+0  & -4 & -4 &-2& 1& 0\\
+0& -4 &-8 &-3 & 0 & 1
+ \end{pmatrix} 
+  \overset{\text{2行目を$-\frac{1}{4}$倍}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &2&3 &1 & 0 & 0\\
+0  & 1 & 1 &\frac{1}{2} & -\frac{1}{4} & 0\\
+0& 4 &8 &3 & 0 & -1
+ \end{pmatrix} \\
+ &\overset{\text{2行目で掃き出し}}{\longrightarrow} 
+  \begin{pmatrix}
+1 &0&1 &0 & \frac{1}{2} & 0\\
+0  & 1 & 1 &\frac{1}{2} & -\frac{1}{4} & 0\\
+0& 0 &4 &1 & 1 & -1
+ \end{pmatrix} 
+  \overset{\text{3行目を$\frac{1}{4}$倍}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &0&1 &0 & \frac{1}{2} & 0\\
+0  & 1 & 1 &\frac{1}{2} & -\frac{1}{4} & 0\\
+0& 0 &1 &\frac{1}{4}  & \frac{1}{4}  & -\frac{1}{4} 
+ \end{pmatrix} \\
+  &\overset{\text{3行目で掃き出し}}{\longrightarrow} 
+  \begin{pmatrix}
+1 &0&0 &-\frac{1}{4}  & \frac{1}{4}  & \frac{1}{4} \\
+0  & 1 & 0&\frac{1}{4}  & -\frac{1}{2} & \frac{1}{4} \\
+0& 0 &1 &\frac{1}{4}  & \frac{1}{4}  & -\frac{1}{4} 
+ \end{pmatrix}. \\
+\end{split}
+\end{align*}
+よって逆行列は
+$\begin{pmatrix}
+-\frac{1}{4}  & \frac{1}{4}  & \frac{1}{4} \\
+\frac{1}{4}  & -\frac{1}{2} & \frac{1}{4} \\
+\frac{1}{4}  & \frac{1}{4}  & -\frac{1}{4} 
+ \end{pmatrix} 
+ $である.
+  \vspace{11pt}
+
+[別解.]
+余因子行列を使った方法でも逆行列を求めることができます. (ただし掃き出し法を使った方が楽なので, この方法はあまり使われません.)
+
+行列$A$について, $i$行と$j$列を取り除いた行列を$\tilde{A}_{ij}$とし, 
+余因子行列$\tilde{A}=(b_{ij})$を$b_{ij}=(-1)^{i+j}\det(A_{ji})$で定めると, 第12回授業資料の定理6から$A^{-1} = \frac{1}{\det(A)} \tilde{A}$となる.
+
+今$A= \begin{pmatrix}
+1 &2&3 \\
+2 & 0 & 2 \\
+3&2 &1 
+ \end{pmatrix}$として$\det(\tilde{A}_{ij})$を求めていくと次の通りになる.
+ 
+ \begin{itemize}
+ \item $\det(\tilde{A}_{11}) = 
+ \begin{vmatrix}
+ 0 & 2 \\
+2 &1 
+ \end{vmatrix}
+ = -4 $, 
+ $\det(\tilde{A}_{12}) = 
+ \begin{vmatrix}
+ 2& 2 \\
+3&1 
+ \end{vmatrix}
+ = -4 $, 
+ $\det(\tilde{A}_{13}) = 
+ \begin{vmatrix}
+ 2& 0 \\
+3&2
+ \end{vmatrix}
+ = 4 $.
+ \item 
+ $\det(\tilde{A}_{21}) = 
+ \begin{vmatrix}
+ 2& 3 \\
+2&1 
+ \end{vmatrix}
+ = -4 $, 
+ $\det(\tilde{A}_{22}) = 
+ \begin{vmatrix}
+ 1& 3 \\
+3&1 
+ \end{vmatrix}
+ = -8 $, 
+ $\det(\tilde{A}_{23}) = 
+ \begin{vmatrix}
+ 1& 2 \\
+3&2 
+ \end{vmatrix}
+ = -4 $.
+ \item 
+ $\det(\tilde{A}_{31}) = 
+ \begin{vmatrix}
+ 2& 3 \\
+0&2
+ \end{vmatrix}
+ = 4 $, 
+ $\det(\tilde{A}_{32}) = 
+ \begin{vmatrix}
+ 1& 3 \\
+2&2
+ \end{vmatrix}
+ = -4 $, 
+ $\det(\tilde{A}_{33}) = 
+ \begin{vmatrix}
+ 1& 2 \\
+2&0
+ \end{vmatrix}
+ = -4 $.
+ \end{itemize}
+
+よって余因子行列$\tilde{A}$は
+$$
+\tilde{A}
+=
+ \begin{pmatrix}
+(-1)^{1+1}\det(\tilde{A}_{11})  & (-1)^{2+1} \det(\tilde{A}_{21})  &(-1)^{3+1}\det(\tilde{A}_{31})  \\
+(-1)^{1+2}\det(\tilde{A}_{12})  & (-1)^{2+2}\det(\tilde{A}_{22})  & (-1)^{3+2}\det(\tilde{A}_{32}) \\
+(-1)^{1+3}\det(\tilde{A}_{13})  & (-1)^{2+3}\det(\tilde{A}_{23})  &(-1)^{3+3}\det(\tilde{A}_{33}) 
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+-4  & 4 &4 \\
+ 4& -8 & 4\\
+4& 4 & -4
+ \end{pmatrix}.
+$$
+以上より逆行列$A^{-1}$は
+$$
+A^{-1} = \frac{1}{\det(A)}\tilde{A}
+= \frac{1}{16}
+ \begin{pmatrix}
+-4  & 4 &4 \\
+ 4& -8 & 4\\
+4& 4 & -4
+ \end{pmatrix}
+ = 
+\begin{pmatrix}
+-\frac{1}{4}  & \frac{1}{4}  & \frac{1}{4} \\
+\frac{1}{4}  & -\frac{1}{2} & \frac{1}{4} \\
+\frac{1}{4}  & \frac{1}{4}  & -\frac{1}{4} 
+ \end{pmatrix} 
+ \text{となる.}
+$$
+
+(3). サラスの公式より
+\begin{align*}
+\begin{split}
+\begin{vmatrix}
+1 &2&1 \\
+2 & 1 & 3 \\
+1&5 &0
+ \end{vmatrix}
+& =
+1 \times 1 \times 0 + 2 \times 3 \times 1 + 1 \times 2 \times 5 
+- 1 \times 3  \times 5 - 2 \times 2 \times 0 - 1 \times 1 \times 1 \\
+ & = 6 + 10 - 15 -1 =0.
+\end{split}
+\end{align*}
+であるため, 行列式が0であることから定理\ref{determinant_2}より正則行列ではない.
+ 
+ (4). 第10回授業のように行列式を簡単な形にして計算していくと, 
+ %\footnote{掃き出し方と同じで$=$}
+\begin{align*}
+\begin{split}
+ \begin{vmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 5& 6& 7 & 8&9\\
+ \end{vmatrix}
+&
+=
+ \begin{vmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 4& 5& 6 & 7&8\\
+ 1& 1& 1 & 1&1\\
+ \end{vmatrix}
+  =
+ \begin{vmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 1& 1& 1& 1&1\\
+ 1& 1& 1 & 1&1\\
+ \end{vmatrix}
+ =
+ \begin{vmatrix}
+ 1& 2& 3  & 4&5\\
+ 2& 3& 4  & 5&6\\
+ 3& 4& 5 & 6&7\\
+ 1& 1& 1& 1&1\\
+ 0& 0& 0 & 0&0\\
+ \end{vmatrix}
+=0.
+\end{split}
+\end{align*}
+となる.(最後の$=0$については例えば第12回授業の余因子展開からわかる.)
+以上より行列式が0であることから定理\ref{determinant_2}より正則行列ではない.
+
+[別解.] 中間レポートの第4問(3)からこの行列の階数は2であることがわかっている.
+ よって定理\ref{determinant_2}より正則行列ではない.
+
+ \vspace{22pt}
+   
+{\Large 第2問} (授業第7, 9-12回の内容).
+    \vspace{11pt}
+
+$x$を実数とし, $4 \times 4$行列$A$を次のように定める.
+ $$A=
+  \begin{pmatrix}
+1 &-1&1 &2\\
+0 & 1&-1 &-1\\
+2 &-1&x &3\\
+x &-2&2&4\\
+ \end{pmatrix}
+ $$
+行列$A$が逆行列を持たないような$x$の値を全て求めよ.
+
+  \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第2問解答例.}
+
+定理\ref{determinant_2}から$\det(A)=0$となる$x$の値を全て求めれば良い.
+行列式の計算方法は第10回授業や第12回授業の余因子展開を用いると例えば次の通りとなる.
+\begin{align*}
+\begin{split}
+ & \begin{vmatrix}
+1 &-1&1 &2\\
+0 & 1&-1 &-1\\
+2 &-1&x &3\\
+x &-2&2&4\\
+ \end{vmatrix}
+ =
+  \begin{vmatrix}
+1 &0&0 &1\\
+0 & 1&-1 &-1\\
+2 &0&x-1 &2\\
+x &0&0&2\\
+ \end{vmatrix}
+  =
+ - \begin{vmatrix}
+0&1&0 &1\\
+1 & 0&-1 &-1\\
+0 &2&x-1 &2\\
+0 &x&0&2\\
+ \end{vmatrix}
+  =
+\begin{vmatrix}
+1 & 0&-1 &-1\\
+0&1&0 &1\\
+0 &2&x-1 &2\\
+0 &x&0&2\\
+ \end{vmatrix} \\
+ &= 1 \times 
+ \begin{vmatrix}
+1&0 &1\\
+2&x-1 &2\\
+x&0&2\\
+ \end{vmatrix}
+ = 
+ 2 (x-1) - x (x-1)
+ = (2-x) (x-1).
+\end{split}
+\end{align*}
+以上より$\det(A)=(2-x) (x-1) =0$となる$x$の値は$x = 1,2$となる.
+
+ 
+ \vspace{22pt}
+ 
+   
+{\Large 第3問} (授業全体の内容).
+    \vspace{11pt}
+  
+$y$を実数とし, $3 \times 3$行列$B$を次のように定める.
+ $$B=
+  \begin{pmatrix}
+1 &y&3 \\
+y & 3& 13\\
+3&6 &9
+ \end{pmatrix}
+ $$
+次の問いに答えよ.
+     \vspace{11pt}
+     
+  \begin{enumerate}
+\renewcommand{\labelenumi}{(\arabic{enumi}).}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item $B$の階数$\rank (B)$は2以上であることを示せ.
+ 
+%(2). $\rank (B)=2$となるための, $a$が満たすべき必要十分条件を求めよ.
+
+%\item $B$の行列式$\det (B)$を求めよ.\footnote{$a$と$b$の式として表してください.}
+
+\item $B$が正則行列になるための, $y$が満たすべき必要十分条件を求めよ.
+ \end{enumerate}
+
+\newpage
+ 
+\hspace{-11pt}{\Large $\bullet$ 第3問解答例.}
+
+(1). 行基本変形をしていく.
+\begin{align*}
+\begin{split}
+ & \begin{pmatrix}
+1 &y&3 \\
+y & 3& 13\\
+3&6 &9
+ \end{pmatrix}
+  \overset{\text{１行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &y&3 \\
+0 & 3 - y^2& 13 - 3y\\
+0&6 - 3y &0 
+ \end{pmatrix} 
+  \overset{\text{2行目と3行目を交換}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &y&3 \\
+0&6 - 3y &0 \\
+0 & 3 - y^2& 13 - 3y\\
+ \end{pmatrix}.
+ \end{split}
+\end{align*}
+
+$y \neq 2$の場合はさらに基本変形をすることができる.
+\begin{align*}
+\begin{split}
+\begin{pmatrix}
+1 &y&3 \\
+0&6 - 3y &0 \\
+0 & 3 - y^2& 13 - 3y\\
+ \end{pmatrix} 
+\overset{\text{2行目を$\frac{1}{6-3y}$倍}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &y&3 \\
+0&1  &0 \\
+0 & 3 - y^2& 13 - 3y\\
+ \end{pmatrix} 
+  \overset{\text{2行目で掃き出し}}{\longrightarrow} 
+ \begin{pmatrix}
+1 &0&3 \\
+0&1  &0 \\
+0 & 0& 13 - 3y\\
+ \end{pmatrix}.
+ \end{split}
+\end{align*}
+以上より, $y = \frac{13}{3}$の場合は$\rank(B) = 2$であり, $y \neq \frac{13}{3}$の場合は$\rank(B) = 3$となる.
+
+$y = 2$の場合は$6-3y =0$より次の通りとなる.
+\begin{align*}
+\begin{split}
+\begin{pmatrix}
+1 &2&3 \\
+0&0&0 \\
+0 & -1& 7 
+ \end{pmatrix} 
+  \overset{\text{2行目と3行目を交換}}{\longrightarrow} 
+\begin{pmatrix}
+1 &2&3 \\
+0 & 1& -7 \\
+0&0&0 \\
+ \end{pmatrix}    
+  \overset{\text{2行目で掃き出し}}{\longrightarrow} 
+\begin{pmatrix}
+1 &0&17 \\
+0 & 1& -7 \\
+0&0&0 \\
+ \end{pmatrix} 
+  \end{split}
+\end{align*}
+であるので, $\rank(B) = 2$である.
+以上より$\rank(B) \geqq  2$である.
+
+[別解.] もし$\rank(B) <  2$であると仮定すると, 
+$$
+ \begin{pmatrix}
+1 &y&3 \\
+0&6 - 3y &0 \\
+0 & 3 - y^2& 13 - 3y\\
+ \end{pmatrix}
+ $$
+ の階数は1以下となる. 第1行目から階数が0になることはなく, もしこの行列の階数が1ならば
+ $6 - 3y  = 3 - y^2=13 - 3y =0$とならなければいけない.
+ しかしこのような$y$は存在しないので矛盾. つまり$\rank(B) \geqq  2$である.
+
+(2). 定理\ref{determinant}から$B$が正則行列であることは$\rank(B) = 3$であることと同値であるので, (1)から$y \neq 2$かつ$y \neq \frac{13}{3}$であることが必要十分条件となる.
+
+[別解.] $\det(B) \neq 0$となる$y$の条件を求めても良い.
+\begin{align*}
+\begin{split}
+ & \begin{vmatrix}
+1 &y&3 \\
+y & 3& 13\\
+3&6 &9
+ \end{vmatrix} 
+= 
+ \begin{vmatrix}
+1 &y&3 \\
+0 & 3 - y^2& 13 - 3y\\
+0&6 - 3y &0 
+ \end{vmatrix} 
+=
+ \begin{vmatrix}
+3 - y^2& 13 - 3y\\
+6 - 3y &0 
+ \end{vmatrix} 
+ = (3y - 6)(13 - 3y).
+ \end{split}
+\end{align*}
+であるので, $y \neq 2$かつ$y \neq \frac{13}{3}$であることが必要十分条件となる.
+
+\newpage
+ 
+{\Large 第4問}  (授業全体の内容).
+ \vspace{11pt}
+ 
+   以下の(1)-(8)の各主張について, 正しい場合には証明を与え, 誤っている場合には反例をあげよ.\footnote{反例とは「ある主張について, それが成立しない例」のことである. 例えば「任意の実数$x$について, $x \geqq 0$ならば, $x+1=2$である」という主張は誤りであり, その反例として$x=5$が挙げられる. なぜなら$x=5 \geqq0$ではあるが, $x+1 = 5 + 1 =6 \neq 2$であるためである. また$x=1$はこの主張の反例にはならない.}
+   ただし授業・教科書で証明を与えた定理に関しては自由に用いて良い. またこの問題において, $m,n$を正の整数, $E_m$を$m$次の単位行列, $O_{n,m}$を$n\times m$型の零行列とする.
+ \begin{enumerate}
+\renewcommand{\labelenumi}{(\arabic{enumi}).}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+ \item $m\times n$行列$A$と$n\times m$行列$B$について, $AB=E_m$ならば, $BA = E_n$である.
+ \item $n$次正方行列$A$と$n\times m$行列$B$について, $A$が正則行列かつ$AB=O_{n,m}$ならば, $B=O_{n,m}$である.
+  \item $n$次正方行列$A, B$について, $AB=O_{n,n}$ならば, $B=O_{n,n}$である.
+  \item $n$次正方行列$A, B$について, $AB=E_n$ならば, $AB=BA$である.
+   \item $n$次正方行列$A, B$について, $AB$が正則行列ならば, $A$も$B$も正則行列である.
+ %\item 「$n$次正方行列$A, B$について, $A$も$B$も正則行列であるならば, $AB$も正則行列である.」
+ \item $n$次正方行列$A, B, C$について, $\det(ABC) = \det(BAC)$である.
+ \item 全ての成分が整数である$n$次正則行列$A$について, $\det(A) =\pm1$ならば, 逆行列$A^{-1}$の全ての成分は整数である.
+ \item 全ての成分が整数である$n$次正則行列$A$について, 逆行列$A^{-1}$の全ての成分が整数であるならば, $\det(A) =\pm1$である.
+
+ \end{enumerate} 
+ \vspace{11pt}
+ 
+\hspace{-11pt}{\Large $\bullet$ 第4問解答例.}
+
+(1). 誤りである. $m=1$, $n=2$, 
+$
+A =  \begin{pmatrix}
+1& 0 \\
+ \end{pmatrix} 
+$, 
+$
+B =  \begin{pmatrix}
+1\\
+ 0 
+ \end{pmatrix} 
+$
+とすると
+$
+AB =  \begin{pmatrix}
+1& 0 \\
+ \end{pmatrix} 
+ \begin{pmatrix}
+1\\
+ 0 
+ \end{pmatrix} 
+ = 1 = E_1
+$
+であるが
+$
+BA =  
+ \begin{pmatrix}
+1\\
+ 0 
+ \end{pmatrix} 
+\begin{pmatrix}
+1& 0 \\
+ \end{pmatrix} 
+ = 
+ \begin{pmatrix}
+1& 0 \\
+0& 0 \\
+ \end{pmatrix} 
+ \neq  E_2
+$
+となるので, これは(1)の主張の反例となる.
+
+(2). 正しい. $A$が正則なので逆行列$A^{-1}$が存在する．
+よって$AB = O_{n,m}$なので, 左から$A^{-1}$をかけると
+$$
+B = (A^{-1} A) B = A^{-1} (AB) = A^{-1} O_{n,m} = O_{n,m}
+\text{となる．}
+$$
+
+(3). 誤りである.
+$n=2$, 
+$
+A =  \begin{pmatrix}
+1& 0 \\
+0& 0 \\
+ \end{pmatrix} 
+$, 
+$
+B =  \begin{pmatrix}
+0& 0 \\
+1& 0 \\
+ \end{pmatrix} 
+$
+とすると
+$$
+AB =
+\begin{pmatrix}
+1& 0 \\
+0& 0 \\
+ \end{pmatrix} 
+ \begin{pmatrix}
+0& 0 \\
+1& 0 \\
+ \end{pmatrix} 
+ =
+ \begin{pmatrix}
+0& 0 \\
+0& 0 \\
+ \end{pmatrix} 
+ = O_{2,2}
+$$
+だが, $B \neq O_{2,2}$ではない. よってこれは(3)の主張の反例となる.
+
+[別解.] $A=O_{2,2}$, $B=E_2$とするとこれも反例になる. \footnote{出題の際に$A$が零行列でないという条件を入れるべきでした...}
+なおこの解答は想定外の解答だったので, この解答をしている答案に加点をいたしました.
+
+(4). 正しい. 第10回授業資料系6から$A$は正則で$B$は$A$の逆行列であるので, 逆行列の定義から$AB = BA =E_n$となる. 特に$AB=BA$である.
+
+[補足.] 第10回授業資料系6とは「$AB=E_n$ならば$A$は正則で$B$は$A$の逆行列」という主張である.
+ これは次のように示される.
+%$B$が$A$の逆行列であることを示せば, 逆行列の定義から$AB = BA =E_n$であるので, 主張が正しいことがわかる.これは第10回授業の定理から示しているので言えた.
+
+$AB = E_n$より, 
+$$
+\det(A) \det (B) = \det(AB) = \det(E_n)=1
+$$
+となる. よって$A$は正則で逆行列$A^{-1}$をもつ. 
+$$B = (E_n)B  = (A^{-1}A)B = A^{-1}(AB) = A^{-1}$$
+であるので, $B$は$A$の逆行列である.
+%[別解.] 第10回授業の定理から$A$は正則で$B$は$A$の逆行列であるので, $AB = BA =E_n$となる.
+ 
+ (5). 正しい. 
+$AB$が正則なので$\det(AB)\neq 0$である.
+よって$\det(A) \det (B) = \det(AB) \neq 0$
+であるので$\det (A) \neq 0$かつ$\det(B)\neq 0$である.
+よって定理\ref{determinant}より$A$も$B$も正則である.
+
+ (6). 正しい. 第10回授業資料定理5から$\det(A) \det (B) = \det(AB) $であるので
+ $$
+ \det(ABC)
+ =
+ \det(A) \det(B) \det(C)
+ =
+ \det(B)\det(A)\det(C)
+ =
+  \det(BAC)
+  \text{となる.}
+ $$
+ 
+(7). 正しい.  
+行列$A$について, $i$行と$j$列を取り除いた行列を$\tilde{A}_{ij}$とし, 
+余因子行列$\tilde{A}=(b_{ij})$を$b_{ij}=(-1)^{i+j}\det(\tilde{A}_{ji})$で定めると, 第12回授業資料定理6から
+$A^{-1} = \frac{1}{\det(A)} \tilde{A}$となる.
+仮定から$\det(A ) = \pm 1$であるので$ \tilde{A}$の全ての成分が整数であることを示せば良い.
+
+$A$の全ての成分は整数であるので, $\tilde{A}_{ij}$の全ての成分は整数であり, 行列式の定義から$\det(\tilde{A}_{ji})$も整数である.
+よって$b_{ij}=(-1)^{i+j}\det(A_{ji})$であるので, $ \tilde{A}$の全ての成分は整数である.
+%$A$の余因子行列$\tilde{A}$を考えると, $\tilde{A}$の$(i,j)$成分は
+
+[補足.]
+$A$を全ての成分が整数である$n$次正則行列とすると, $\det(A)$も整数である.
+これは
+$$
+\det(A) =  \sum_{\sigma \in S_n}\sgn(\sigma) 
+a_{1 \sigma(1)} a_{2 \sigma(2)} \cdots a_{n \sigma(n)} 
+$$
+であり, $\sgn(\sigma) $が整数であることからわかる．
+
+(8). 正しい.  
+$A^{-1}$の全ての成分が整数であるので, $\det(A^{-1})$も整数である.
+$$
+\det(A)\det(A^{-1}) = \det(A A^{-1})=\det(E_n) = 1
+$$
+であり, $\det(A)$も$\det(A^{-1})$も整数であるので, $\det(A)=\pm1$となる.
+ \vspace{22pt}
+   
+ \hspace{-11pt}{\LARGE 期末レポートについて.}
+
+第1問から第4問を通して, 正答率69\%でした. できる人とできていない人が極端に分かれるなんとも数学らしい得点分布になっていました. 
+第1問から第3問は大学院の試験(通称"院試")を少し修正して出しました. 期末レポート第1,2,3問と中間レポート第5,6問ができていればこの授業の理解は十分だと思います.
+
+各問題を通しての感想は以下のとおりです.
+\begin{itemize}
+\item [第1問.] 正答率78\%. 正則行列かどうか判定する方法は概ね2つあります. 一つは 「行列式」を用いた方法です.  もう一つは掃き出し法を用いて行列の階数を求める方法です. 解答としてはどちらでも構いません. 
+逆行列を求める方法は「掃き出し法」と「余因子行列」の2つありますが, 「掃き出し法」の方が楽だと思います.
+
+他にも次の定理を用いて正則行列かどうか判定しさらに逆行列も求められる方法があります.
+ \begin{tcolorbox}[
+    colback = white,
+    colframe = green!35!black,
+    fonttitle = \bfseries,
+    breakable = true]
+$A$を$n$次正方行列とする. $n \times 2n$行列$[A : E_n]$の簡約化が$[E_n : B]$の形にならない場合, $A$は逆行列を持たない.
+ \end{tcolorbox}
+ なぜなら$A$の簡約化が$E_n$にならないので$\rank(A) <n$から定理\ref{determinant_2}より言えます. ただこちらは$n \times 2n$行列を掃き出すことになるので, 少々面倒な気がします. 
+\item [第2問.] 正答率78\%. これも「行列式」と「掃き出し法」の2つの方法があります. 掃き出し法の場合は行列の階数を求めることになります. どちらも同じくらい計算します.
+\item [第3問.] 正答率76\%. (2)で行列式を用いて答えを出し, その後$y=2$, $y=\frac{13}{3}$の場合での行列の階数を計算して(1)を示す方法もあります．
+\item [第4問.] 正答率61\%. 意外とできていました. 特に(7),(8)ができていたのが驚きです. 
+\end{itemize}
+
+今回もプログラミングで解答した答案を授業ホームページに公開しておきます. 
+
+またレポートを採点していて気になったことを3点ご連絡いたします. 今後の参考にしてください.
+
+(1). 行基本変形(掃き出し法)を"$=$"で結んできる解答, つまり基本変形を
+ $$
+ \begin{pmatrix}
+1& 2022 &1 & 0 \\
+0& 1& 0& 1
+ \end{pmatrix}
+=
+  \begin{pmatrix}
+1& 0 &1 & -2022 \\
+0& 1& 0& 1
+ \end{pmatrix}
+ $$
+ としている解答がまあまあ見られました. \underline{これはやめた方がいいです.}
+ なぜなら上の二つの行列は等しいものではないからです. 
+ (採点者によっては減点の対象になると思います.)
+ 
+ 矢印"$\rightarrow$"を使って
+  $$
+ \begin{pmatrix}
+1& 2022 &1 & 0 \\
+0& 1& 0& 1
+ \end{pmatrix}
+ \longrightarrow
+  \begin{pmatrix}
+1& 0 &1 & -2022 \\
+0& 1& 0& 1
+ \end{pmatrix}
+ $$
+ のように書いておいた方が無難です. 
+ 
+ (2). 読めないレポートがまあまあ多かったです. ここで"読めない"とは「論理展開がわからない」, 「字が汚い」, 「何を計算したのかわからない」などを意味します.
+
+例えば第3問(1)で
+
+\begin{center}
+$
+\begin{pmatrix}
+1 &y&3 \\
+y & 3& 13\\
+3&6 &9
+ \end{pmatrix}
+\rightarrow
+ \begin{pmatrix}
+1 &y&3 \\
+0 & 3 - y^2& 13 - 3y\\
+1&2  &3\\
+ \end{pmatrix}$より.
+\end{center}
+
+と解答されても得点を与えることができません. \footnote{(2)や(3)の解答例はあくまで"例"であり, 今回のレポートでこのような解答をした人はいません. (まあ近い解答はありましたが...)}
+(この例だとそもそも何をしたのかわからないし階数2以上であることの"理由"が抜けている.) 
+
+今回は大目に見ましたが, 他人が読んで理解できるレポートを作るように心がけた方がいいと思います. (採点者によっては採点してもらえないこともあります.)
+%\footnote{大学や社会に行くと, 丹精かけて作ったもの(論文など)が, 「興味がない」「読む時間がない」などの理由で, 他人に全然読んでもらえないことがしばしばあります. }
+
+(3).レポートのコピペ(コピーアンドペースト)が疑われる答案が何個かありました. なぜ疑われるかというと「答案として同じになることがあり得ない」からです.
+
+例えば第4問(3)で
+
+\begin{center}
+$A=
+\begin{pmatrix}
+1&1\\
+2 &2\\
+ \end{pmatrix},
+B=
+\begin{pmatrix}
+2781& -4891\\
+-2781 &4891 \\
+ \end{pmatrix}
+ $が反例である.
+\end{center}
+という答案が3人連続で来た場合, 流石にコピペを疑います. なぜなら$\begin{pmatrix}
+2781& -4891\\
+-2781 &4891 \\
+ \end{pmatrix}$という行列なんて普通3人も思いつかないからです. 
+
+レポートのコピペは不正行為の一種で, 最悪の場合には全単位が没収される行為なので, 控えてください. (前に教官内でレポートのコピペの話題になって, 「コピペがわかった時点で問答無用でその人たちの単位を不可にする」といってた人もいたので, やめた方が無難です.)
+
+\vspace{22pt}
+{\Large 期末レポートおまけ問題}  (授業第14回の内容).
+\vspace{11pt}
+
+$m$を正の整数とし, $\bm{x} = (x_0, x_1, \ldots, x_m), \bm{y} = (y_0, y_1, \ldots, y_m)\in \R^{m+1}$について$q(\bm{x},\bm{y})$を次のように定める. 
+$$
+q(\bm{x},\bm{y}) = x_0 y_0 - (x_1y_1 + \cdots + x_m y_m) 
+$$
+次の問いに答えよ.
+\begin{enumerate}
+ \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm}
+\item[$(1).$] $q(\bm{x} , \bm{x} )\geqq 0$ならば, $q(\bm{x} , \bm{x})q(\bm{y} , \bm{y}) \leqq q(\bm{x},\bm{y})^2$であることを示せ.
+\item[$(2).$] $q(\bm{x} ,\bm{x})>0$かつ$q(\bm{x},\bm{y})=q(\bm{y},\bm{y})=0$ならば, $\bm{y}=0$となることを示せ.
+\item[$(3).$] $q(\bm{x},\bm{x})=q(\bm{x},\bm{y})=q(\bm{y},\bm{y})=0$ならば, ある実数$\lambda, \mu$があって, $\lambda \bm{x} + \mu \bm{y}=0$とできることを示せ.
+\item[$(4).$] $\bm{x} \neq 0$かつ$q(\bm{x} ,\bm{y})=q(\bm{x},\bm{x})=0$ならば, $q(\bm{y} , \bm{y}) \leqq 0$であることを示せ.
+\end{enumerate}
+
+ \vspace{11pt} 
+ 
+\hspace{-11pt}{\Large $\bullet$ 期末レポートおまけ問題解答例.}
+
+この問題は私が最近出した論文
+
+$\bullet$ M. Iwai, S. Matsumura.
+\textit{Abundance theorem for minimal compact K\"ahler manifolds with vanishing second Chern class.}
+Preprint, arXiv:2205.10613
+
+のLemma 6.1そのままです. 「arXiv:2205.10613」とgoogleで検索しこの論文の証明をそのまま写せば答えになります.
+ちょっと写してみると次の通りです.
+
+\begin{proof}
+Set $F(t) := q(x+ty, x+ty) = q(x,x)+2tq(x,y) + t^2q(y,y)$.
+
+(1). We may assume that $q(x,x) >0$ and $q(y,y) >0$. From $y_0 \neq0$, we have $F(0) >0$ and $F(-\frac{x_0}{y_0}) \le 0$. Thus, $q(x,y)^2 \ge q(x,x)q(y,y)$ since $F(t)=0$ has a real solution.
+
+(2). If $y_0 \neq 0$, then $0\ge F(-\frac{x_0}{y_0}) =F(0)>0$, which is impossible. Thus, $y_0 =0$. From $q(y,y)=0$, we have $y=0$.
+
+(3). We may assume that $y \neq 0$. From $F(-\frac{x_0}{y_0}) =0$, we have $x - \frac{x_0}{y_0}y=0$.
+
+(4). The proof
+%Editor: Please ensure that the intended meaning has been maintained in this edit.
+follows from $q(y,y)=q(y-\frac{y_0}{x_0}x, y-\frac{y_0}{x_0}x) \le 0$.
+\end{proof}
+
+ 
+ですが論文の都合上議論をかなり省略しました. (専門家からすると簡単な議論のため, 本来は証明すらも削除する予定でした.) 
+よってこの解答を書いてても減点しております. 特に丸写し解答は0点にしております.\footnote{今回は丸写し解答は誰もしていませんでした.}
+
+線形代数の実用的な応用は中間レポートのおまけ問題でやったので, 今回の期末レポートのおまけ問題では専門的な研究への線形代数の応用例としてこの問題を出しました.\footnote{今回の私の論文で線形代数使ったのはここだけですが...証明のメインでは難しい手法を使いまくりました.}
+%\footnote{ただし線形代数だけで数学の研究ができるほど数学の世界は甘くないです. あくまで線形代数をちょっと使っただけです.}
+証明は第14回授業のCauchy-Schwartzの不等式の証明とほぼ同じです.
+
+[解答例.]
+以下の証明でよく使う事実を2点確認しておく.
+
+(a). $q(\bm{x},\bm{x})>0$ならば$x_0 >0$である.
+これは
+$q(\bm{x},\bm{x}) = x_{0}^2 - \sum_{i=1}^{m} x_{i}^2  \leqq x_{0}^2 $
+%(x_{0})^2 - \left( (x_{1})^2 + \cdots + (x_{m})^2  \right) \leqq (x_0)^2 $$
+からわかる.
+
+(b).実数$t$について$q(\bm{x}+t\bm{y}, \bm{x}+t\bm{y}) = q(\bm{x},\bm{x})+2tq(\bm{x},\bm{y}) + t^2q(\bm{y},\bm{y})$が成り立つ. これは次のように示す.
+\begin{align*}
+\begin{split}
+q(\bm{x}+t\bm{y}, \bm{x}+t\bm{y})
+& = (x_0 + t y_0)^2 - \sum_{i=1}^{m}(x_i+ t y_i)^2  \\
+&= ( x_{0}^2 + 2tx_0 y_0 + t^2 y_{0}^2) - \sum_{i=1}^{m}\left( x_{i}^2+2t x_i y_i+ t^2 y_{i}^2   \right) \\
+&= ( x_{0}^2 - \sum_{i=1}^{m} x_{i}^2) + 2t (x_0 y_0 - \sum_{i=1}^{m} x_i y_i ) 
++ t^2 (y_{0}^2 - \sum_{i=1}^{m} y_{i}^2) \\
+&= q(\bm{x},\bm{x})+2tq(\bm{x},\bm{y}) + t^2q(\bm{y},\bm{y})
+ \end{split}
+\end{align*}
+
+(1). $q(\bm{y},\bm{y}) \leqq0$の場合. $q(\bm{x} , \bm{y} )^2 \geqq 0$かつ$q(\bm{x} , \bm{x} ) \geqq 0$から, 
+$q(\bm{x} , \bm{x})q(\bm{y} , \bm{y}) \leqq q(\bm{x},\bm{y})^2$である.
+
+$q(\bm{y},\bm{y}) > 0$の場合. 実数$t$について$F(t) = q(\bm{x}+t\bm{y} , \bm{x}+t\bm{y} )$とおく. 
+$F(0) = q(\bm{x} , \bm{x} ) \geqq 0$である. また(a)から$y_0 \neq 0$であるので, 
+$$
+F\left(\frac{x_0}{y_0}\right) = q\left(\bm{x} - \frac{x_0}{y_0}\bm{y} ,  \bm{x} - \frac{x_0}{y_0}\bm{y} \right) 
+= - \sum_{i=1}^{m}\left(x_i - \frac{x_0}{y_0} y_i\right)^2  \leqq 0
+$$
+となる.
+また(b)から$F(t)$は$t$に関する2次関数であり, $F(0)\geqq 0$かつ$F\left(\frac{x_0}{y_0}\right) \leqq 0$なので, $F(t)=0$は実数解を持つ.
+つまり判別式は0以上であるので(b)から
+$$
+(2q(\bm{x},\bm{y}))^2 - 4q(\bm{x},\bm{x})q(\bm{y},\bm{y})\geqq0
+$$
+を得る. よって$q(\bm{x} , \bm{x})q(\bm{y} , \bm{y}) \leqq q(\bm{x},\bm{y})^2$である.
+
+(2). $\bm{y}\neq 0$と仮定して矛盾を示す.
+$q(\bm{y},\bm{y}) =0$より(a)から$y_0 \neq 0$である.
+ よって(b)より 
+$$
+F\left(\frac{x_0}{y_0}\right) 
+= 
+q(\bm{x},\bm{x})+2\left(\frac{x_0}{y_0}\right)q(\bm{x},\bm{y}) + \left(\frac{x_0}{y_0}\right)^2 q(\bm{y},\bm{y})
+=
+q(\bm{x},\bm{x}) >0
+$$
+である.
+これは$F\left(\frac{x_0}{y_0}\right)\leqq 0$に矛盾する.
+
+
+(3).
+$\bm{y}=0$の場合. $\lambda=0, \mu=1$とおけば良い. 
+
+$\bm{y} \neq 0$の場合. $q(\bm{y},\bm{y}) =0$より(a)から$y_0 \neq 0$である.
+また(b)から任意の実数$t$について$F(t)=0$なので, 
+特に$F\left(\frac{x_0}{y_0}\right) =0$. よって
+$$
+0=F\left(\frac{x_0}{y_0}\right) = q\left(\bm{x} - \frac{x_0}{y_0}\bm{y} ,  \bm{x} - \frac{x_0}{y_0}\bm{y} \right) 
+= - \sum_{i=1}^{m}\left(x_i - \frac{x_0}{y_0} y_i \right)^2
+$$
+より任意の$i = 1, \ldots, m$について$x_i - \frac{x_0}{y_0}y_i =0$となる.
+よって$\lambda=1, \mu= - \frac{x_0}{y_0}$とおけば$\lambda \bm{x} + \mu \bm{y}=0$とできる.
+
+[別解.] $\lambda=\mu=0$とおけばよい. \footnote{$(\lambda, \mu) \neq (0,0)$という条件を入れるのを忘れていました.}
+なおこの解答は想定外の解答だったので, この解答をしているものには加点をいたしました.
+
+
+(4).
+$q(\bm{x},\bm{x}) =0$より(a)から$x_0 \neq 0$である. よって(b)から
+$$
+q(\bm{y},\bm{y}) =q\left(\bm{y} - \frac{y_0}{x_0}\bm{x},\bm{y} - \frac{y_0}{x_0}\bm{x}\right) \leqq0
+\text{となる.}
+$$
+
+
+
+\end{document}
